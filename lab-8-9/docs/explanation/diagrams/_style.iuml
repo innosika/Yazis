@@ -1,0 +1,49 @@
+skinparam dpi 180
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #3A4150
+skinparam ArrowThickness 1.2
+skinparam BackgroundColor #FFFFFF
+skinparam rectangle {
+  BorderColor #1D3B8A
+  BackgroundColor #F4F6FC
+}
+skinparam component {
+  BorderColor #1D3B8A
+  BackgroundColor #F4F6FC
+}
+skinparam node {
+  BorderColor #5C5F66
+  BackgroundColor #FCFCFA
+}
+skinparam database {
+  BorderColor #5C5F66
+  BackgroundColor #FFF6CC
+}
+skinparam cloud {
+  BorderColor #5C5F66
+  BackgroundColor #F3F3EF
+}
+skinparam activity {
+  BorderColor #1D3B8A
+  BackgroundColor #F4F6FC
+  DiamondBorderColor #1D3B8A
+  DiamondBackgroundColor #FFF6CC
+}
+skinparam sequence {
+  ParticipantBorderColor #1D3B8A
+  ParticipantBackgroundColor #F4F6FC
+  LifeLineBorderColor #9AA0AA
+  ActorBorderColor #1D3B8A
+  ActorBackgroundColor #F4F6FC
+}
+skinparam state {
+  BorderColor #1D3B8A
+  BackgroundColor #F4F6FC
+}
+skinparam note {
+  BorderColor #C9B458
+  BackgroundColor #FFF9DB
+}

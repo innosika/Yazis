@@ -1,0 +1,58 @@
+[
+ {
+  "key": "vector",
+  "label": "Vector model",
+  "description": "TF-IDF term weights with cosine similarity. The retrieval strategy this assignment specifies for variant 34, implemented directly from its formulas.",
+  "is_required_model": true,
+  "available": true,
+  "unavailable_reason": null
+ },
+ {
+  "key": "bm25",
+  "label": "BM25",
+  "description": "Probabilistic ranking with saturating term frequency and length normalisation. The standard baseline the vector model is measured against.",
+  "is_required_model": false,
+  "available": true,
+  "unavailable_reason": null
+ },
+ {
+  "key": "fts",
+  "label": "PostgreSQL full-text",
+  "description": "The database's own tsvector index and ts_rank. Included as an external reference point that shares none of our indexing code.",
+  "is_required_model": false,
+  "available": true,
+  "unavailable_reason": null
+ },
+ {
+  "key": "hybrid",
+  "label": "Hybrid",
+  "description": "Reciprocal-rank fusion of the vector, BM25 and semantic rankings. Combines lexical precision with semantic recall.",
+  "is_required_model": false,
+  "available": true,
+  "unavailable_reason": null
+ },
+ {
+  "key": "semantic",
+  "label": "Semantic",
+  "description": "Dense sentence embeddings compared by cosine distance in pgvector. Matches meaning rather than vocabulary, so it answers paraphrased queries the lexical rankers miss.",
+  "is_required_model": false,
+  "available": true,
+  "unavailable_reason": null
+ },
+ {
+  "key": "vector_idf",
+  "label": "Vector \u00b7 IDF query",
+  "description": "The mandated vector model with one change: query words are weighted by their inverse document frequency instead of being binary. An improvement proposal measured against the mandated model rather than asserted.",
+  "is_required_model": false,
+  "available": true,
+  "unavailable_reason": null
+ },
+ {
+  "key": "vector_prf",
+  "label": "Vector \u00b7 Rocchio PRF",
+  "description": "The mandated vector model followed by one round of Rocchio pseudo-relevance feedback: the top documents of the first pass expand the query, which is scored again. The selection module's learning step, measured in the arena.",
+  "is_required_model": false,
+  "available": true,
+  "unavailable_reason": null
+ }
+]

@@ -1,0 +1,32 @@
+@startuml
+!include _style.iuml
+skinparam defaultFontSize 14
+skinparam maxMessageSize 170
+hide footbox
+actor "Пользователь" as U
+participant "Плеер" as P
+participant "API" as API
+participant "Нормализатор" as N
+participant "Кеш" as C
+participant "Очередь" as Q
+participant "Kokoro" as K
+
+U -> P : Play
+P -> API : единица текста, голос, скорость, тон
+API -> N : «O(n log n) [12]»
+N --> API : «big O of n log n» + карта смещений
+API -> C : ключ sha256
+alt уже есть
+  C --> API : WAV + тайминги (≈5 мс)
+else новое
+  API -> Q : задача «now»
+  Q -> K : фонемы, голос
+  K --> Q : звук 24 кГц, длительности токенов
+  Q -> Q : выравнивание, сдвиг тона
+  Q --> API : WAV + тайминги
+  API -> C : сохранить
+end
+API --> P : audio_url, слова с временем и позицией в тексте
+P -> P : Web Audio, подсветка слова
+P -> API : следующие 3 единицы («prefetch»)
+@enduml

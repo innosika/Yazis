@@ -1,0 +1,1173 @@
+{
+ "depth": 10,
+ "unique_documents": 202,
+ "total_entries": 1489,
+ "by_source": {
+  "run_union": {
+   "entries": 1094.0,
+   "judged": 103.0,
+   "relevant": 9.0,
+   "relevant_rate": 0.08737864077669903
+  },
+  "oracle": {
+   "entries": 165.0,
+   "judged": 20.0,
+   "relevant": 0.0,
+   "relevant_rate": 0.0
+  },
+  "random_sample": {
+   "entries": 230.0,
+   "judged": 23.0,
+   "relevant": 0.0,
+   "relevant_rate": 0.0
+  }
+ },
+ "per_topic": [
+  {
+   "query_id": 31,
+   "ext_id": 1,
+   "title": "Okapi BM25 ranking function",
+   "category": "navigational",
+   "is_judged": true,
+   "total": 29,
+   "judged": 29,
+   "relevant": 1,
+   "by_source": {
+    "run_union": 20,
+    "oracle": 4,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "fts": 3,
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "semantic": 10
+   }
+  },
+  {
+   "query_id": 32,
+   "ext_id": 2,
+   "title": "PageRank algorithm",
+   "category": "navigational",
+   "is_judged": false,
+   "total": 30,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "random_sample": 5,
+    "run_union": 25
+   },
+   "by_ranker": {
+    "fts": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "semantic": 10,
+    "vector": 10
+   }
+  },
+  {
+   "query_id": 33,
+   "ext_id": 3,
+   "title": "Gerard Salton SMART system",
+   "category": "navigational",
+   "is_judged": false,
+   "total": 31,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 21,
+    "oracle": 5,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "fts": 4,
+    "bm25": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "oracle": 10,
+    "hybrid": 10,
+    "semantic": 10
+   }
+  },
+  {
+   "query_id": 34,
+   "ext_id": 4,
+   "title": "Text Retrieval Conference TREC",
+   "category": "navigational",
+   "is_judged": false,
+   "total": 32,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "random_sample": 5,
+    "run_union": 22,
+    "oracle": 5
+   },
+   "by_ranker": {
+    "fts": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "semantic": 10,
+    "oracle": 10
+   }
+  },
+  {
+   "query_id": 35,
+   "ext_id": 5,
+   "title": "Apache Lucene search library",
+   "category": "navigational",
+   "is_judged": true,
+   "total": 30,
+   "judged": 30,
+   "relevant": 3,
+   "by_source": {
+    "run_union": 21,
+    "random_sample": 5,
+    "oracle": 4
+   },
+   "by_ranker": {
+    "fts": 7,
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector_idf": 10,
+    "semantic": 10,
+    "vector": 10,
+    "vector_prf": 10
+   }
+  },
+  {
+   "query_id": 36,
+   "ext_id": 6,
+   "title": "Vannevar Bush memex",
+   "category": "navigational",
+   "is_judged": true,
+   "total": 31,
+   "judged": 31,
+   "relevant": 2,
+   "by_source": {
+    "run_union": 23,
+    "oracle": 3,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "semantic": 10,
+    "bm25": 10,
+    "oracle": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "fts": 8,
+    "hybrid": 10
+   }
+  },
+  {
+   "query_id": 37,
+   "ext_id": 7,
+   "title": "Karen Sp\u00e4rck Jones inverse document frequency",
+   "category": "navigational",
+   "is_judged": true,
+   "total": 27,
+   "judged": 27,
+   "relevant": 2,
+   "by_source": {
+    "run_union": 16,
+    "oracle": 6,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "hybrid": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "oracle": 10,
+    "fts": 4,
+    "bm25": 10,
+    "semantic": 10
+   }
+  },
+  {
+   "query_id": 38,
+   "ext_id": 8,
+   "title": "Wayback Machine internet archive",
+   "category": "navigational",
+   "is_judged": true,
+   "total": 36,
+   "judged": 29,
+   "relevant": 1,
+   "by_source": {
+    "run_union": 28,
+    "random_sample": 5,
+    "oracle": 3
+   },
+   "by_ranker": {
+    "semantic": 10,
+    "hybrid": 10,
+    "fts": 10,
+    "bm25": 10,
+    "oracle": 10,
+    "vector_prf": 10,
+    "vector": 10,
+    "vector_idf": 10
+   }
+  },
+  {
+   "query_id": 39,
+   "ext_id": 9,
+   "title": "Herman Hollerith tabulating machine",
+   "category": "navigational",
+   "is_judged": true,
+   "total": 25,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "random_sample": 5,
+    "run_union": 19,
+    "oracle": 1
+   },
+   "by_ranker": {
+    "fts": 9,
+    "bm25": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "semantic": 10
+   }
+  },
+  {
+   "query_id": 40,
+   "ext_id": 10,
+   "title": "MEDLINE bibliographic database",
+   "category": "navigational",
+   "is_judged": true,
+   "total": 28,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 19,
+    "random_sample": 5,
+    "oracle": 4
+   },
+   "by_ranker": {
+    "vector_idf": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "vector": 10,
+    "vector_prf": 10,
+    "semantic": 10,
+    "fts": 2,
+    "oracle": 10
+   }
+  },
+  {
+   "query_id": 41,
+   "ext_id": 11,
+   "title": "Tim Berners-Lee World Wide Web",
+   "category": "navigational",
+   "is_judged": false,
+   "total": 28,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 21,
+    "oracle": 2,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "fts": 10,
+    "bm25": 10,
+    "oracle": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "hybrid": 10,
+    "vector": 10,
+    "semantic": 10
+   }
+  },
+  {
+   "query_id": 42,
+   "ext_id": 12,
+   "title": "Latent Dirichlet allocation topic model",
+   "category": "navigational",
+   "is_judged": false,
+   "total": 30,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 22,
+    "random_sample": 5,
+    "oracle": 3
+   },
+   "by_ranker": {
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector": 10,
+    "semantic": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "fts": 2
+   }
+  },
+  {
+   "query_id": 43,
+   "ext_id": 13,
+   "title": "how does an inverted index store term positions",
+   "category": "topical",
+   "is_judged": false,
+   "total": 33,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 25,
+    "random_sample": 5,
+    "oracle": 3
+   },
+   "by_ranker": {
+    "semantic": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "fts": 1
+   }
+  },
+  {
+   "query_id": 44,
+   "ext_id": 14,
+   "title": "measuring precision and recall of a search system",
+   "category": "topical",
+   "is_judged": true,
+   "total": 31,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 24,
+    "random_sample": 5,
+    "oracle": 2
+   },
+   "by_ranker": {
+    "fts": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "semantic": 10,
+    "vector_idf": 10,
+    "vector": 10,
+    "vector_prf": 10
+   }
+  },
+  {
+   "query_id": 45,
+   "ext_id": 15,
+   "title": "term weighting with tf-idf",
+   "category": "topical",
+   "is_judged": false,
+   "total": 28,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 21,
+    "random_sample": 5,
+    "oracle": 2
+   },
+   "by_ranker": {
+    "fts": 9,
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector": 10,
+    "semantic": 10,
+    "vector_idf": 10,
+    "vector_prf": 10
+   }
+  },
+  {
+   "query_id": 46,
+   "ext_id": 16,
+   "title": "vector space model cosine similarity",
+   "category": "topical",
+   "is_judged": false,
+   "total": 25,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 19,
+    "oracle": 1,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "fts": 6,
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector": 10,
+    "semantic": 10,
+    "vector_idf": 10,
+    "vector_prf": 10
+   }
+  },
+  {
+   "query_id": 47,
+   "ext_id": 17,
+   "title": "boolean queries with AND OR NOT operators",
+   "category": "topical",
+   "is_judged": false,
+   "total": 31,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 24,
+    "oracle": 2,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "fts": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "oracle": 10,
+    "semantic": 10
+   }
+  },
+  {
+   "query_id": 48,
+   "ext_id": 18,
+   "title": "probabilistic relevance model binary independence",
+   "category": "topical",
+   "is_judged": false,
+   "total": 32,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 25,
+    "oracle": 2,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "fts": 8,
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "semantic": 10
+   }
+  },
+  {
+   "query_id": 49,
+   "ext_id": 19,
+   "title": "web crawler politeness and robots.txt",
+   "category": "topical",
+   "is_judged": true,
+   "total": 34,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 24,
+    "random_sample": 5,
+    "oracle": 5
+   },
+   "by_ranker": {
+    "semantic": 10,
+    "hybrid": 10,
+    "fts": 2,
+    "bm25": 10,
+    "oracle": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10
+   }
+  },
+  {
+   "query_id": 50,
+   "ext_id": 20,
+   "title": "dimensionality reduction of the term-document matrix",
+   "category": "topical",
+   "is_judged": true,
+   "total": 26,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 17,
+    "random_sample": 5,
+    "oracle": 4
+   },
+   "by_ranker": {
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector": 10,
+    "semantic": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "fts": 1
+   }
+  },
+  {
+   "query_id": 51,
+   "ext_id": 21,
+   "title": "relevance feedback and query modification",
+   "category": "topical",
+   "is_judged": false,
+   "total": 31,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 22,
+    "random_sample": 5,
+    "oracle": 4
+   },
+   "by_ranker": {
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector": 10,
+    "semantic": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "fts": 2
+   }
+  },
+  {
+   "query_id": 52,
+   "ext_id": 22,
+   "title": "learning to rank with machine learning",
+   "category": "topical",
+   "is_judged": true,
+   "total": 38,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "oracle": 7,
+    "run_union": 26,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "oracle": 10,
+    "hybrid": 10,
+    "vector": 10,
+    "fts": 10,
+    "bm25": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "semantic": 10
+   }
+  },
+  {
+   "query_id": 53,
+   "ext_id": 23,
+   "title": "automatic text summarization methods",
+   "category": "topical",
+   "is_judged": true,
+   "total": 38,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 25,
+    "oracle": 8,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "hybrid": 10,
+    "semantic": 10,
+    "fts": 10,
+    "bm25": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "oracle": 10
+   }
+  },
+  {
+   "query_id": 54,
+   "ext_id": 24,
+   "title": "document classification and categorization",
+   "category": "topical",
+   "is_judged": false,
+   "total": 31,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 23,
+    "random_sample": 5,
+    "oracle": 3
+   },
+   "by_ranker": {
+    "vector": 10,
+    "semantic": 10,
+    "vector_prf": 10,
+    "fts": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector_idf": 10
+   }
+  },
+  {
+   "query_id": 55,
+   "ext_id": 25,
+   "title": "retrieving images and music by content",
+   "category": "topical",
+   "is_judged": false,
+   "total": 35,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 28,
+    "random_sample": 5,
+    "oracle": 2
+   },
+   "by_ranker": {
+    "vector": 10,
+    "hybrid": 10,
+    "semantic": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "fts": 10,
+    "oracle": 10,
+    "bm25": 10
+   }
+  },
+  {
+   "query_id": 56,
+   "ext_id": 26,
+   "title": "searching documents written in another language",
+   "category": "topical",
+   "is_judged": true,
+   "total": 38,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "random_sample": 5,
+    "run_union": 30,
+    "oracle": 3
+   },
+   "by_ranker": {
+    "hybrid": 10,
+    "semantic": 10,
+    "vector_prf": 10,
+    "bm25": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "fts": 10,
+    "oracle": 10
+   }
+  },
+  {
+   "query_id": 57,
+   "ext_id": 27,
+   "title": "enterprise and desktop search tools",
+   "category": "topical",
+   "is_judged": true,
+   "total": 32,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 24,
+    "oracle": 3,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "vector_idf": 10,
+    "semantic": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector": 10,
+    "vector_prf": 10,
+    "fts": 6
+   }
+  },
+  {
+   "query_id": 58,
+   "ext_id": 28,
+   "title": "recommender systems collaborative filtering",
+   "category": "topical",
+   "is_judged": true,
+   "total": 36,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 25,
+    "oracle": 6,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "fts": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "vector": 10,
+    "semantic": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "oracle": 10
+   }
+  },
+  {
+   "query_id": 59,
+   "ext_id": 29,
+   "title": "history of search engines on the web",
+   "category": "topical",
+   "is_judged": true,
+   "total": 30,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "random_sample": 5,
+    "run_union": 21,
+    "oracle": 4
+   },
+   "by_ranker": {
+    "fts": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "semantic": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "bm25": 10
+   }
+  },
+  {
+   "query_id": 60,
+   "ext_id": 30,
+   "title": "digital libraries and preservation of collections",
+   "category": "topical",
+   "is_judged": true,
+   "total": 37,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 29,
+    "random_sample": 5,
+    "oracle": 3
+   },
+   "by_ranker": {
+    "semantic": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "hybrid": 10,
+    "vector_prf": 10,
+    "bm25": 10,
+    "oracle": 10,
+    "fts": 10
+   }
+  },
+  {
+   "query_id": 61,
+   "ext_id": 31,
+   "title": "spam filtering techniques for email",
+   "category": "topical",
+   "is_judged": false,
+   "total": 29,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 21,
+    "random_sample": 5,
+    "oracle": 3
+   },
+   "by_ranker": {
+    "hybrid": 10,
+    "fts": 5,
+    "bm25": 10,
+    "oracle": 10,
+    "vector": 10,
+    "semantic": 10,
+    "vector_idf": 10,
+    "vector_prf": 10
+   }
+  },
+  {
+   "query_id": 62,
+   "ext_id": 32,
+   "title": "metadata standards for describing documents",
+   "category": "topical",
+   "is_judged": false,
+   "total": 36,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 29,
+    "random_sample": 5,
+    "oracle": 2
+   },
+   "by_ranker": {
+    "vector": 10,
+    "semantic": 10,
+    "vector_prf": 10,
+    "fts": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector_idf": 10,
+    "bm25": 10
+   }
+  },
+  {
+   "query_id": 63,
+   "ext_id": 33,
+   "title": "question answering systems",
+   "category": "topical",
+   "is_judged": false,
+   "total": 30,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 25,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "bm25": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "oracle": 10,
+    "semantic": 10,
+    "hybrid": 10,
+    "fts": 10
+   }
+  },
+  {
+   "query_id": 64,
+   "ext_id": 34,
+   "title": "citation analysis and impact of scientific publications",
+   "category": "topical",
+   "is_judged": true,
+   "total": 31,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "random_sample": 5,
+    "run_union": 24,
+    "oracle": 2
+   },
+   "by_ranker": {
+    "hybrid": 10,
+    "oracle": 10,
+    "semantic": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "fts": 10,
+    "bm25": 10
+   }
+  },
+  {
+   "query_id": 65,
+   "ext_id": 35,
+   "title": "neural language models for text representation",
+   "category": "topical",
+   "is_judged": true,
+   "total": 28,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 20,
+    "random_sample": 5,
+    "oracle": 3
+   },
+   "by_ranker": {
+    "hybrid": 10,
+    "semantic": 10,
+    "vector_prf": 10,
+    "fts": 10,
+    "bm25": 10,
+    "oracle": 10,
+    "vector": 10,
+    "vector_idf": 10
+   }
+  },
+  {
+   "query_id": 66,
+   "ext_id": 36,
+   "title": "privacy and freedom of information online",
+   "category": "topical",
+   "is_judged": true,
+   "total": 22,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "random_sample": 5,
+    "run_union": 16,
+    "oracle": 1
+   },
+   "by_ranker": {
+    "hybrid": 10,
+    "vector": 10,
+    "semantic": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "bm25": 10,
+    "oracle": 10,
+    "fts": 10
+   }
+  },
+  {
+   "query_id": 67,
+   "ext_id": 37,
+   "title": "why do search results favour long articles",
+   "category": "vocabulary-mismatch",
+   "is_judged": true,
+   "total": 45,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "random_sample": 5,
+    "run_union": 30,
+    "oracle": 10
+   },
+   "by_ranker": {
+    "hybrid": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "bm25": 10,
+    "semantic": 10,
+    "oracle": 10,
+    "fts": 2
+   }
+  },
+  {
+   "query_id": 68,
+   "ext_id": 38,
+   "title": "programs that automatically browse the web to collect pages",
+   "category": "vocabulary-mismatch",
+   "is_judged": false,
+   "total": 37,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 26,
+    "oracle": 6,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "semantic": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "fts": 10,
+    "oracle": 10
+   }
+  },
+  {
+   "query_id": 69,
+   "ext_id": 39,
+   "title": "putting holes in stiff paper to record data for machines",
+   "category": "vocabulary-mismatch",
+   "is_judged": false,
+   "total": 27,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "oracle": 3,
+    "run_union": 19,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "oracle": 10,
+    "semantic": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "vector_idf": 10,
+    "vector": 10,
+    "vector_prf": 10,
+    "fts": 1
+   }
+  },
+  {
+   "query_id": 70,
+   "ext_id": 40,
+   "title": "finding words with similar meaning from the company they keep",
+   "category": "vocabulary-mismatch",
+   "is_judged": false,
+   "total": 39,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 30,
+    "random_sample": 5,
+    "oracle": 4
+   },
+   "by_ranker": {
+    "vector_prf": 10,
+    "semantic": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "fts": 10
+   }
+  },
+  {
+   "query_id": 71,
+   "ext_id": 41,
+   "title": "rating a web page by who points to it",
+   "category": "vocabulary-mismatch",
+   "is_judged": true,
+   "total": 38,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 30,
+    "random_sample": 5,
+    "oracle": 3
+   },
+   "by_ranker": {
+    "hybrid": 10,
+    "vector": 10,
+    "semantic": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "bm25": 10,
+    "fts": 10,
+    "oracle": 10
+   }
+  },
+  {
+   "query_id": 72,
+   "ext_id": 42,
+   "title": "deciding whether a found document actually answers the query",
+   "category": "vocabulary-mismatch",
+   "is_judged": true,
+   "total": 42,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 31,
+    "oracle": 6,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "oracle": 10,
+    "semantic": 10,
+    "vector_prf": 10,
+    "hybrid": 10,
+    "vector": 10,
+    "bm25": 10,
+    "vector_idf": 10,
+    "fts": 9
+   }
+  },
+  {
+   "query_id": 73,
+   "ext_id": 43,
+   "title": "having too much information to cope with",
+   "category": "vocabulary-mismatch",
+   "is_judged": false,
+   "total": 38,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 28,
+    "random_sample": 5,
+    "oracle": 5
+   },
+   "by_ranker": {
+    "bm25": 10,
+    "hybrid": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "semantic": 10,
+    "oracle": 10,
+    "fts": 5
+   }
+  },
+  {
+   "query_id": 74,
+   "ext_id": 44,
+   "title": "asking a computer something in plain English and getting an answer",
+   "category": "vocabulary-mismatch",
+   "is_judged": true,
+   "total": 37,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 27,
+    "oracle": 5,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "hybrid": 10,
+    "semantic": 10,
+    "bm25": 10,
+    "oracle": 10
+   }
+  },
+  {
+   "query_id": 75,
+   "ext_id": 45,
+   "title": "how libraries arrange books on shelves by subject",
+   "category": "vocabulary-mismatch",
+   "is_judged": false,
+   "total": 30,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 21,
+    "oracle": 4,
+    "random_sample": 5
+   },
+   "by_ranker": {
+    "semantic": 10,
+    "oracle": 10,
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "fts": 1
+   }
+  },
+  {
+   "query_id": 76,
+   "ext_id": 46,
+   "title": "the dream of a desk that holds all your books and notes",
+   "category": "vocabulary-mismatch",
+   "is_judged": true,
+   "total": 37,
+   "judged": 0,
+   "relevant": 0,
+   "by_source": {
+    "run_union": 28,
+    "random_sample": 5,
+    "oracle": 4
+   },
+   "by_ranker": {
+    "vector": 10,
+    "vector_idf": 10,
+    "vector_prf": 10,
+    "bm25": 10,
+    "hybrid": 10,
+    "oracle": 10,
+    "semantic": 10
+   }
+  }
+ ]
+}

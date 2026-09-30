@@ -1,0 +1,28 @@
+# torch is installed separately from the CPU-only index (see Dockerfile) so that
+# kokoro/misaki never pull the ~3 GB CUDA build from PyPI.
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+pydantic==2.13.5
+pydantic-settings==2.15.0
+python-multipart==0.0.32
+sqlalchemy==2.0.54
+httpx==0.28.1
+pyyaml==6.0.3
+
+# speech synthesis
+kokoro==0.9.4
+misaki[en]==0.9.4
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+soundfile==0.14.0
+soxr==1.1.0
+
+# speech recognition (local fallback)
+onnx-asr[cpu,hub]==0.12.0
+
+# commands
+rapidfuzz==3.14.6
+
+# document import
+pymupdf4llm==1.28.2
+selectolax==0.4.12
+trafilatura==2.2.0

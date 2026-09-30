@@ -1,0 +1,12 @@
+{
+ "document_count": 208,
+ "term_count": 44054,
+ "posting_count": 175848,
+ "average_document_length": 2170.903846153846,
+ "index_version": 4,
+ "log_base": "e",
+ "built_at": "2026-09-02T21:15:42.896279",
+ "build_duration_ms": 17839.277,
+ "embedded_document_count": 0,
+ "is_stale": false
+}

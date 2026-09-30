@@ -1,0 +1,23 @@
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# node
+node_modules/
+dist/
+.vite/
+
+# local config & data
+.env
+*.local
+
+# generated report artefacts are committed deliberately; scratch output is not
+docs/assets/*.tmp.*

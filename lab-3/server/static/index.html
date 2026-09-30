@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Автоматическое реферирование документов — sentence extraction + OSTIS</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>📝</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <h1>Автоматическое реферирование документов</h1>
+    <div class="sub">Sentence extraction + OSTIS · вариант 1 · русский / английский · лабораторная работа по ЯЗИС</div>
+  </div>
+  <div class="spacer"></div>
+  <button id="btn-print" title="Печать открытой вкладки (Ctrl+P)">🖨 Печать</button>
+  <button id="btn-keys" title="Список горячих клавиш (?)">⌨ Клавиши</button>
+  <button id="btn-help" title="Справка (F1)">❓ Справка</button>
+  <div class="progress" id="progress" hidden></div>
+</header>
+
+<div class="layout">
+  <!-- ============================ панель управления ============================ -->
+  <aside class="noprint">
+    <div class="card">
+      <h2>Коллекция документов <span class="pill" id="db-size"></span></h2>
+      <div class="body tight">
+        <input type="search" id="doc-search" placeholder="Поиск по названию…  (/)"
+               autocomplete="off" aria-label="Поиск документа в коллекции">
+      </div>
+      <div class="doclist" id="doclist"></div>
+      <div class="body tight border-top">
+        <div class="btnrow">
+          <button class="btn ghost small" id="btn-own" title="Вставить произвольный текст">✎ Свой текст</button>
+          <button class="btn ghost small" id="btn-file" title="Открыть текстовый файл с диска">📂 Файл .txt</button>
+          <button class="btn ghost small" id="btn-url" title="Загрузить статью по ссылке">🌐 По ссылке</button>
+        </div>
+        <input type="file" id="file" accept=".txt,text/plain" hidden>
+        <div class="hint" id="coll-stats"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Параметры реферирования
+        <span class="pill warn" id="params-changed" hidden title="Параметры отличаются от формулы методических указаний">изменено</span>
+      </h2>
+      <div class="body">
+        <div class="field">
+          <label for="p-sent">Предложений в реферате <b id="v-sent">10</b></label>
+          <input type="range" id="p-sent" min="3" max="25" step="1" value="10">
+        </div>
+        <div class="field">
+          <label for="p-kw">Ключевых слов <b id="v-kw">15</b></label>
+          <input type="range" id="p-kw" min="5" max="40" step="1" value="15">
+        </div>
+        <div class="field">
+          <label for="p-method">Метод отбора предложений</label>
+          <select id="p-method">
+            <option value="tfidf">Формула методички: Posd · Posp · Score</option>
+            <option value="textrank">TextRank (PageRank по графу)</option>
+            <option value="hybrid">Гибрид: позиция + TextRank</option>
+            <option value="lead">Lead-N (первые предложения)</option>
+          </select>
+        </div>
+
+        <details id="adv-params">
+          <summary>Исследовательские параметры</summary>
+          <div class="field">
+            <label for="p-alpha">Степень α у Posd <b id="v-alpha">1.0</b></label>
+            <input type="range" id="p-alpha" min="0" max="3" step="0.1" value="1">
+            <div class="hint">1 — формула методички, 0 — влияние позиции в документе отключено.</div>
+          </div>
+          <div class="field">
+            <label for="p-beta">Степень β у Posp <b id="v-beta">1.0</b></label>
+            <input type="range" id="p-beta" min="0" max="3" step="0.1" value="1">
+          </div>
+          <div class="field">
+            <label for="p-mmr">MMR λ — подавление повторов <b id="v-mmr">1.00</b></label>
+            <input type="range" id="p-mmr" min="0.3" max="1" step="0.05" value="1">
+            <div class="hint">1,0 — чистый отбор по весу; меньше — штраф за повтор отобранного.</div>
+          </div>
+          <div class="field">
+            <label for="p-lennorm">Нормировка Score по длине предложения</label>
+            <select id="p-lennorm">
+              <option value="none">нет (как в методичке)</option>
+              <option value="sqrt">делить на √(число слов)</option>
+              <option value="linear">делить на число слов</option>
+            </select>
+          </div>
+          <label class="switch"><input type="checkbox" id="p-conflate" checked>
+            Склейка близких основ</label>
+          <div class="hint">Исправляет расхождения стеммера («систем» / «сист»).</div>
+        </details>
+
+        <button class="btn ghost small wide" id="btn-reset" style="margin-top:.6rem">
+          ↺ Вернуть значения методички</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Сохранение и печать</h2>
+      <div class="body">
+        <div class="btnrow">
+          <button class="btn small" data-export="txt" title="Текстовый отчёт">TXT</button>
+          <button class="btn small" data-export="html" title="Отчёт для печати">HTML</button>
+          <button class="btn small" data-export="json" title="Все веса и метрики">JSON</button>
+          <button class="btn small" data-export="csv" title="Таблица весов предложений">CSV</button>
+          <button class="btn small" data-export="scs" title="Фрагмент семантической сети">SC-код</button>
+        </div>
+        <button class="btn ghost small wide" data-export="scs" data-scope="collection"
+                style="margin-top:.4rem" title="SC-код семантической сети всей коллекции">
+          ⤓ SC-код всей коллекции</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================================ содержимое ================================ -->
+  <main>
+    <!-- строка текущего документа: видна на всех вкладках -->
+    <div class="card docbar" id="docbar">
+      <div class="body">
+        <div class="docinfo">
+          <h3 id="d-title">—</h3>
+          <span class="badge" id="d-lang"></span>
+          <span class="badge" id="d-domain"></span>
+          <a id="d-source" href="#" target="_blank" rel="noopener">источник ↗</a>
+          <span class="pill warn" id="d-temp" hidden title="Документ обрабатывается временно и не сохранён в коллекции">не в коллекции</span>
+          <button class="btn small" id="btn-add-collection" hidden
+                  title="Сохранить документ в коллекцию: |DB| увеличится, df(t) пересчитаются">
+            ＋ Добавить в коллекцию</button>
+        </div>
+        <div class="stats" id="d-stats"></div>
+      </div>
+    </div>
+
+    <nav class="tabs noprint" id="tabs" role="tablist"></nav>
+
+    <!-- 1. РЕФЕРАТ -->
+    <section class="tab active" id="tab-abstract">
+      <div class="note tip noprint" id="first-hint" hidden>
+        <b>С чего начать.</b> Слева выберите документ — справа сразу появятся оба реферата.
+        Вкладка «Карта текста» покажет, <i>почему</i> выбрано каждое предложение,
+        «Сравнение методов» — насколько формула методички зависит от позиции предложения.
+        <button class="btn ghost small" id="hint-close">Понятно</button>
+      </div>
+
+      <div class="card" style="margin-bottom:1rem">
+        <h2>Раздел 1 · Классический реферат (sentence extraction)
+          <span class="hint inline" id="sum-note"></span></h2>
+        <div class="body">
+          <ol class="summary" id="summary-list"></ol>
+          <details style="margin-top:.6rem">
+            <summary class="noprint">Показать реферат сплошным текстом</summary>
+            <p class="plain" id="summary-plain"></p>
+          </details>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Раздел 2 · Реферат в виде списка ключевых слов
+          <span class="hint inline">щёлкните слово, чтобы найти его в тексте</span></h2>
+        <div class="body">
+          <div class="chips" id="kw-chips"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. КАРТА ТЕКСТА -->
+    <section class="tab" id="tab-heat">
+      <div class="card">
+        <h2>Исходный текст с картой весов предложений</h2>
+        <div class="body">
+          <div class="legend-row noprint">
+            <span><i class="sw" style="background:rgba(184,86,47,.55)"></i> вошло в реферат</span>
+            <span><i class="sw" style="background:rgba(47,93,140,.45)"></i> вес предложения (насыщенность)</span>
+            <span class="hint">щёлкните предложение — справа появится разбор его веса</span>
+          </div>
+          <div class="note tip noprint" id="term-banner" hidden></div>
+          <div class="heat">
+            <div class="minimap" id="minimap" title="Карта документа: положение и вес предложений"></div>
+            <div class="heattext" id="heattext"></div>
+            <div class="detail"><div class="card"><h2>Разбор веса предложения</h2>
+              <div class="body" id="sent-detail"></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ВЕСА ТЕРМИНОВ -->
+    <section class="tab" id="tab-terms">
+      <div class="card" style="margin-bottom:1rem">
+        <h2>Облако ключевых слов <span class="hint inline">размер и цвет — вес w(t,D); клик — поиск в тексте</span></h2>
+        <div class="body"><div id="cloud" class="chips" style="align-items:center"></div></div>
+      </div>
+      <div class="card">
+        <h2>Веса терминов документа: w(t,D) = 0,5 · (1 + tf/tf<sub>max</sub>) · log(|DB|/df)</h2>
+        <div class="body">
+          <div class="btnrow" style="margin-bottom:.5rem">
+            <input type="search" id="term-filter" placeholder="фильтр по слову…" style="max-width:220px">
+            <span class="hint" id="term-count"></span>
+          </div>
+          <div class="scroll"><table class="grid" id="terms-table"></table></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. СЕМАНТИЧЕСКАЯ СЕТЬ -->
+    <section class="tab" id="tab-graph">
+      <div class="card" style="margin-bottom:1rem">
+        <h2>Фрагмент семантической сети (OSTIS)</h2>
+        <div class="body">
+          <div class="btnrow noprint" style="margin-bottom:.6rem">
+            <select id="g-scope" style="max-width:270px">
+              <option value="document">Сеть текущего документа</option>
+              <option value="collection">Сеть всей коллекции</option>
+            </select>
+            <button class="btn ghost small" id="g-relayout">↻ Повернуть раскладку</button>
+            <button class="btn ghost small" id="g-fit">⤢ Вписать</button>
+            <label class="switch small"><input type="checkbox" id="g-labels" checked> подписи дуг</label>
+            <span class="hint">узлы перетаскиваются мышью, колесо — масштаб</span>
+          </div>
+          <div class="graphwrap">
+            <svg id="graph"></svg>
+            <div class="legend">
+              <div><i style="background:#2f5d8c"></i>документ</div>
+              <div><i style="background:#7a5ea8"></i>класс / множество</div>
+              <div><i style="background:#b8562f"></i>предложение реферата</div>
+              <div><i style="background:#2e7d5b"></i>ключевое слово</div>
+              <div><i style="background:#96a2b3"></i>атрибут (язык, область)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>SC-код в нотации SCs</h2>
+        <div class="body">
+          <div class="btnrow noprint" style="margin-bottom:.5rem">
+            <button class="btn ghost small" id="scs-copy">⧉ Копировать</button>
+            <button class="btn ghost small" id="scs-save">⤓ Сохранить .scs</button>
+            <span class="hint" id="scs-note"></span>
+          </div>
+          <pre class="code" id="scs-code"></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. СРАВНЕНИЕ МЕТОДОВ -->
+    <section class="tab" id="tab-compare">
+      <div class="card" style="margin-bottom:1rem">
+        <h2>Сопоставление методов отбора предложений</h2>
+        <div class="body">
+          <table class="grid" id="cmp-table"></table>
+          <div class="hint" style="margin-top:.4rem">ROUGE и коэффициент Жаккара вычислены
+            относительно реферата по формуле методических указаний: это мера того,
+            насколько другой метод согласуется с базовым, а не абсолютная точность.</div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:1rem">
+        <h2>Диагностика позиционного перекоса формулы</h2>
+        <div class="body" id="bias-body"></div>
+      </div>
+      <div class="card">
+        <h2>Рефераты рядом</h2>
+        <div class="body cols" id="cmp-cols"></div>
+      </div>
+    </section>
+
+    <!-- 6. ВСЯ КОЛЛЕКЦИЯ -->
+    <section class="tab" id="tab-batch">
+      <div class="card">
+        <h2>Пакетная обработка коллекции</h2>
+        <div class="body">
+          <div class="btnrow noprint" style="margin-bottom:.6rem">
+            <button class="btn small" id="batch-run">▶ Обработать все документы</button>
+            <button class="btn ghost small" id="batch-csv">⤓ Таблица в CSV</button>
+            <span class="hint" id="batch-info"></span>
+          </div>
+          <div class="scroll"><table class="grid" id="batch-table"></table></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:1rem">
+        <h2>Близость документов коллекции (косинусная мера по векторам TF-IDF)</h2>
+        <div class="body">
+          <div class="btnrow noprint" style="margin-bottom:.6rem">
+            <button class="btn ghost small" id="sim-run">▶ Построить матрицу близости</button>
+            <span class="hint" id="sim-info">Показывает, какие документы тематически связаны:
+              именно эта связанность определяет df(t), а значит и веса терминов.</span>
+          </div>
+          <div class="scroll"><table class="grid" id="sim-table"></table></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. СТАТИСТИКА КОЛЛЕКЦИИ -->
+    <section class="tab" id="tab-stats">
+      <div class="card" style="margin-bottom:1rem">
+        <h2>Сводка по коллекции</h2>
+        <div class="body">
+          <div class="stats" id="st-totals"></div>
+          <div class="hint" style="margin-top:.5rem" id="st-note"></div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:1rem">
+        <h2>Что отбрасывается при фильтрации</h2>
+        <div class="body" id="st-filter"></div>
+      </div>
+      <div class="cols" style="margin-bottom:1rem">
+        <div class="card">
+          <h2>Ранго-частотное распределение (закон Ципфа)</h2>
+          <div class="body" id="st-zipf"></div>
+        </div>
+        <div class="card">
+          <h2>Распределение документных частот df(t)</h2>
+          <div class="body" id="st-df"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Документы коллекции</h2>
+        <div class="body">
+          <div class="btnrow noprint" style="margin-bottom:.5rem">
+            <button class="btn ghost small" id="st-csv">⤓ Таблица в CSV</button>
+          </div>
+          <div class="scroll"><table class="grid" id="st-table"></table></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. СПРАВКА -->
+    <section class="tab help" id="tab-help">
+      <div class="card"><div class="body" id="help-body"></div></div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ============================== диалоги ============================== -->
+<dialog id="own-dialog">
+  <form method="dialog">
+    <h2>Собственный текст для реферирования</h2>
+    <div class="body">
+      <div class="field">
+        <label for="own-title">Название документа</label>
+        <input type="text" id="own-title" placeholder="Например: Статья о нейронных сетях">
+      </div>
+      <div class="field">
+        <label for="own-text">Текст (абзацы разделяются пустой строкой)</label>
+        <textarea id="own-text" rows="14" placeholder="Вставьте текст статьи…"></textarea>
+      </div>
+      <div class="hint">Документ будет сохранён в коллекцию: |DB| увеличится на единицу,
+        документные частоты df(t) и веса терминов пересчитаются для всех документов.
+        Удалить его можно крестиком в списке слева. Нужно не менее 400 символов.</div>
+      <div class="btnrow right">
+        <button class="btn ghost" value="cancel">Отмена</button>
+        <button class="btn" value="ok">Реферировать</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="url-dialog">
+  <form method="dialog">
+    <h2>Реферирование страницы по ссылке</h2>
+    <div class="body">
+      <div class="field">
+        <label for="url-input">Адрес страницы</label>
+        <input type="url" id="url-input" placeholder="https://ru.wikipedia.org/wiki/Машинное_обучение">
+        <div class="hint">Система скачает страницу, уберёт разметку, меню и сноски,
+          соберёт текст по абзацам и добавит документ в коллекцию. Подходят статьи
+          Wikipedia, Habr, новостные и научные публикации; страницы, где текст
+          подгружается скриптами, не поддерживаются.</div>
+      </div>
+      <div class="note err" id="url-error" hidden></div>
+      <div class="btnrow right">
+        <button class="btn ghost" value="cancel" type="button" id="url-cancel">Отмена</button>
+        <button class="btn" id="url-load" type="button">Загрузить и реферировать</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="keys-dialog">
+  <form method="dialog">
+    <h2>Горячие клавиши</h2>
+    <div class="body">
+      <table class="grid keys">
+        <tr><td class="l"><kbd>1</kbd>…<kbd>8</kbd></td><td class="l">переключение вкладок</td></tr>
+        <tr><td class="l"><kbd>↑</kbd> <kbd>↓</kbd></td><td class="l">предыдущий / следующий документ коллекции</td></tr>
+        <tr><td class="l"><kbd>/</kbd></td><td class="l">поиск по списку документов</td></tr>
+        <tr><td class="l"><kbd>Esc</kbd></td><td class="l">снять выделение термина, закрыть диалог</td></tr>
+        <tr><td class="l"><kbd>F1</kbd></td><td class="l">справка</td></tr>
+        <tr><td class="l"><kbd>?</kbd></td><td class="l">это окно</td></tr>
+        <tr><td class="l"><kbd>Ctrl</kbd>+<kbd>P</kbd></td><td class="l">печать открытой вкладки</td></tr>
+      </table>
+      <div class="btnrow right"><button class="btn" value="ok">Закрыть</button></div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="confirm-dialog">
+  <form method="dialog">
+    <h2 id="confirm-title">Подтверждение</h2>
+    <div class="body">
+      <p id="confirm-text" style="margin:.2rem 0 1rem"></p>
+      <div class="btnrow right">
+        <button class="btn ghost" value="cancel">Отмена</button>
+        <button class="btn danger" value="ok" id="confirm-ok">Удалить</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>

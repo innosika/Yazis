@@ -1,0 +1,64 @@
+[
+ {
+  "id": 5,
+  "status": "done",
+  "seed_urls": [
+   "https://en.wikipedia.org/wiki/Information_retrieval",
+   "https://en.wikipedia.org/wiki/Tf-idf",
+   "https://en.wikipedia.org/wiki/Okapi_BM25",
+   "https://en.wikipedia.org/wiki/Web_crawler",
+   "https://en.wikipedia.org/wiki/Latent_semantic_analysis",
+   "https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)",
+   "https://en.wikipedia.org/wiki/Relevance_feedback",
+   "https://en.wikipedia.org/wiki/Word_embedding"
+  ],
+  "max_pages": 220,
+  "max_depth": 2,
+  "same_domain_only": true,
+  "respect_robots_txt": true,
+  "pages_fetched": 221,
+  "pages_indexed": 190,
+  "pages_skipped": 60,
+  "pages_failed": 5,
+  "urls_discovered": 29979,
+  "bytes_downloaded": 74021174,
+  "skip_breakdown": {
+   "too_short": 1,
+   "http_error": 5,
+   "near_duplicate": 5,
+   "duplicate_content": 20,
+   "robots_disallowed": 34
+  },
+  "pending_urls": 29377,
+  "error": null,
+  "started_at": "2026-09-02T21:06:45.928146",
+  "finished_at": "2026-09-02T21:15:24.962471",
+  "task_id": "51a17c6fad8a4a10b6ed2df862191f0e"
+ },
+ {
+  "id": 4,
+  "status": "done",
+  "seed_urls": [
+   "https://en.wikipedia.org/wiki/Vector_space_model"
+  ],
+  "max_pages": 20,
+  "max_depth": 1,
+  "same_domain_only": true,
+  "respect_robots_txt": true,
+  "pages_fetched": 20,
+  "pages_indexed": 19,
+  "pages_skipped": 18,
+  "pages_failed": 0,
+  "urls_discovered": 105,
+  "bytes_downloaded": 5205717,
+  "skip_breakdown": {
+   "duplicate_content": 1,
+   "robots_disallowed": 17
+  },
+  "pending_urls": 69,
+  "error": null,
+  "started_at": "2026-09-02T21:05:29.031063",
+  "finished_at": "2026-09-02T21:06:17.090110",
+  "task_id": "7f9243834fcc4890aef0d48dd5a9ee5c"
+ }
+]

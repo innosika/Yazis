@@ -1,0 +1,400 @@
+# Hand-authored topical test collection for the frozen 208-document crawl (English
+# Wikipedia, information-retrieval neighbourhood). TREC/ROMIP shape: `title` is what gets
+# executed, `description` and `narrative` are what the assessor reads, `oracle_query` is a
+# hand-built synonym/keyword query run *only* to widen the judgment pool with relevant
+# documents the topic's own wording may never retrieve.
+#
+# Categories: `navigational` (one or a few specific pages are the answer), `topical`
+# (several pages treat the subject), `vocabulary-mismatch` (the wording deliberately
+# avoids the words the relevant pages use — the only category on which a semantic ranker
+# can show any benefit over lexical ones).
+#
+# Many more topics are authored than will be judged. The judged subset is drawn only after
+# every ranker's run has been frozen (ROMIP's anti-tuning device).
+collection: "topical (LLM-judged)"
+description: >-
+  46 hand-authored topics over the frozen crawl; a 25-topic subset is selected for judging
+  after all runs are frozen. Judged by an LLM assessor on ROMIP's five-point scale.
+topics:
+  # ------------------------------------------------------------- navigational ----
+  - ext_id: 1
+    category: navigational
+    title: "Okapi BM25 ranking function"
+    description: "The page describing the BM25 ranking function itself."
+    narrative: >-
+      Relevant: an article whose subject is BM25 — its formula, its k1 and b parameters,
+      its origin in the probabilistic relevance framework. Pages that merely mention BM25 as
+      one ranking function among others are at most marginally relevant.
+    oracle_query: "probabilistic ranking function term frequency saturation Robertson"
+  - ext_id: 2
+    category: navigational
+    title: "PageRank algorithm"
+    description: "The article on Google's PageRank link-analysis algorithm."
+    narrative: >-
+      Relevant: the PageRank article, and pages that explain how the algorithm computes
+      a page's importance from incoming links. Biographies that only mention PageRank in
+      passing are marginal.
+    oracle_query: "link analysis eigenvector web graph Larry Page Sergey Brin"
+  - ext_id: 3
+    category: navigational
+    title: "Gerard Salton SMART system"
+    description: "Gerard Salton and the SMART information retrieval system he built at Cornell."
+    narrative: >-
+      Relevant: Salton's biography and the SMART system article. Pages about the vector
+      space model that credit Salton and SMART are partially relevant.
+    oracle_query: "Cornell vector space model pioneer Harvard experimental retrieval"
+  - ext_id: 4
+    category: navigational
+    title: "Text Retrieval Conference TREC"
+    description: "The TREC evaluation conference organised by NIST."
+    narrative: >-
+      Relevant: the TREC article; pages describing its tracks, its test collections and
+      its role in IR evaluation. The NIST article is partially relevant.
+    oracle_query: "NIST evaluation workshop test collections ad hoc track relevance judgments"
+  - ext_id: 5
+    category: navigational
+    title: "Apache Lucene search library"
+    description: "The Lucene full-text search library and the servers built on it."
+    narrative: >-
+      Relevant: Apache Lucene, and Solr and Elasticsearch as Lucene-based servers. Other
+      open-source search engines (Xapian, Sphinx, Terrier) are not relevant unless they
+      discuss Lucene.
+    oracle_query: "open source Java full-text indexing library Solr Elasticsearch"
+  - ext_id: 6
+    category: navigational
+    title: "Vannevar Bush memex"
+    description: "Vannevar Bush and his memex proposal."
+    narrative: >-
+      Relevant: Bush's biography and the essay As We May Think. Hypertext history pages
+      that describe the memex are partially relevant.
+    oracle_query: "As We May Think hypertext microfilm desk device associative trails"
+  - ext_id: 7
+    category: navigational
+    title: "Karen Spärck Jones inverse document frequency"
+    description: "Karen Spärck Jones and her introduction of IDF weighting."
+    narrative: >-
+      Relevant: her biography and the tf–idf article's account of IDF. Pages on term
+      weighting that credit her are partially relevant.
+    oracle_query: "IDF term specificity statistical interpretation Cambridge computational linguist"
+  - ext_id: 8
+    category: navigational
+    title: "Wayback Machine internet archive"
+    description: "The Wayback Machine service for browsing archived web pages."
+    narrative: >-
+      Relevant: the Wayback Machine article. Digital preservation pages are marginal unless
+      they discuss web archiving.
+    oracle_query: "archived web pages snapshots Internet Archive crawl history"
+  - ext_id: 9
+    category: navigational
+    title: "Herman Hollerith tabulating machine"
+    description: "Hollerith and the electromechanical tabulating equipment he invented."
+    narrative: >-
+      Relevant: Hollerith's biography, the tabulating machine article, and punched-card
+      pages that describe his census machines. Jacquard looms are marginal.
+    oracle_query: "census electromechanical card reader counting sorter IBM predecessor"
+  - ext_id: 10
+    category: navigational
+    title: "MEDLINE bibliographic database"
+    description: "The MEDLINE database of biomedical literature."
+    narrative: >-
+      Relevant: MEDLINE, and the National Library of Medicine and Grateful Med pages as its
+      producer and early interface. General database articles are not relevant.
+    oracle_query: "PubMed National Library of Medicine biomedical citations index"
+  - ext_id: 11
+    category: navigational
+    title: "Tim Berners-Lee World Wide Web"
+    description: "Berners-Lee's invention of the World Wide Web at CERN."
+    narrative: >-
+      Relevant: Berners-Lee's biography and the World Wide Web article; the CERN article
+      insofar as it describes the Web's origin. Hypertext history is partially relevant.
+    oracle_query: "hypertext HTTP HTML CERN inventor browser 1989 proposal"
+  - ext_id: 12
+    category: navigational
+    title: "Latent Dirichlet allocation topic model"
+    description: "The LDA generative topic model."
+    narrative: >-
+      Relevant: the LDA article. Latent semantic analysis is partially relevant as the
+      related earlier technique; general dimensionality reduction is not.
+    oracle_query: "generative probabilistic topic modeling Dirichlet Blei document mixture"
+  # ------------------------------------------------------------------ topical ----
+  - ext_id: 13
+    category: topical
+    title: "how does an inverted index store term positions"
+    description: "Structure of an inverted index and what its posting lists contain."
+    narrative: >-
+      Relevant: pages that explain inverted files, dictionaries and posting lists,
+      including positional or offset information. Pages using 'index' in the sense of a
+      citation index or database index without describing text indexing are not relevant.
+    oracle_query: "posting list dictionary occurrence offset inverted file full-text indexing"
+  - ext_id: 14
+    category: topical
+    title: "measuring precision and recall of a search system"
+    description: "How the effectiveness of a retrieval system is evaluated."
+    narrative: >-
+      Relevant: articles on precision/recall, evaluation measures, test collections and
+      the Cranfield/TREC methodology. Pages that define precision and recall only for
+      classification in general are marginally relevant.
+    oracle_query: "relevance judgments F-measure mean average precision Cranfield test collection"
+  - ext_id: 15
+    category: topical
+    title: "term weighting with tf-idf"
+    description: "Assigning weights to terms from their frequency in a document and across the collection."
+    narrative: >-
+      Relevant: tf–idf, term discrimination, the vector space model's weighting, bag-of-words
+      representations that discuss weighting. Pure biographies are marginal.
+    oracle_query: "inverse document frequency term frequency weight normalization discrimination value"
+  - ext_id: 16
+    category: topical
+    title: "vector space model cosine similarity"
+    description: "Representing documents and queries as vectors and comparing them by angle."
+    narrative: >-
+      Relevant: the vector space model and its variants, and any page explaining cosine
+      similarity between term vectors. Pure linear-algebra pages on vector spaces are
+      marginally relevant only if they connect to document representation.
+    oracle_query: "document vectors angle dot product Salton term weights similarity"
+  - ext_id: 17
+    category: topical
+    title: "boolean queries with AND OR NOT operators"
+    description: "Retrieval models based on Boolean logic over index terms."
+    narrative: >-
+      Relevant: the Boolean model, the extended Boolean model, fuzzy retrieval. Pages on
+      set theory or logic without a retrieval context are not relevant.
+    oracle_query: "exact match set operations logical retrieval model conjunction disjunction"
+  - ext_id: 18
+    category: topical
+    title: "probabilistic relevance model binary independence"
+    description: "Probabilistic models of retrieval and the probability ranking principle."
+    narrative: >-
+      Relevant: the binary independence model, the probabilistic relevance model, BM25,
+      divergence from randomness, and pages on uncertain inference in retrieval. Bayes'
+      theorem alone is marginal.
+    oracle_query: "Robertson Spärck Jones probability ranking principle relevance estimation"
+  - ext_id: 19
+    category: topical
+    title: "web crawler politeness and robots.txt"
+    description: "How crawlers schedule fetches, avoid overloading hosts and respect exclusion rules."
+    narrative: >-
+      Relevant: the web crawler article and any page describing crawl policies, revisit
+      strategies, frontier management or the robots exclusion protocol. Search engine
+      overviews are partially relevant where they discuss crawling.
+    oracle_query: "spider frontier crawl policy revisit robots exclusion protocol"
+  - ext_id: 20
+    category: topical
+    title: "dimensionality reduction of the term-document matrix"
+    description: "Reducing the dimensionality of document representations, e.g. by SVD."
+    narrative: >-
+      Relevant: latent semantic analysis, dimensionality reduction, word embeddings and
+      topic-based vector models. General linear algebra is marginal.
+    oracle_query: "singular value decomposition latent semantic indexing low-rank approximation"
+  - ext_id: 21
+    category: topical
+    title: "relevance feedback and query modification"
+    description: "Improving a query from the user's judgments of initial results."
+    narrative: >-
+      Relevant: relevance feedback (Rocchio), pseudo-relevance feedback, query expansion.
+      Interactive search pages that discuss reformulating queries are partially relevant.
+    oracle_query: "Rocchio algorithm user marks relevant documents modify query expansion terms"
+  - ext_id: 22
+    category: topical
+    title: "learning to rank with machine learning"
+    description: "Supervised methods that learn a ranking function from labelled data."
+    narrative: >-
+      Relevant: learning to rank, ranking in IR, feature engineering for rankers. Pages
+      about ranking without any learned component are marginal.
+    oracle_query: "supervised ranking pairwise listwise features gradient boosted trees"
+  - ext_id: 23
+    category: topical
+    title: "automatic text summarization methods"
+    description: "Producing a shorter version of one or several documents automatically."
+    narrative: >-
+      Relevant: automatic summarization and multi-document summarization. Pages on
+      information overload are marginal.
+    oracle_query: "extractive abstractive summary sentence selection compression"
+  - ext_id: 24
+    category: topical
+    title: "document classification and categorization"
+    description: "Assigning documents to predefined classes or a classification scheme."
+    narrative: >-
+      Relevant: document (text) classification, classification in general, taxonomies and
+      library classification schemes. Clustering pages are marginal.
+    oracle_query: "text categorization supervised labels naive Bayes taxonomy scheme"
+  - ext_id: 25
+    category: topical
+    title: "retrieving images and music by content"
+    description: "Content-based retrieval of non-textual media."
+    narrative: >-
+      Relevant: image retrieval, music information retrieval, multimedia and cross-modal
+      retrieval, 3D content retrieval, video search engines. Pages about images or video
+      as media without retrieval are not relevant.
+    oracle_query: "content-based multimedia audio features visual similarity query by example"
+  - ext_id: 26
+    category: topical
+    title: "searching documents written in another language"
+    description: "Retrieval where the query and the documents are in different languages."
+    narrative: >-
+      Relevant: cross-language information retrieval. Computational linguistics and
+      language models are marginal unless translation for retrieval is discussed.
+    oracle_query: "translation multilingual bilingual query cross-lingual retrieval"
+  - ext_id: 27
+    category: topical
+    title: "enterprise and desktop search tools"
+    description: "Search inside an organisation's systems or on a personal computer."
+    narrative: >-
+      Relevant: enterprise search, desktop search, federated and vertical search. Web
+      search engines in general are marginal.
+    oracle_query: "intranet local files indexing corporate content federated sources"
+  - ext_id: 28
+    category: topical
+    title: "recommender systems collaborative filtering"
+    description: "Systems that suggest items to users from behaviour and preferences."
+    narrative: >-
+      Relevant: recommender systems and information filtering systems. Social search is
+      partially relevant.
+    oracle_query: "personalized recommendations user ratings matrix factorization filtering"
+  - ext_id: 29
+    category: topical
+    title: "history of search engines on the web"
+    description: "Early web search engines and how the market developed."
+    narrative: >-
+      Relevant: the search engine and list-of-search-engines articles, AltaVista, Yahoo,
+      Google, Bing. Corporate pages count where they describe the search product's history.
+    oracle_query: "AltaVista Yahoo Google Bing early web portals directory 1990s"
+  - ext_id: 30
+    category: topical
+    title: "digital libraries and preservation of collections"
+    description: "Building digital libraries and keeping their content accessible over time."
+    narrative: >-
+      Relevant: digital library, preservation (library and archive), the Wayback Machine as
+      web preservation. Physical library classification is marginal.
+    oracle_query: "archives long-term access electronic collections repository preservation"
+  - ext_id: 31
+    category: topical
+    title: "spam filtering techniques for email"
+    description: "Detecting and blocking unsolicited email."
+    narrative: >-
+      Relevant: anti-spam techniques; adversarial information retrieval where it covers
+      spam. Information filtering in general is marginal.
+    oracle_query: "spam detection blacklist Bayesian filter greylisting adversarial"
+  - ext_id: 32
+    category: topical
+    title: "metadata standards for describing documents"
+    description: "Structured descriptions of resources and the vocabularies used for them."
+    narrative: >-
+      Relevant: metadata, ontologies, the Semantic Web, knowledge organization. Data
+      modeling is partially relevant.
+    oracle_query: "Dublin Core schema descriptive cataloging RDF vocabulary resource description"
+  - ext_id: 33
+    category: topical
+    title: "question answering systems"
+    description: "Systems that return a direct answer rather than a list of documents."
+    narrative: >-
+      Relevant: question answering, natural-language user interfaces, language models used
+      for answering. Search engines in general are marginal.
+    oracle_query: "answer extraction natural language questions passage retrieval reading"
+  - ext_id: 34
+    category: topical
+    title: "citation analysis and impact of scientific publications"
+    description: "Using citations to measure the influence of papers, journals and authors."
+    narrative: >-
+      Relevant: citation index, bibliometrics, Eugene Garfield, scholarly journals where
+      impact is discussed. General library science is marginal.
+    oracle_query: "impact factor h-index Garfield scientometrics Science Citation Index"
+  - ext_id: 35
+    category: topical
+    title: "neural language models for text representation"
+    description: "Neural networks that represent words and passages as dense vectors."
+    narrative: >-
+      Relevant: language models, BERT, word embeddings, learned sparse retrieval. Classic
+      statistical models are marginal.
+    oracle_query: "transformer contextual embeddings dense vectors pretrained neural network"
+  - ext_id: 36
+    category: topical
+    title: "privacy and freedom of information online"
+    description: "Individual privacy and the right to access information on the internet."
+    narrative: >-
+      Relevant: internet privacy, privacy, the right to privacy, freedom of information,
+      internet freedom, the right to know, censorship. Intellectual property is marginal.
+    oracle_query: "surveillance data protection censorship rights access government transparency"
+  # ------------------------------------------------------- vocabulary-mismatch ----
+  - ext_id: 37
+    category: vocabulary-mismatch
+    title: "why do search results favour long articles"
+    description: "Document length normalisation in ranking functions."
+    narrative: >-
+      Relevant: pages explaining how ranking functions correct for document length (BM25's
+      b parameter, pivoted normalisation, the vector model's norm). Pages on ranking that
+      never mention length are not relevant.
+    oracle_query: "document length normalization pivoted BM25 parameter b"
+  - ext_id: 38
+    category: vocabulary-mismatch
+    title: "programs that automatically browse the web to collect pages"
+    description: "Web crawlers, without using the words crawler or spider."
+    narrative: >-
+      Relevant: the web crawler article and indexing pages that describe fetching pages
+      automatically. Browsers and portals are not relevant.
+    oracle_query: "web crawler spider bot fetch pages"
+  - ext_id: 39
+    category: vocabulary-mismatch
+    title: "putting holes in stiff paper to record data for machines"
+    description: "Punched-card data storage and its machinery."
+    narrative: >-
+      Relevant: punched card, keypunch, tabulating machine, Hollerith, Jacquard machine.
+      Modern computer storage is marginal.
+    oracle_query: "punched card keypunch Hollerith Jacquard"
+  - ext_id: 40
+    category: vocabulary-mismatch
+    title: "finding words with similar meaning from the company they keep"
+    description: "Distributional semantics: word similarity from co-occurrence statistics."
+    narrative: >-
+      Relevant: co-occurrence, word embeddings, latent semantic analysis, distributional
+      models in computational linguistics. Thesauri built by hand are marginal.
+    oracle_query: "distributional semantics word embedding co-occurrence context"
+  - ext_id: 41
+    category: vocabulary-mismatch
+    title: "rating a web page by who points to it"
+    description: "Link-based importance of web pages."
+    narrative: >-
+      Relevant: PageRank and pages describing link analysis for ranking. Company pages
+      count only where they explain the ranking idea.
+    oracle_query: "PageRank link analysis hyperlink authority"
+  - ext_id: 42
+    category: vocabulary-mismatch
+    title: "deciding whether a found document actually answers the query"
+    description: "Relevance and how it is judged."
+    narrative: >-
+      Relevant: ground truth, evaluation measures, precision and recall, relevance feedback,
+      information needs — anything about judging relevance. Pages on legal or general
+      'relevance' are not.
+    oracle_query: "relevance judgment assessor ground truth information need"
+  - ext_id: 43
+    category: vocabulary-mismatch
+    title: "having too much information to cope with"
+    description: "Information overload."
+    narrative: >-
+      Relevant: information overload and information filtering. Information society and
+      information behaviour pages are partially relevant where they discuss overload.
+    oracle_query: "information overload infobesity filtering attention"
+  - ext_id: 44
+    category: vocabulary-mismatch
+    title: "asking a computer something in plain English and getting an answer"
+    description: "Natural-language question answering interfaces."
+    narrative: >-
+      Relevant: question answering and natural-language user interfaces. Search engines
+      in general are marginal.
+    oracle_query: "question answering natural language interface conversational"
+  - ext_id: 45
+    category: vocabulary-mismatch
+    title: "how libraries arrange books on shelves by subject"
+    description: "Library classification schemes."
+    narrative: >-
+      Relevant: library classification, knowledge organization, taxonomy. Digital libraries
+      are marginal unless classification is discussed.
+    oracle_query: "Dewey classification scheme call number shelving subject"
+  - ext_id: 46
+    category: vocabulary-mismatch
+    title: "the dream of a desk that holds all your books and notes"
+    description: "Early visions of personal knowledge machines (the memex and hypertext)."
+    narrative: >-
+      Relevant: Vannevar Bush, As We May Think, hypertext, Ted Nelson, Emanuel Goldberg,
+      J. C. R. Licklider. Modern desktop search is marginal.
+    oracle_query: "memex Vannevar Bush hypertext Ted Nelson Xanadu"

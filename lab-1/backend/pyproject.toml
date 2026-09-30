@@ -1,0 +1,121 @@
+[project]
+name = "irs"
+version = "1.0.0"
+description = "Information Retrieval System — vector search model over a web-crawled English corpus (Lab 1, variant 34)"
+requires-python = ">=3.12"
+
+dependencies = [
+    # --- web layer ---
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    "sse-starlette>=2.1",
+    "orjson>=3.10",
+    # --- persistence ---
+    "sqlalchemy[asyncio]>=2.0.36",
+    "asyncpg>=0.30",
+    "alembic>=1.14",
+    "pgvector>=0.3.6",
+    "redis>=5.2",
+    # --- task queue (arq is maintenance-only; taskiq is the async-first successor) ---
+    "taskiq>=0.11",
+    "taskiq-redis>=1.0",
+    "taskiq-fastapi>=0.3",
+    # --- crawling / extraction ---
+    "httpx[http2]>=0.28",
+    "trafilatura>=2.0",
+    "selectolax>=0.3.27",
+    "protego>=0.3",
+    # --- linguistics ---
+    "spacy>=3.8",
+    # --- maths: the N x D matrix, TF-IDF weights and truncated SVD are hand-rolled on these ---
+    "numpy>=2.1",
+    "scipy>=1.14",
+    # --- semantic ranker: ONNX only, deliberately avoids pulling in torch ---
+    "fastembed>=0.5",
+    # --- observability ---
+    "structlog>=24.4",
+    "prometheus-client>=0.21",
+    # --- misc ---
+    "pyyaml>=6.0",
+    "python-dateutil>=2.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=6.0",
+    "respx>=0.22",
+    "testcontainers[postgres]>=4.8",
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "rich>=13.9",
+    # Vendors NIST trec_eval; the metric core is cross-validated against it to 1e-9.
+    "pytrec-eval-terrier>=0.5.6",
+]
+report = [
+    "matplotlib>=3.9",
+    "jinja2>=3.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/irs"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/irs/py.typed" = "irs/py.typed"
+
+# ----------------------------------------------------------------------------------
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM", "RUF", "ASYNC", "PL"]
+ignore = [
+    "PLR0913",  # many arguments — the ranking and crawl functions take many knobs
+    "PLR0917",  # ditto, positional form
+    "PLR2004",  # magic values are fine in the maths and in tests
+    "B008",     # FastAPI's Depends() in defaults is the documented idiom
+    # Imports are deferred deliberately in three places: optional rankers whose absence
+    # must not break the app, the CLI's subcommands, and to break import cycles between
+    # the crawler and the indexer.
+    "PLC0415",
+    # `global` is used only for the lazily-created process-wide singletons (engine,
+    # session factory, Redis client, ranker registry), which is the intended pattern.
+    "PLW0603",
+    # Docstrings and comments quote the assignment text in Russian; the "ambiguous
+    # unicode" rules exist to catch homoglyph attacks in identifiers, not prose.
+    "RUF001",
+    "RUF002",
+    "RUF003",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["PLR0915", "PLC0415"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+plugins = ["pydantic.mypy"]
+# Third-party packages without bundled type information.
+[[tool.mypy.overrides]]
+module = ["trafilatura.*", "selectolax.*", "protego.*", "fastembed.*", "scipy.*", "pgvector.*", "taskiq_fastapi.*", "yaml.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = [
+    "integration: requires the live compose PostgreSQL (run via `make test-all`)",
+]

@@ -1,0 +1,84 @@
+# Lab 4 - "Автоматический машинный перевод текстов", variant 1 (English -> Russian).
+#
+#   make up     build, start, migrate, seed the dictionary, wait for ready
+#   make logs   follow all container logs
+#   make down   stop and remove
+#
+# Every service declares a healthcheck and every dependency uses `service_healthy`,
+# so `docker compose up` either reaches a working system or fails loudly - it never
+# leaves the API racing an unmigrated or unseeded database.
+
+name: mt-lab4
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: mt-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-mt}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mt}
+      POSTGRES_DB: ${POSTGRES_DB:-mt}
+      # The dictionary is bilingual; a deterministic collation keeps sort order
+      # identical between the developer machine and the container.
+      LANG: C.UTF-8
+    ports:
+      - "${POSTGRES_PORT:-5434}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-mt} -d ${POSTGRES_DB:-mt}"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: mt-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_DSN: postgresql+asyncpg://${POSTGRES_USER:-mt}:${POSTGRES_PASSWORD:-mt}@postgres:5432/${POSTGRES_DB:-mt}
+      DATA_DIR: /data
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      ENRICH_WIKTIONARY_ENABLED: ${ENRICH_WIKTIONARY_ENABLED:-true}
+    volumes:
+      - ./data:/data
+    ports:
+      - "${API_PORT:-8020}:8000"
+    # Alembic first, then the dictionary seeder (idempotent: it skips a populated
+    # table), then the API. The readiness probe only passes once spaCy, pymorphy3
+    # and the dictionary caches are warm. Log level is configured by the application
+    # rather than on this line, because uvicorn's own flag rejects "INFO" in capitals.
+    command: >
+      sh -c "alembic upgrade head
+      && python -m scripts.seed_dictionary
+      && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8000/api/health/ready').read()"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      start_period: 30s
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: mt-frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${WEB_PORT:-8090}:80"
+    healthcheck:
+      # 127.0.0.1 rather than localhost: nginx listens on IPv4 only, and inside the
+      # container `localhost` resolves to ::1 first, where nothing is listening.
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+volumes:
+  pgdata:

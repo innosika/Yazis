@@ -1,0 +1,25 @@
+@startuml
+!include _style.iuml
+skinparam defaultFontSize 14
+skinparam maxMessageSize 170
+hide footbox
+actor "Пользователь" as U
+participant "Любая страница\n+ content script" as CS
+participant "Service worker" as SW
+participant "Offscreen document" as OFF
+participant "Lector API\nlocalhost:8100" as API
+U -> CS : выделил текст
+CS -> CS : показать кнопку Play (shadow DOM)
+U -> CS : нажал Play / Alt+R / меню
+CS -> SW : {speak, text}
+SW -> OFF : создать при необходимости,\nпередать текст
+OFF -> API : GET /settings (голос, темп)
+OFF -> API : POST /tts/segment
+loop по единицам
+  OFF -> API : POST /tts/synthesize
+  API --> OFF : WAV
+  OFF -> OFF : воспроизвести,\nзаранее запросить следующую
+  OFF -> SW : статус «part 2 of 3»
+  SW -> CS : статус → мини-плеер
+end
+@enduml

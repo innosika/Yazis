@@ -1,0 +1,35 @@
+# Chemistry
+Chemistry is the scientific study of the properties and behavior of matter. It is a physical science within the natural sciences that studies matter: composition, structure, properties, behavior and the changes they undergo during reactions with other substances. Chemistry also addresses the nature of chemical bonds in chemical compounds.
+In the scope of its subject, chemistry occupies an intermediate position between physics and biology. It is sometimes called the central science because it provides a foundation for understanding both basic and applied scientific disciplines at a fundamental level. For example, chemistry explains aspects of plant growth (botany), the formation of igneous rocks (geology), how atmospheric ozone is formed and how environmental pollutants are degraded (ecology), the properties of the soil on the Moon (cosmochemistry), how medications work (pharmacology), and how to collect DNA evidence at a crime scene (forensics).
+Chemistry has existed under various names since ancient times. It has evolved, and now chemistry encompasses various areas of specialisation, or subdisciplines, that continue to increase in number and interrelate to create further interdisciplinary fields of study. The applications of various fields of chemistry are used frequently for economic purposes in the chemical industry.
+
+
+Etymology
+
+The word chemistry comes from a modification during the Renaissance of the word alchemy, which referred to an earlier set of practices that encompassed elements of chemistry, metallurgy, philosophy, astrology, astronomy, mysticism, and medicine. Alchemy is often associated with the quest to turn lead or other base metals into gold, though alchemists were also interested in many of the questions of modern chemistry.
+The modern word alchemy in turn is derived from the Arabic word al-kīmīā (الكیمیاء). This may have Egyptian origins since al-kīmīā is derived from the Ancient Greek χημία, which is in turn derived from the word Kemet, which is the ancient name of Egypt in the Egyptian language. Alternately, al-kīmīā may derive from χημεία 'cast together'.
+
+
+Modern principles
+
+The current model of atomic structure is the quantum mechanical model. Traditional chemistry starts with the study of elementary particles, atoms, molecules, substances, metals, crystals and other aggregates of matter. Matter can be studied in solid, liquid, gas and plasma states, in isolation or in combination. The interactions, reactions and transformations that are studied in chemistry are usually the result of interactions between atoms, leading to rearrangements of the chemical bonds which hold atoms together. Such behaviors are studied in a chemistry laboratory.
+The chemistry laboratory stereotypically uses various forms of laboratory glassware. However glassware is not central to chemistry, and a great deal of experimental (as well as applied/industrial) chemistry is done without it.
+
+A chemical reaction is a transformation of some substances into one or more different substances. The basis of such a chemical transformation is the rearrangement of electrons in the chemical bonds between atoms. It can be symbolically depicted through a chemical equation, which usually involves atoms as subjects. The number of atoms on the left and the right in the equation for a chemical transformation is equal. (When the number of atoms on either side is unequal, the transformation is referred to as a nuclear reaction or radioactive decay.) The type of chemical reactions a substance may undergo and the energy changes that may accompany it are constrained by certain basic rules, known as chemical laws.
+Energy and entropy considerations are invariably important in almost all chemical studies. Chemical substances are classified in terms of their structure, phase, as well as their chemical compositions. They can be analyzed using the tools of chemical analysis, e.g. spectroscopy and chromatography. Scientists engaged in chemical research are known as chemists. Most chemists specialize in one or more sub-disciplines. Several concepts are essential for the study of chemistry; some of them are:
+
+
+Matter
+
+In chemistry, matter is defined as anything that has rest mass and volume (it takes up space) and is made up of particles. The particles that make up matter have rest mass as well – not all particles have rest mass, such as the photon. Matter can be a pure chemical substance or a mixture of substances.
+
+
+Atom
+
+The atom is the basic unit of chemistry. It consists of a dense core called the atomic nucleus surrounded by a space occupied by an electron cloud. The nucleus is made up of positively charged protons and uncharged neutrons (together called nucleons), while the electron cloud consists of negatively charged electrons which orbit the nucleus. In a neutral atom, the negatively charged electrons balance out the positive charge of the protons. The nucleus is dense; the mass of a nucleon is approximately 1,836 times that of an electron, yet the radius of an atom is about 10,000 times that of its nucleus.
+The atom is also the smallest entity that can be envisaged to retain the chemical properties of the element, such as electronegativity, ionization potential, preferred oxidation state(s), coordination number, and preferred types of bonds to form (e.g., metallic, ionic, covalent).
+
+
+Element
+
+A chemical element is a pure substance which is composed of a single type of atom, characterized by its particular number of protons in the nuclei of its atoms, known as the atomic number and represented by the symbol Z. The mass number is the sum of the number of protons and neutrons in a nucleus. Although all the nuclei of all atoms belonging to one element will have the same atomic number, they may not necessarily have the same mass number; atoms of an element which have different mass numbers are known as isotopes. For example, all atoms with 6 protons in their nuclei are atoms of the chemical element carbon, but atoms 

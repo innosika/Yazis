@@ -1,0 +1,273 @@
+@import "tailwindcss";
+
+/* =================================================================================
+   Design tokens.
+
+   Raw values live on :root as plain custom properties and are re-declared for dark
+   mode, then exposed to Tailwind via `@theme inline` so that a utility like `bg-surface`
+   compiles to `var(--surface)` rather than a baked colour. The consequence is that the
+   whole palette responds to the theme without any `dark:` variant on the components —
+   which keeps the markup readable and makes it impossible to forget a dark override.
+
+   The palette follows Apple's system colours: a near-white (never pure white) ground in
+   light mode, true black in dark mode, a single saturated blue accent, and hairline
+   borders rather than visible strokes.
+   ================================================================================= */
+
+:root {
+  color-scheme: light;
+
+  --ground: #fbfbfd;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f5f5f7;
+  /* Translucent material for the sticky navigation bar. */
+  --material: rgb(251 251 253 / 0.72);
+
+  --text: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-tertiary: #86868b;
+  --text-on-accent: #ffffff;
+
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  --accent-soft: rgb(0 113 227 / 0.1);
+
+  --positive: #1d8a4e;
+  --caution: #b25000;
+  --negative: #d70015;
+
+  --hairline: rgb(0 0 0 / 0.08);
+  --hairline-strong: rgb(0 0 0 / 0.16);
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04), 0 1px 3px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 10px 20px -5px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.06), 0 24px 48px -12px rgb(0 0 0 / 0.14);
+
+  /* Relevance ramp — used by the 3D vector space and the score badges. */
+  --relevance-0: #c7c7cc;
+  --relevance-1: #64d2ff;
+  --relevance-2: #0071e3;
+  --relevance-3: #5e5ce6;
+
+  /* One ranker→colour mapping, shared by every chart, table badge and legend. */
+  --ranker-vector: #0071e3;
+  --ranker-bm25: #ff9500;
+  --ranker-fts: #34c759;
+  --ranker-semantic: #5e5ce6;
+  --ranker-hybrid: #ff2d55;
+  /* Improvement proposals — the vector family, so blue-adjacent but distinct. */
+  --ranker-vector-idf: #30b0c7;
+  --ranker-vector-prf: #a2845e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --ground: #000000;
+    --surface: #1c1c1e;
+    --surface-raised: #2c2c2e;
+    --surface-sunken: #0a0a0a;
+    --material: rgb(22 22 23 / 0.72);
+
+    --text: #f5f5f7;
+    --text-secondary: #a1a1a6;
+    --text-tertiary: #86868b;
+
+    --accent: #0a84ff;
+    --accent-hover: #409cff;
+    --accent-soft: rgb(10 132 255 / 0.16);
+
+    --positive: #30d158;
+    --caution: #ff9f0a;
+    --negative: #ff453a;
+
+    --hairline: rgb(255 255 255 / 0.1);
+    --hairline-strong: rgb(255 255 255 / 0.2);
+
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 10px 20px -5px rgb(0 0 0 / 0.5);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 24px 48px -12px rgb(0 0 0 / 0.6);
+
+    --relevance-0: #48484a;
+  }
+}
+
+/* Explicit override wins in both directions, so the toggle works regardless of the OS. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ground: #000000;
+  --surface: #1c1c1e;
+  --surface-raised: #2c2c2e;
+  --surface-sunken: #0a0a0a;
+  --material: rgb(22 22 23 / 0.72);
+
+  --text: #f5f5f7;
+  --text-secondary: #a1a1a6;
+  --text-tertiary: #86868b;
+
+  --accent: #0a84ff;
+  --accent-hover: #409cff;
+  --accent-soft: rgb(10 132 255 / 0.16);
+
+  --positive: #30d158;
+  --caution: #ff9f0a;
+  --negative: #ff453a;
+
+  --hairline: rgb(255 255 255 / 0.1);
+  --hairline-strong: rgb(255 255 255 / 0.2);
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 10px 20px -5px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 24px 48px -12px rgb(0 0 0 / 0.6);
+
+  --relevance-0: #48484a;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-material: var(--material);
+
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-on-accent: var(--text-on-accent);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-positive: var(--positive);
+  --color-caution: var(--caution);
+  --color-negative: var(--negative);
+
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+
+  --color-relevance-0: var(--relevance-0);
+  --color-relevance-1: var(--relevance-1);
+  --color-relevance-2: var(--relevance-2);
+  --color-relevance-3: var(--relevance-3);
+
+  --color-ranker-vector: var(--ranker-vector);
+  --color-ranker-bm25: var(--ranker-bm25);
+  --color-ranker-fts: var(--ranker-fts);
+  --color-ranker-semantic: var(--ranker-semantic);
+  --color-ranker-hybrid: var(--ranker-hybrid);
+  --color-ranker-vector-idf: var(--ranker-vector-idf);
+  --color-ranker-vector-prf: var(--ranker-vector-prf);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  /* SF Pro when the viewer is on Apple hardware, Inter as the closest metric fallback. */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter",
+    "Helvetica Neue", system-ui, sans-serif;
+  --font-mono:
+    "SF Mono", ui-monospace, "JetBrains Mono", "Menlo", "Consolas", monospace;
+
+  /* Apple's display type is large, heavy and tightly tracked; body type is not. */
+  --text-display: 4.5rem;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.035em;
+  --text-display--font-weight: 700;
+
+  --text-headline: 3rem;
+  --text-headline--line-height: 1.08;
+  --text-headline--letter-spacing: -0.03em;
+  --text-headline--font-weight: 650;
+
+  --text-title: 1.75rem;
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.02em;
+  --text-title--font-weight: 600;
+
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.5;
+  --text-body--letter-spacing: -0.01em;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.4;
+
+  --radius-card: 1.125rem;
+  --radius-panel: 1.25rem;
+  /* Apple's buttons are fully rounded pills, not slightly-rounded rectangles. */
+  --radius-pill: 980px;
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--ground);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+
+  /* Visible, high-contrast focus ring — required for keyboard accessibility, and
+     suppressed for pointer interaction so it does not look noisy. */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: var(--accent-soft);
+  }
+
+  /* Tabular figures everywhere numbers are compared column-to-column. */
+  table,
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Frosted material used by the sticky nav, matching apple.com's global header. */
+  .material-bar {
+    background-color: var(--material);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  }
+
+  .hairline-t {
+    box-shadow: inset 0 1px 0 0 var(--hairline);
+  }
+  .hairline-b {
+    box-shadow: inset 0 -1px 0 0 var(--hairline);
+  }
+}

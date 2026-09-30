@@ -1,0 +1,16 @@
+@startuml
+!include _style.iuml
+rectangle "Фраза\n«hey Lector, could you go to\nthe third section please»" as U
+rectangle "Нормализация\n«go to section 3»" as N
+rectangle "1. Шаблоны\n«go to section {number}»\n→ regex, слот number=3\nуверенность = покрытие фразы" as T
+rectangle "2. Нечёткое сравнение\nRapidFuzz: редакционное\nрасстояние, порог 82 %\n(90 во время чтения)" as F
+rectangle "3. LLM gpt-oss-20b\nстрогая JSON-схема:\nenum включённых команд\nили «none»" as L
+rectangle "Команда\ngo_to_section\n{section: «3 Model\nArchitecture»}" as C
+U -right-> N
+N -right-> T
+T -down-> C : совпало
+T -right-> F : нет
+F -down-> L : нет
+F -left-> C : ≥ порога
+L -left-> C : выбрала
+@enduml

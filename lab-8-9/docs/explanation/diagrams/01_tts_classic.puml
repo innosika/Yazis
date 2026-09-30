@@ -1,0 +1,12 @@
+@startuml
+!include _style.iuml
+rectangle "Текст\n«Sorting takes O(n log n) [12].»" as T
+rectangle "Лингвистический блок\n(front-end)\n\n1. сегментация\n2. нормализация\n3. G2P: буквы → фонемы\n4. просодия" as F
+rectangle "Акустическая модель\n\nфонемы + голос →\nдлительности, тон,\nмел-спектрограмма" as A
+rectangle "Вокодер\n\nспектрограмма →\nзвуковая волна\n24 000 отсчётов/с" as V
+rectangle "Речь" as S
+T -right-> F : символы
+F -right-> A : фонемы\n/sˈɔɹtɪŋ tˈAks …/
+A -down-> V : мел-спектр\n80 полос
+V -left-> S : WAV
+@enduml

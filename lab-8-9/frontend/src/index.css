@@ -1,0 +1,248 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/literata/opsz.css';
+@import '@fontsource-variable/literata/opsz-italic.css';
+@import '@fontsource-variable/ibm-plex-sans/wght.css';
+@import 'katex/dist/katex.min.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------------------
+   Lector's palette is a desk with a paper on it: white paper, blue-black ink for anything
+   you can act on, and one highlighter. The highlighter is reserved for the sentence being
+   spoken - it is the only saturated colour on screen, so the eye always knows where the
+   voice is. The microphone gets a single live red, the convention for "recording".
+--------------------------------------------------------------------------------------- */
+
+:root {
+  --c-paper: #fcfcfa;
+  --c-surface: #ffffff;
+  --c-sunken: #f3f3ef;
+  --c-line: #e4e3dc;
+  --c-line-strong: #cfcdc4;
+  --c-ink: #1b1d22;
+  --c-ink-muted: #5c5f66;
+  --c-ink-faint: #8b8e94;
+
+  --c-accent: #1d3b8a;
+  --c-accent-hover: #162f72;
+  --c-accent-ink: #ffffff;
+  --c-accent-soft: #e9eefb;
+  --c-accent-soft-ink: #1d3b8a;
+
+  --c-marker: #ffe57a;
+  --c-marker-ink: #1b1d22;
+  --c-live: #cf3a2c;
+  --c-live-soft: #fbe9e6;
+
+  --c-success: #1f7a4d;
+  --c-success-soft: #e4f3eb;
+  --c-warning: #8f5c00;
+  --c-warning-soft: #fbf1dc;
+  --c-danger: #b42318;
+  --c-danger-soft: #fdeceb;
+
+  --shadow-float: 0 1px 2px rgb(27 29 34 / 0.06), 0 12px 32px -8px rgb(27 29 34 / 0.18);
+}
+
+.dark {
+  --c-paper: #12151c;
+  --c-surface: #181c25;
+  --c-sunken: #0f1218;
+  --c-line: #262c38;
+  --c-line-strong: #363e4d;
+  --c-ink: #e6e8ee;
+  --c-ink-muted: #a0a6b3;
+  --c-ink-faint: #737a88;
+
+  --c-accent: #93abff;
+  --c-accent-hover: #aebfff;
+  --c-accent-ink: #0c1532;
+  --c-accent-soft: #1c2641;
+  --c-accent-soft-ink: #b8c7ff;
+
+  --c-marker: rgb(255 214 90 / 0.24);
+  --c-marker-ink: #fff4d1;
+  --c-live: #ff6b5e;
+  --c-live-soft: #3a1c1a;
+
+  --c-success: #52c08a;
+  --c-success-soft: #13291f;
+  --c-warning: #e0a948;
+  --c-warning-soft: #2c2213;
+  --c-danger: #f1776b;
+  --c-danger-soft: #331816;
+
+  --shadow-float: 0 1px 2px rgb(0 0 0 / 0.4), 0 16px 40px -10px rgb(0 0 0 / 0.6);
+}
+
+@theme inline {
+  --color-paper: var(--c-paper);
+  --color-surface: var(--c-surface);
+  --color-sunken: var(--c-sunken);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  --color-ink: var(--c-ink);
+  --color-ink-muted: var(--c-ink-muted);
+  --color-ink-faint: var(--c-ink-faint);
+  --color-accent: var(--c-accent);
+  --color-accent-hover: var(--c-accent-hover);
+  --color-accent-ink: var(--c-accent-ink);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-accent-soft-ink: var(--c-accent-soft-ink);
+  --color-marker: var(--c-marker);
+  --color-live: var(--c-live);
+  --color-live-soft: var(--c-live-soft);
+  --color-success: var(--c-success);
+  --color-success-soft: var(--c-success-soft);
+  --color-warning: var(--c-warning);
+  --color-warning-soft: var(--c-warning-soft);
+  --color-danger: var(--c-danger);
+  --color-danger-soft: var(--c-danger-soft);
+
+  --font-sans: 'IBM Plex Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Literata Variable', 'Iowan Old Style', Georgia, serif;
+  --shadow-float: var(--shadow-float);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    background: var(--c-paper);
+    color: var(--c-ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--c-paper);
+  }
+  ::selection {
+    background: var(--c-accent-soft);
+    color: var(--c-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: default;
+  }
+}
+
+/* ------------------------------------------------------------------------- reading */
+
+.prose-paper {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  line-height: 1.72;
+  font-optical-sizing: auto;
+  hyphens: auto;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  overflow-wrap: break-word;
+}
+@media (max-width: 640px) {
+  .prose-paper {
+    font-size: 1.2rem;
+    line-height: 1.66;
+  }
+}
+.prose-paper .katex {
+  font-size: 1em;
+}
+.prose-paper .katex-display {
+  margin: 0;
+}
+
+/* The sentence being spoken. The marker is drawn left to right when the voice arrives,
+   like a highlighter stroke; background slicing makes it continue across line breaks. */
+.sentence {
+  border-radius: 3px;
+  background-image: linear-gradient(var(--c-marker), var(--c-marker));
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition: background-size 0ms;
+  cursor: pointer;
+}
+.sentence:hover {
+  background-color: color-mix(in srgb, var(--c-accent-soft) 55%, transparent);
+}
+.sentence.is-current {
+  background-size: 100% 100%;
+  color: var(--c-marker-ink);
+  transition: background-size 520ms cubic-bezier(0.25, 0.8, 0.3, 1);
+}
+.sentence.is-current:hover {
+  background-color: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sentence.is-current {
+    transition: none;
+  }
+}
+
+::highlight(lector-word) {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--c-accent);
+}
+
+.spoken-form {
+  font-family: var(--font-sans);
+  font-size: 0.8em;
+  line-height: 1.5;
+  color: var(--c-ink-muted);
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-line-strong) transparent;
+}
+
+/* Mic level rings */
+@keyframes orb-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.12); opacity: 0.25; }
+}
+.orb-breathe {
+  animation: orb-breathe 2.4s ease-in-out infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .orb-breathe, .spin {
+    animation: none;
+  }
+}
+
+@keyframes hud-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hud-in {
+  animation: hud-in 180ms ease-out;
+}
+@keyframes sheet-in {
+  from { transform: translateX(24px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.sheet-in {
+  animation: sheet-in 200ms cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-in {
+  animation: fade-in 160ms ease-out;
+}

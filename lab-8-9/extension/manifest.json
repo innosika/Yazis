@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Lector: read selection aloud",
+  "short_name": "Lector",
+  "description": "Select text on any page and hear it in your Lector voice. Needs Lector running on this computer.",
+  "version": "1.0.0",
+  "minimum_chrome_version": "116",
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "action": { "default_popup": "popup.html", "default_title": "Lector", "default_icon": { "16": "icons/16.png", "32": "icons/32.png" } },
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    { "matches": ["<all_urls>"], "js": ["content.js"], "run_at": "document_idle", "all_frames": false }
+  ],
+  "permissions": ["contextMenus", "offscreen", "storage", "activeTab", "scripting"],
+  "host_permissions": ["http://localhost:8100/*", "http://127.0.0.1:8100/*"],
+  "options_page": "options.html",
+  "commands": {
+    "read-selection": {
+      "suggested_key": { "default": "Alt+R" },
+      "description": "Read the selected text aloud"
+    }
+  }
+}

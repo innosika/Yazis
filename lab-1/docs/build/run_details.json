@@ -1,0 +1,1384 @@
+{
+ "vector_prf": {
+  "id": 41,
+  "collection_id": 1,
+  "qrel_set_id": 1,
+  "ranker": "vector_prf",
+  "label": "vector_prf",
+  "top_k": 100,
+  "status": "done",
+  "index_version": 4,
+  "params_snapshot": {
+   "log_base": "e",
+   "run_depth": 100,
+   "rocchio_beta": 0.75,
+   "keep_pos_tags": [
+    "NOUN",
+    "PROPN",
+    "VERB",
+    "ADJ",
+    "ADV",
+    "NUM",
+    "X"
+   ],
+   "rocchio_alpha": 1.0,
+   "min_token_length": 2,
+   "prf_feedback_docs": 5,
+   "prf_expansion_terms": 20
+  },
+  "scored_query_count": 30,
+  "unjudged_retrieved": 2970,
+  "duration_ms": 4718.863,
+  "batch_id": "9d5eaf047a634154",
+  "error": null,
+  "started_at": "2026-09-03T09:36:29.275176",
+  "finished_at": "2026-09-03T09:36:33.993988",
+  "created_at": "2026-09-03T09:36:06.463427",
+  "aggregation": "or",
+  "threshold": 1,
+  "aggregate": [
+   {
+    "metric_key": "ap",
+    "value": 0.5050276575276575,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "bpref",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "err",
+    "value": 0.4418992003367003,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "f1",
+    "value": 0.019801980198019802,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "mrr",
+    "value": 0.5050276575276575,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_10",
+    "value": 0.5850085018779237,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_5",
+    "value": 0.5331965715817018,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel_ret",
+    "value": 30.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_ret",
+    "value": 3000.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_unjudged_ret",
+    "value": 2970.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_1",
+    "value": 0.3,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_10",
+    "value": 0.08666666666666667,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_20",
+    "value": 0.04666666666666667,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_5",
+    "value": 0.14,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "pfound",
+    "value": 0.3409637131608649,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "precision",
+    "value": 0.01,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "recall",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "rprec",
+    "value": 0.3,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   }
+  ],
+  "caveats": [
+   {
+    "metric_key": "recall",
+    "kind": "degenerate",
+    "note": "recall: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "bpref",
+    "kind": "degenerate",
+    "note": "bpref: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "precision",
+    "kind": "degenerate",
+    "note": "precision (set): with R = 1 it cannot exceed 1/top_k (= 0.0100 for top_k = 100); it measures run length, not quality"
+   },
+   {
+    "metric_key": "f1",
+    "kind": "degenerate",
+    "note": "F\u2081: harmonic mean of two degenerate values (see precision and recall)"
+   },
+   {
+    "metric_key": "*",
+    "kind": "annotate",
+    "note": "every pair carries one assessment, so the \u00abor\u00bb and \u00aband\u00bb relevance tables coincide and inter-assessor agreement is not measured"
+   }
+  ]
+ },
+ "vector_idf": {
+  "id": 40,
+  "collection_id": 1,
+  "qrel_set_id": 1,
+  "ranker": "vector_idf",
+  "label": "vector_idf",
+  "top_k": 100,
+  "status": "done",
+  "index_version": 4,
+  "params_snapshot": {
+   "log_base": "e",
+   "run_depth": 100,
+   "keep_pos_tags": [
+    "NOUN",
+    "PROPN",
+    "VERB",
+    "ADJ",
+    "ADV",
+    "NUM",
+    "X"
+   ],
+   "min_token_length": 2
+  },
+  "scored_query_count": 30,
+  "unjudged_retrieved": 2970,
+  "duration_ms": 2141.775,
+  "batch_id": "9d5eaf047a634154",
+  "error": null,
+  "started_at": "2026-09-03T09:36:27.100508",
+  "finished_at": "2026-09-03T09:36:29.242233",
+  "created_at": "2026-09-03T09:36:06.463427",
+  "aggregation": "or",
+  "threshold": 1,
+  "aggregate": [
+   {
+    "metric_key": "ap",
+    "value": 0.6786111111111112,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "bpref",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "err",
+    "value": 0.5937847222222222,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "f1",
+    "value": 0.019801980198019802,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "mrr",
+    "value": 0.6786111111111112,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_10",
+    "value": 0.7388936648858422,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_5",
+    "value": 0.7151465190786408,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel_ret",
+    "value": 30.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_ret",
+    "value": 3000.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_unjudged_ret",
+    "value": 2970.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_1",
+    "value": 0.5333333333333333,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_10",
+    "value": 0.09333333333333334,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_20",
+    "value": 0.04833333333333334,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_5",
+    "value": 0.17333333333333334,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "pfound",
+    "value": 0.410676808192636,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "precision",
+    "value": 0.01,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "recall",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "rprec",
+    "value": 0.5333333333333333,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   }
+  ],
+  "caveats": [
+   {
+    "metric_key": "recall",
+    "kind": "degenerate",
+    "note": "recall: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "bpref",
+    "kind": "degenerate",
+    "note": "bpref: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "precision",
+    "kind": "degenerate",
+    "note": "precision (set): with R = 1 it cannot exceed 1/top_k (= 0.0100 for top_k = 100); it measures run length, not quality"
+   },
+   {
+    "metric_key": "f1",
+    "kind": "degenerate",
+    "note": "F\u2081: harmonic mean of two degenerate values (see precision and recall)"
+   },
+   {
+    "metric_key": "*",
+    "kind": "annotate",
+    "note": "every pair carries one assessment, so the \u00abor\u00bb and \u00aband\u00bb relevance tables coincide and inter-assessor agreement is not measured"
+   }
+  ]
+ },
+ "vector": {
+  "id": 39,
+  "collection_id": 1,
+  "qrel_set_id": 1,
+  "ranker": "vector",
+  "label": "vector",
+  "top_k": 100,
+  "status": "done",
+  "index_version": 4,
+  "params_snapshot": {
+   "log_base": "e",
+   "run_depth": 100,
+   "keep_pos_tags": [
+    "NOUN",
+    "PROPN",
+    "VERB",
+    "ADJ",
+    "ADV",
+    "NUM",
+    "X"
+   ],
+   "min_token_length": 2
+  },
+  "scored_query_count": 30,
+  "unjudged_retrieved": 2970,
+  "duration_ms": 1943.737,
+  "batch_id": "9d5eaf047a634154",
+  "error": null,
+  "started_at": "2026-09-03T09:36:25.145681",
+  "finished_at": "2026-09-03T09:36:27.089358",
+  "created_at": "2026-09-03T09:36:06.463427",
+  "aggregation": "or",
+  "threshold": 1,
+  "aggregate": [
+   {
+    "metric_key": "ap",
+    "value": 0.4980651122756386,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "bpref",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "err",
+    "value": 0.4358069732411838,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "f1",
+    "value": 0.019801980198019802,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "mrr",
+    "value": 0.4980651122756386,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_10",
+    "value": 0.5797519338080729,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_5",
+    "value": 0.51447636119354,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel_ret",
+    "value": 30.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_ret",
+    "value": 3000.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_unjudged_ret",
+    "value": 2970.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_1",
+    "value": 0.3,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_10",
+    "value": 0.08666666666666667,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_20",
+    "value": 0.04833333333333334,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_5",
+    "value": 0.13333333333333333,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "pfound",
+    "value": 0.33798651957024667,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "precision",
+    "value": 0.01,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "recall",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "rprec",
+    "value": 0.3,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   }
+  ],
+  "caveats": [
+   {
+    "metric_key": "recall",
+    "kind": "degenerate",
+    "note": "recall: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "bpref",
+    "kind": "degenerate",
+    "note": "bpref: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "precision",
+    "kind": "degenerate",
+    "note": "precision (set): with R = 1 it cannot exceed 1/top_k (= 0.0100 for top_k = 100); it measures run length, not quality"
+   },
+   {
+    "metric_key": "f1",
+    "kind": "degenerate",
+    "note": "F\u2081: harmonic mean of two degenerate values (see precision and recall)"
+   },
+   {
+    "metric_key": "*",
+    "kind": "annotate",
+    "note": "every pair carries one assessment, so the \u00abor\u00bb and \u00aband\u00bb relevance tables coincide and inter-assessor agreement is not measured"
+   }
+  ]
+ },
+ "semantic": {
+  "id": 38,
+  "collection_id": 1,
+  "qrel_set_id": 1,
+  "ranker": "semantic",
+  "label": "semantic",
+  "top_k": 100,
+  "status": "done",
+  "index_version": 4,
+  "params_snapshot": {
+   "model": "BAAI/bge-small-en-v1.5",
+   "log_base": "e",
+   "max_chars": 2000,
+   "run_depth": 100,
+   "dimensions": 384,
+   "keep_pos_tags": [
+    "NOUN",
+    "PROPN",
+    "VERB",
+    "ADJ",
+    "ADV",
+    "NUM",
+    "X"
+   ],
+   "min_token_length": 2
+  },
+  "scored_query_count": 30,
+  "unjudged_retrieved": 2970,
+  "duration_ms": 4941.528,
+  "batch_id": "9d5eaf047a634154",
+  "error": null,
+  "started_at": "2026-09-03T09:36:20.187051",
+  "finished_at": "2026-09-03T09:36:25.128537",
+  "created_at": "2026-09-03T09:36:06.463427",
+  "aggregation": "or",
+  "threshold": 1,
+  "aggregate": [
+   {
+    "metric_key": "ap",
+    "value": 0.7175326135852451,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "bpref",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "err",
+    "value": 0.6278410368870895,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "f1",
+    "value": 0.019801980198019802,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "mrr",
+    "value": 0.7175326135852451,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_10",
+    "value": 0.7513833858363943,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_5",
+    "value": 0.7513833858363943,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel_ret",
+    "value": 30.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_ret",
+    "value": 3000.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_unjudged_ret",
+    "value": 2970.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_1",
+    "value": 0.6,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_10",
+    "value": 0.08666666666666667,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_20",
+    "value": 0.04666666666666667,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_5",
+    "value": 0.17333333333333334,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "pfound",
+    "value": 0.4067517323656583,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "precision",
+    "value": 0.01,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "recall",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "rprec",
+    "value": 0.6,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   }
+  ],
+  "caveats": [
+   {
+    "metric_key": "recall",
+    "kind": "degenerate",
+    "note": "recall: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "bpref",
+    "kind": "degenerate",
+    "note": "bpref: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "precision",
+    "kind": "degenerate",
+    "note": "precision (set): with R = 1 it cannot exceed 1/top_k (= 0.0100 for top_k = 100); it measures run length, not quality"
+   },
+   {
+    "metric_key": "f1",
+    "kind": "degenerate",
+    "note": "F\u2081: harmonic mean of two degenerate values (see precision and recall)"
+   },
+   {
+    "metric_key": "*",
+    "kind": "annotate",
+    "note": "every pair carries one assessment, so the \u00abor\u00bb and \u00aband\u00bb relevance tables coincide and inter-assessor agreement is not measured"
+   }
+  ]
+ },
+ "hybrid": {
+  "id": 37,
+  "collection_id": 1,
+  "qrel_set_id": 1,
+  "ranker": "hybrid",
+  "label": "hybrid",
+  "top_k": 100,
+  "status": "done",
+  "index_version": 4,
+  "params_snapshot": {
+   "rrf_k": 60,
+   "log_base": "e",
+   "run_depth": 100,
+   "keep_pos_tags": [
+    "NOUN",
+    "PROPN",
+    "VERB",
+    "ADJ",
+    "ADV",
+    "NUM",
+    "X"
+   ],
+   "min_token_length": 2
+  },
+  "scored_query_count": 30,
+  "unjudged_retrieved": 2937,
+  "duration_ms": 10120.555,
+  "batch_id": "9d5eaf047a634154",
+  "error": null,
+  "started_at": "2026-09-03T09:36:10.057262",
+  "finished_at": "2026-09-03T09:36:20.178038",
+  "created_at": "2026-09-03T09:36:06.463427",
+  "aggregation": "or",
+  "threshold": 1,
+  "aggregate": [
+   {
+    "metric_key": "ap",
+    "value": 0.8792929292929293,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "bpref",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "err",
+    "value": 0.7693813131313132,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "f1",
+    "value": 0.020039696659584733,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "mrr",
+    "value": 0.8792929292929293,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_10",
+    "value": 0.8995712313559827,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_5",
+    "value": 0.8876976584523819,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel_ret",
+    "value": 30.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_ret",
+    "value": 2967.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_unjudged_ret",
+    "value": 2937.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_1",
+    "value": 0.8333333333333334,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_10",
+    "value": 0.09666666666666668,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_20",
+    "value": 0.04833333333333334,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_5",
+    "value": 0.18666666666666668,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "pfound",
+    "value": 0.4628608485653639,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "precision",
+    "value": 0.010121372296332169,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "recall",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "rprec",
+    "value": 0.8333333333333334,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   }
+  ],
+  "caveats": [
+   {
+    "metric_key": "recall",
+    "kind": "degenerate",
+    "note": "recall: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "bpref",
+    "kind": "degenerate",
+    "note": "bpref: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "precision",
+    "kind": "degenerate",
+    "note": "precision (set): with R = 1 it cannot exceed 1/top_k (= 0.0100 for top_k = 100); it measures run length, not quality"
+   },
+   {
+    "metric_key": "f1",
+    "kind": "degenerate",
+    "note": "F\u2081: harmonic mean of two degenerate values (see precision and recall)"
+   },
+   {
+    "metric_key": "*",
+    "kind": "annotate",
+    "note": "every pair carries one assessment, so the \u00abor\u00bb and \u00aband\u00bb relevance tables coincide and inter-assessor agreement is not measured"
+   }
+  ]
+ },
+ "fts": {
+  "id": 36,
+  "collection_id": 1,
+  "qrel_set_id": 1,
+  "ranker": "fts",
+  "label": "fts",
+  "top_k": 100,
+  "status": "done",
+  "index_version": 4,
+  "params_snapshot": {
+   "log_base": "e",
+   "run_depth": 100,
+   "keep_pos_tags": [
+    "NOUN",
+    "PROPN",
+    "VERB",
+    "ADJ",
+    "ADV",
+    "NUM",
+    "X"
+   ],
+   "min_token_length": 2
+  },
+  "scored_query_count": 30,
+  "unjudged_retrieved": 134,
+  "duration_ms": 927.543,
+  "batch_id": "9d5eaf047a634154",
+  "error": null,
+  "started_at": "2026-09-03T09:36:09.113638",
+  "finished_at": "2026-09-03T09:36:10.041127",
+  "created_at": "2026-09-03T09:36:06.463427",
+  "aggregation": "or",
+  "threshold": 1,
+  "aggregate": [
+   {
+    "metric_key": "ap",
+    "value": 0.8472222222222222,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "bpref",
+    "value": 0.9333333333333333,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "err",
+    "value": 0.7413194444444444,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "f1",
+    "value": 0.5381717307037001,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "mrr",
+    "value": 0.8472222222222222,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_10",
+    "value": 0.8682914417441443,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_5",
+    "value": 0.8564178688405436,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel_ret",
+    "value": 28.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_ret",
+    "value": 162.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_unjudged_ret",
+    "value": 134.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_1",
+    "value": 0.8,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_10",
+    "value": 0.09333333333333334,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_20",
+    "value": 0.04666666666666667,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_5",
+    "value": 0.18000000000000002,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "pfound",
+    "value": 0.4459638385416667,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "precision",
+    "value": 0.4697049222209069,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "recall",
+    "value": 0.9333333333333333,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "rprec",
+    "value": 0.8,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   }
+  ],
+  "caveats": [
+   {
+    "metric_key": "recall",
+    "kind": "degenerate",
+    "note": "recall: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "bpref",
+    "kind": "degenerate",
+    "note": "bpref: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "precision",
+    "kind": "degenerate",
+    "note": "precision (set): with R = 1 it cannot exceed 1/top_k (= 0.0100 for top_k = 100); it measures run length, not quality"
+   },
+   {
+    "metric_key": "f1",
+    "kind": "degenerate",
+    "note": "F\u2081: harmonic mean of two degenerate values (see precision and recall)"
+   },
+   {
+    "metric_key": "*",
+    "kind": "annotate",
+    "note": "every pair carries one assessment, so the \u00abor\u00bb and \u00aband\u00bb relevance tables coincide and inter-assessor agreement is not measured"
+   }
+  ]
+ },
+ "bm25": {
+  "id": 35,
+  "collection_id": 1,
+  "qrel_set_id": 1,
+  "ranker": "bm25",
+  "label": "bm25",
+  "top_k": 100,
+  "status": "done",
+  "index_version": 4,
+  "params_snapshot": {
+   "b": 0.75,
+   "k1": 1.2,
+   "log_base": "e",
+   "run_depth": 100,
+   "keep_pos_tags": [
+    "NOUN",
+    "PROPN",
+    "VERB",
+    "ADJ",
+    "ADV",
+    "NUM",
+    "X"
+   ],
+   "min_token_length": 2
+  },
+  "scored_query_count": 30,
+  "unjudged_retrieved": 2970,
+  "duration_ms": 2101.253,
+  "batch_id": "9d5eaf047a634154",
+  "error": null,
+  "started_at": "2026-09-03T09:36:06.994646",
+  "finished_at": "2026-09-03T09:36:09.095824",
+  "created_at": "2026-09-03T09:36:06.463427",
+  "aggregation": "or",
+  "threshold": 1,
+  "aggregate": [
+   {
+    "metric_key": "ap",
+    "value": 0.8825000000000001,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "bpref",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "err",
+    "value": 0.7721874999999999,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "f1",
+    "value": 0.019801980198019802,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "mrr",
+    "value": 0.8825000000000001,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_10",
+    "value": 0.9099021922773308,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "ndcg_5",
+    "value": 0.8897512021738769,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_rel_ret",
+    "value": 30.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_ret",
+    "value": 3000.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "num_unjudged_ret",
+    "value": 2970.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_1",
+    "value": 0.8333333333333334,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_10",
+    "value": 0.1,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_20",
+    "value": 0.05,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "p_5",
+    "value": 0.18666666666666668,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "pfound",
+    "value": 0.4644386505760742,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "precision",
+    "value": 0.01,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "recall",
+    "value": 1.0,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   },
+   {
+    "metric_key": "rprec",
+    "value": 0.8333333333333334,
+    "query_count": 30,
+    "ci_low": null,
+    "ci_high": null
+   }
+  ],
+  "caveats": [
+   {
+    "metric_key": "recall",
+    "kind": "degenerate",
+    "note": "recall: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "bpref",
+    "kind": "degenerate",
+    "note": "bpref: every topic has exactly one relevant document (R = 1) and no judged non-relevant ones, so the value collapses to \u00abwas it found\u00bb \u2014 it equals the fraction of topics whose target was retrieved and says nothing about ranking quality"
+   },
+   {
+    "metric_key": "precision",
+    "kind": "degenerate",
+    "note": "precision (set): with R = 1 it cannot exceed 1/top_k (= 0.0100 for top_k = 100); it measures run length, not quality"
+   },
+   {
+    "metric_key": "f1",
+    "kind": "degenerate",
+    "note": "F\u2081: harmonic mean of two degenerate values (see precision and recall)"
+   },
+   {
+    "metric_key": "*",
+    "kind": "annotate",
+    "note": "every pair carries one assessment, so the \u00abor\u00bb and \u00aband\u00bb relevance tables coincide and inter-assessor agreement is not measured"
+   }
+  ]
+ }
+}

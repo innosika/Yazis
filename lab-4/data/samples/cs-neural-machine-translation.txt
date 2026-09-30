@@ -1,0 +1,9 @@
+Neural machine translation has become the dominant approach in computational linguistics.
+The model learns distributed representations of words from large parallel corpora.
+An encoder maps the source sentence into a sequence of hidden states, and a decoder generates the target sentence one token at a time.
+The attention mechanism computes a weighted sum of the encoder states for every decoding step.
+Researchers evaluate the quality of a system with automatic metrics such as BLEU.
+The training procedure minimises the cross-entropy loss with stochastic gradient descent.
+Modern systems process a large amount of data on graphics hardware, and the network contains billions of parameters.
+However, the output of a statistical system remains difficult to interpret, because the internal representation carries no explicit grammatical information.
+A rule-based system, by contrast, describes the transfer between two languages with an explicit dictionary and a set of syntactic rules.

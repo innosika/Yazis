@@ -1,0 +1,105 @@
+{
+  "collection": "YAZIS lab3, вариант 1",
+  "documents": [
+    {
+      "id": "ru_cs_ai",
+      "file": "ru_cs_ai.txt",
+      "title": "Искусственный интеллект",
+      "language": "ru",
+      "domain": "computer science",
+      "source": "https://ru.wikipedia.org/wiki/Искусственный_интеллект",
+      "chars": 21665
+    },
+    {
+      "id": "ru_cs_neural_network",
+      "file": "ru_cs_neural_network.txt",
+      "title": "Нейронная сеть",
+      "language": "ru",
+      "domain": "computer science",
+      "source": "https://ru.wikipedia.org/wiki/Нейронная_сеть",
+      "chars": 21718
+    },
+    {
+      "id": "ru_cs_cryptography",
+      "file": "ru_cs_cryptography.txt",
+      "title": "Криптография",
+      "language": "ru",
+      "domain": "computer science",
+      "source": "https://ru.wikipedia.org/wiki/Криптография",
+      "chars": 17539
+    },
+    {
+      "id": "ru_lit_crime_punishment",
+      "file": "ru_lit_crime_punishment.txt",
+      "title": "Преступление и наказание",
+      "language": "ru",
+      "domain": "литература",
+      "source": "https://ru.wikipedia.org/wiki/Преступление_и_наказание",
+      "chars": 21366
+    },
+    {
+      "id": "ru_lit_war_and_peace",
+      "file": "ru_lit_war_and_peace.txt",
+      "title": "Война и мир",
+      "language": "ru",
+      "domain": "литература",
+      "source": "https://ru.wikipedia.org/wiki/Война_и_мир",
+      "chars": 21902
+    },
+    {
+      "id": "en_cs_computer_vision",
+      "file": "en_cs_computer_vision.txt",
+      "title": "Computer vision",
+      "language": "en",
+      "domain": "computer science",
+      "source": "https://en.wikipedia.org/wiki/Computer_vision",
+      "chars": 21808
+    },
+    {
+      "id": "en_cs_operating_system",
+      "file": "en_cs_operating_system.txt",
+      "title": "Operating system",
+      "language": "en",
+      "domain": "computer science",
+      "source": "https://en.wikipedia.org/wiki/Operating_system",
+      "chars": 21327
+    },
+    {
+      "id": "en_cs_database",
+      "file": "en_cs_database.txt",
+      "title": "Database",
+      "language": "en",
+      "domain": "computer science",
+      "source": "https://en.wikipedia.org/wiki/Database",
+      "chars": 21802
+    },
+    {
+      "id": "en_lit_hamlet",
+      "file": "en_lit_hamlet.txt",
+      "title": "Hamlet",
+      "language": "en",
+      "domain": "литература",
+      "source": "https://en.wikipedia.org/wiki/Hamlet",
+      "chars": 21502
+    },
+    {
+      "id": "en_lit_moby_dick",
+      "file": "en_lit_moby_dick.txt",
+      "title": "Moby-Dick",
+      "language": "en",
+      "domain": "литература",
+      "source": "https://en.wikipedia.org/wiki/Moby-Dick",
+      "chars": 21838
+    },
+    {
+      "id": "user_wikipedia_wolna_encyklopedia",
+      "file": "user_wikipedia_wolna_encyklopedia.txt",
+      "title": "Wikipedia, wolna encyklopedia",
+      "language": "en",
+      "domain": "документ пользователя",
+      "source": "https://pl.wikipedia.org/wiki/Wikipedia:Strona_g%C5%82%C3%B3wna",
+      "chars": 4534,
+      "added_by_user": true
+    }
+  ]
+}

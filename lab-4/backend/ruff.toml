@@ -1,0 +1,22 @@
+line-length = 100
+target-version = "py312"
+
+[lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF", "ASYNC", "C4", "PTH", "SLF"]
+ignore = [
+    # The Cyrillic in this project is deliberate: Russian output, Russian rule tables and
+    # quotations from the assignment. The ambiguous-character rules flag every one of them.
+    "RUF001",
+    "RUF002",
+    "RUF003",
+]
+
+[lint.per-file-ignores]
+# `Depends(...)` in a default argument is FastAPI's own idiom, not a mutable default.
+"app/api/*" = ["B008"]
+# Tests reach into private state on purpose: the app's lifespan is bypassed so spaCy is
+# loaded once for the whole session, and one test inspects every parse pymorphy3 produces.
+"tests/*" = ["SLF001", "E501"]
+
+[format]
+line-ending = "lf"

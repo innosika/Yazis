@@ -1,0 +1,11 @@
+﻿id;title;language;domain;chars;sentences;terms;time_ms;compression;keyword_coverage;mean_position;top_keywords
+en_cs_computer_vision;Computer vision;en;computer science;21808;152;613;2.04;0.1049;0.6;0.1526;vision robot analysis sensors detection
+en_cs_database;Database;en;computer science;21802;145;668;1.78;0.1308;0.6;0.1943;database query sql codd dbms
+en_cs_operating_system;Operating system;en;computer science;21327;172;585;1.67;0.114;0.3333;0.1047;cpu services kernel resources instruction
+en_lit_hamlet;Hamlet;en;литература;21502;164;806;2.02;0.1;0.8;0.151;hamlet claudius ophelia quarto denmark
+en_lit_moby_dick;Moby-Dick;en;литература;21838;159;962;2.25;0.0906;0.8667;0.2084;whale ahab ishmael chapters melville
+ru_cs_ai;Искусственный интеллект;ru;computer science;21665;120;863;2.12;0.173;0.6667;0.1893;интеллекта искусственного интеллектуальных подход достижения
+ru_cs_cryptography;Криптография;ru;computer science;17539;119;590;1.75;0.2046;0.8667;0.2323;ключа криптографических криптографии шифр шифровальных
+ru_cs_neural_network;Нейронная сеть;ru;computer science;21718;193;729;2.14;0.0893;0.4;0.1387;сети слоёв сигнал учителем признаков
+ru_lit_crime_punishment;Преступление и наказание;ru;литература;21366;130;1053;2.66;0.1123;0.6;0.1939;преступления раскольникова достоевского наказания михайлович
+ru_lit_war_and_peace;Война и мир;ru;литература;21902;209;1103;2.82;0.1061;0.6;0.2627;пьер князь война болконский долохова

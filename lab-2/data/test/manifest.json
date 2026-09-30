@@ -1,0 +1,362 @@
+[
+  {
+    "id": "ru_01",
+    "file": "ru_01.html",
+    "title": "Кофе",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D1%84%D0%B5",
+    "chars": 3414
+  },
+  {
+    "id": "ru_02",
+    "file": "ru_02.html",
+    "title": "Велосипед",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%BB%D0%BE%D1%81%D0%B8%D0%BF%D0%B5%D0%B4",
+    "chars": 3120
+  },
+  {
+    "id": "ru_03",
+    "file": "ru_03.html",
+    "title": "Фотография",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%A4%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%8F",
+    "chars": 2973
+  },
+  {
+    "id": "ru_04",
+    "file": "ru_04.html",
+    "title": "Древний Рим",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%94%D1%80%D0%B5%D0%B2%D0%BD%D0%B8%D0%B9_%D0%A0%D0%B8%D0%BC",
+    "chars": 3455
+  },
+  {
+    "id": "ru_05",
+    "file": "ru_05.html",
+    "title": "Антарктида",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%90%D0%BD%D1%82%D0%B0%D1%80%D0%BA%D1%82%D0%B8%D0%B4%D0%B0",
+    "chars": 3043
+  },
+  {
+    "id": "ru_06",
+    "file": "ru_06.html",
+    "title": "Париж",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B8%D0%B6",
+    "chars": 3109
+  },
+  {
+    "id": "ru_07",
+    "file": "ru_07.html",
+    "title": "Джаз",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%94%D0%B6%D0%B0%D0%B7",
+    "chars": 3065
+  },
+  {
+    "id": "ru_08",
+    "file": "ru_08.html",
+    "title": "Дельфины",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%94%D0%B5%D0%BB%D1%8C%D1%84%D0%B8%D0%BD%D1%8B",
+    "chars": 3026
+  },
+  {
+    "id": "ru_09",
+    "file": "ru_09.html",
+    "title": "Вулкан",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%92%D1%83%D0%BB%D0%BA%D0%B0%D0%BD",
+    "chars": 2947
+  },
+  {
+    "id": "ru_10",
+    "file": "ru_10.html",
+    "title": "Олимпийские игры",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%9E%D0%BB%D0%B8%D0%BC%D0%BF%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B5_%D0%B8%D0%B3%D1%80%D1%8B",
+    "chars": 3102
+  },
+  {
+    "id": "ru_11",
+    "file": "ru_11.html",
+    "title": "Пирамида Хеопса",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%9F%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D0%B4%D0%B0_%D0%A5%D0%B5%D0%BE%D0%BF%D1%81%D0%B0",
+    "chars": 2961
+  },
+  {
+    "id": "ru_12",
+    "file": "ru_12.html",
+    "title": "Шоколад",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%A8%D0%BE%D0%BA%D0%BE%D0%BB%D0%B0%D0%B4",
+    "chars": 3293
+  },
+  {
+    "id": "ru_13",
+    "file": "ru_13.html",
+    "title": "Балет",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%91%D0%B0%D0%BB%D0%B5%D1%82",
+    "chars": 2798
+  },
+  {
+    "id": "ru_14",
+    "file": "ru_14.html",
+    "title": "Молекула",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D0%BB%D0%B5%D0%BA%D1%83%D0%BB%D0%B0",
+    "chars": 3158
+  },
+  {
+    "id": "ru_15",
+    "file": "ru_15.html",
+    "title": "Электричество",
+    "lang": "ru",
+    "source": "https://ru.wikipedia.org/wiki/%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE",
+    "chars": 3139
+  },
+  {
+    "id": "en_01",
+    "file": "en_01.html",
+    "title": "Coffee",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Coffee",
+    "chars": 3083
+  },
+  {
+    "id": "en_02",
+    "file": "en_02.html",
+    "title": "Bicycle",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Bicycle",
+    "chars": 3062
+  },
+  {
+    "id": "en_03",
+    "file": "en_03.html",
+    "title": "Photography",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Photography",
+    "chars": 3221
+  },
+  {
+    "id": "en_04",
+    "file": "en_04.html",
+    "title": "Ancient Rome",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Ancient_Rome",
+    "chars": 2902
+  },
+  {
+    "id": "en_05",
+    "file": "en_05.html",
+    "title": "Antarctica",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Antarctica",
+    "chars": 3174
+  },
+  {
+    "id": "en_06",
+    "file": "en_06.html",
+    "title": "Paris",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Paris",
+    "chars": 2843
+  },
+  {
+    "id": "en_07",
+    "file": "en_07.html",
+    "title": "Jazz",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Jazz",
+    "chars": 3439
+  },
+  {
+    "id": "en_08",
+    "file": "en_08.html",
+    "title": "Dolphin",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Dolphin",
+    "chars": 2909
+  },
+  {
+    "id": "en_09",
+    "file": "en_09.html",
+    "title": "Volcano",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Volcano",
+    "chars": 3314
+  },
+  {
+    "id": "en_10",
+    "file": "en_10.html",
+    "title": "Olympic Games",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Olympic_Games",
+    "chars": 3339
+  },
+  {
+    "id": "en_11",
+    "file": "en_11.html",
+    "title": "Great Pyramid of Giza",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+    "chars": 3203
+  },
+  {
+    "id": "en_12",
+    "file": "en_12.html",
+    "title": "Chocolate",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Chocolate",
+    "chars": 3486
+  },
+  {
+    "id": "en_13",
+    "file": "en_13.html",
+    "title": "Ballet",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Ballet",
+    "chars": 3493
+  },
+  {
+    "id": "en_14",
+    "file": "en_14.html",
+    "title": "Molecule",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Molecule",
+    "chars": 2953
+  },
+  {
+    "id": "en_15",
+    "file": "en_15.html",
+    "title": "Electricity",
+    "lang": "en",
+    "source": "https://en.wikipedia.org/wiki/Electricity",
+    "chars": 3124
+  },
+  {
+    "id": "hard_01",
+    "file": "hard_01.html",
+    "title": "Русский текст в транслите",
+    "lang": "ru",
+    "source": "synthetic",
+    "chars": 1288,
+    "group": "hard",
+    "note": "русский текст записан латиницей (транслит); алфавитный метод видит только латинские буквы"
+  },
+  {
+    "id": "hard_02",
+    "file": "hard_02.html",
+    "title": "Русский текст с латинскими гомоглифами",
+    "lang": "ru",
+    "source": "synthetic",
+    "chars": 1235,
+    "group": "hard",
+    "note": "буквы а, е, о, р, с, у, х заменены на похожие латинские a, e, o, p, c, y, x — приём спам-обфускации"
+  },
+  {
+    "id": "hard_03",
+    "file": "hard_03.html",
+    "title": "English text with Cyrillic homoglyphs",
+    "lang": "en",
+    "source": "synthetic",
+    "chars": 1182,
+    "group": "hard",
+    "note": "латинские a, e, o, p, c, y, x заменены на кириллические гомоглифы; текст выглядит как английский, но половина букв — кириллица"
+  },
+  {
+    "id": "hard_04",
+    "file": "hard_04.html",
+    "title": "Русская статья, перегруженная IT-терминами",
+    "lang": "ru",
+    "source": "synthetic",
+    "chars": 990,
+    "group": "hard",
+    "note": "русский текст, где больше трети слов — английские технические термины и названия"
+  },
+  {
+    "id": "hard_05",
+    "file": "hard_05.html",
+    "title": "English essay with Russian titles and names",
+    "lang": "en",
+    "source": "synthetic",
+    "chars": 866,
+    "group": "hard",
+    "note": "английский текст с большим числом кириллических названий, имён и цитат"
+  },
+  {
+    "id": "hard_06",
+    "file": "hard_06.html",
+    "title": "Короткое сообщение с брендами",
+    "lang": "ru",
+    "source": "synthetic",
+    "chars": 88,
+    "group": "hard",
+    "note": "очень короткий русский текст, наполовину состоящий из латинских названий брендов"
+  },
+  {
+    "id": "hard_07",
+    "file": "hard_07.html",
+    "title": "Short chat message",
+    "lang": "en",
+    "source": "synthetic",
+    "chars": 69,
+    "group": "hard",
+    "note": "очень короткое английское сообщение с сокращениями и одним кириллическим словом"
+  },
+  {
+    "id": "hard_08",
+    "file": "hard_08.html",
+    "title": "English SMS slang",
+    "lang": "en",
+    "source": "synthetic",
+    "chars": 369,
+    "group": "hard",
+    "note": "английский интернет-сленг: сокращения и цифры вместо слов не встречаются в тренировочном корпусе"
+  },
+  {
+    "id": "hard_09",
+    "file": "hard_09.html",
+    "title": "Русский текст в дореформенной орфографии",
+    "lang": "ru",
+    "source": "synthetic",
+    "chars": 628,
+    "group": "hard",
+    "note": "орфография до 1918 года: буквы ѣ, і, ъ на конце слов отсутствуют в современном алфавите и корпусе"
+  },
+  {
+    "id": "hard_10",
+    "file": "hard_10.html",
+    "title": "Python-код с русскими комментариями",
+    "lang": "ru",
+    "source": "synthetic",
+    "chars": 1237,
+    "group": "hard",
+    "note": "исходный код: английские ключевые слова и идентификаторы против русских комментариев и строк"
+  },
+  {
+    "id": "hard_11",
+    "file": "hard_11.html",
+    "title": "English written in Cyrillic letters",
+    "lang": "en",
+    "source": "synthetic",
+    "chars": 495,
+    "group": "hard",
+    "note": "английская речь, записанная кириллицей по звучанию: алфавит русский, а N-граммы и лексика — английские"
+  },
+  {
+    "id": "hard_12",
+    "file": "hard_12.html",
+    "title": "English article quoting Russian proverbs",
+    "lang": "en",
+    "source": "synthetic",
+    "chars": 913,
+    "group": "hard",
+    "note": "английская статья, примерно на 40% состоящая из русских цитат"
+  }
+]

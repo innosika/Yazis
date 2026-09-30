@@ -1,0 +1,219 @@
+# Built-in pronunciation lexicon for computer-science text.
+#
+# `words`   - how a term is said; matched as a whole word, case-sensitively.
+#             Respellings are plain English spellings the synthesizer reads well.
+# `spell`   - acronyms that are always spelled letter by letter even though they
+#             look pronounceable (the heuristic would otherwise read them as words).
+# Users extend this in Settings -> Pronunciation; their entries win.
+
+words:
+  SQL: sequel
+  SQLite: sequel lite
+  MySQL: my sequel
+  PostgreSQL: postgres Q L
+  NoSQL: no sequel
+  GUI: gooey
+  GUIs: gooeys
+  JSON: jay son
+  YAML: yammel
+  ASCII: ask ee
+  CUDA: kooda
+  LaTeX: lah tek
+  TeX: tek
+  BibTeX: bib tek
+  NumPy: num pie
+  SciPy: sigh pie
+  PyTorch: pie torch
+  PyPI: pie P I
+  Kubernetes: koober netties
+  nginx: engine x
+  Linux: linnux
+  GitHub: git hub
+  GitLab: git lab
+  macOS: mac O S
+  iOS: eye O S
+  RAM: ram
+  ROM: rom
+  LAN: lan
+  WAN: wan
+  GAN: gan
+  GANs: gans
+  RAG: rag
+  LoRA: lora
+  QLoRA: Q lora
+  BERT: bert
+  RoBERTa: roberta
+  ALBERT: albert
+  ELMo: elmo
+  GELU: jee loo
+  ReLU: ray loo
+  ReLUs: ray loos
+  SELU: see loo
+  Adam: adam
+  AdamW: adam W
+  ResNet: rez net
+  ResNets: rez nets
+  ImageNet: image net
+  AlexNet: alex net
+  VGGNet: V G G net
+  U-Net: you net
+  YOLO: yo low
+  SLAM: slam
+  LIDAR: lie dar
+  LiDAR: lie dar
+  RADAR: ray dar
+  NASA: nasa
+  FLOPS: flops
+  FLOPs: flops
+  TFLOPS: terra flops
+  GFLOPS: giga flops
+  RISC: risk
+  CISC: sisk
+  POSIX: pozzix
+  UNIX: you nix
+  Unix: you nix
+  REST: rest
+  RESTful: restful
+  CRUD: crud
+  OAuth: oh auth
+  DOM: dom
+  AJAX: ay jax
+  SaaS: sass
+  PaaS: pass
+  IaaS: eye as a service
+  WiFi: why fye
+  Wi-Fi: why fye
+  XOR: ex or
+  NAND: nand
+  NOR: nor
+  SIMD: sim dee
+  MIMD: mim dee
+  IEEE: I triple E
+  ROC: rock
+  AUC: A U C
+  NP: N P
+  P2P: peer to peer
+  I/O: I O
+  TCP/IP: T C P I P
+  IPv4: I P version 4
+  IPv6: I P version 6
+  x86: x 86
+  x64: x 64
+  arXiv: archive
+  Wikipedia: wikipedia
+  softmax: soft max
+  argmax: arg max
+  argmin: arg min
+  backprop: back prop
+  dropout: drop out
+  tokenizer: tokenizer
+  WordNet: word net
+  word2vec: word to vec
+  seq2seq: seek to seek
+  GloVe: glove
+  fastText: fast text
+  OpenAI: open A I
+  ChatGPT: chat G P T
+  LLaMA: llama
+  Llama: llama
+  DeepMind: deep mind
+  TensorFlow: tensor flow
+  JAX: jacks
+  Keras: keras
+  scikit-learn: sigh kit learn
+  Jupyter: jupiter
+  Rust: rust
+  Haskell: haskell
+  OCaml: oh camel
+  JavaScript: java script
+  TypeScript: type script
+  WebAssembly: web assembly
+  Wasm: wasm
+  SQuAD: squad
+  GLUE: glue
+  MNIST: em nist
+  CIFAR: sigh far
+  COCO: coco
+  ACL: A C L
+  NeurIPS: neur I P S
+  ICML: I C M L
+  ICLR: I C L R
+  CVPR: C V P R
+  ACID: acid
+  BLEU: blue
+  ROUGE: rouge
+  FIFO: fye foe
+  LIFO: lie foe
+
+spell:
+  - API
+  - APIs
+  - GPU
+  - GPUs
+  - CPU
+  - CPUs
+  - TPU
+  - TPUs
+  - CNN
+  - CNNs
+  - RNN
+  - RNNs
+  - LSTM
+  - LSTMs
+  - GRU
+  - MLP
+  - MLPs
+  - SVM
+  - SVMs
+  - PCA
+  - SGD
+  - LLM
+  - LLMs
+  - GPT
+  - NLP
+  - NLU
+  - ASR
+  - TTS
+  - OCR
+  - HTTP
+  - HTTPS
+  - HTML
+  - CSS
+  - XML
+  - URL
+  - URLs
+  - URI
+  - DNS
+  - TCP
+  - UDP
+  - SSH
+  - SSL
+  - TLS
+  - JWT
+  - UML
+  - OOP
+  - IDE
+  - SDK
+  - CLI
+  - OS
+  - VM
+  - VMs
+  - DAG
+  - DAGs
+  - BFS
+  - DFS
+  - MST
+  - LRU
+  - ORM
+  - SSD
+  - HDD
+  - IoT
+  - AI
+  - ML
+  - DL
+  - RL
+  - KL
+  - MSE
+  - MAE
+  - WER
+  - F1

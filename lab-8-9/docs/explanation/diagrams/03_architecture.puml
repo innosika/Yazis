@@ -1,0 +1,20 @@
+@startuml
+!include _style.iuml
+skinparam defaultFontSize 13
+skinparam componentStyle rectangle
+
+rectangle "**Браузер пользователя**\n\nвеб-приложение (React)\nдвижок чтения Web Audio,\nподсветка слов\nдетектор речи Silero VAD" as B
+rectangle "**Расширение Chrome**\n\nкнопка Play на любой\nстранице, мини-плеер,\nзвук в offscreen document" as E
+rectangle "**frontend** (nginx)\n\nотдаёт интерфейс,\nпроксирует /api" as NG
+rectangle "**backend** (FastAPI, Python 3.12)\n\nдокументы: импорт PDF / arXiv / URL\nсинтез (ЛР 8): нормализатор → Kokoro-82M\nраспознавание (ЛР 9): Groq / Parakeet, фильтры\nкоманды (ЛР 9): каталог, матчер, LLM" as BE
+database "SQLite\n\nбиблиотека,\nнастройки,\nкоманды" as DB
+database "том models\n\nKokoro 330 МБ\nParakeet 670 МБ" as MOD
+cloud "Groq API\n\nWhisper large-v3-turbo\ngpt-oss-20b" as GROQ
+
+B -down-> NG : HTTP :8100
+E -down-> NG : HTTP :8100
+NG -down-> BE
+BE -down-> DB
+BE -down-> MOD
+BE .down.> GROQ : если есть ключ\nи не исчерпан лимит
+@enduml

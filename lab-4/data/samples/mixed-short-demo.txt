@@ -1,0 +1,4 @@
+The neural network model learns representations of words from large corpora.
+The main character of the novel is an unreliable narrator.
+The author's argument is simple, but the machine learning system did not translate it correctly.
+Turing studied computable numbers, and his paper changed the field.

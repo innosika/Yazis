@@ -1,0 +1,140 @@
+[
+ {
+  "id": 1,
+  "name": "known-item (automatic)",
+  "description": "Automatically generated known-item topics. Each query is derived from a document's opening sentences with its title words removed; that document is the single relevant answer. Judgments are exact and independent of any ranker's output, so the set carries no pool bias \u2014 but R = 1 per topic, and the query shares the document's vocabulary, so it measures known-item finding rather than topical retrieval.",
+  "frozen_at": "2026-09-02T21:37:39.126373",
+  "created_at": "2026-09-02T21:37:39.102933",
+  "summary": {
+   "queries": 30,
+   "judged_queries": 30,
+   "judgments": 30,
+   "pool_entries": 30
+  },
+  "topics_by_category": {
+   "known-item": {
+    "total": 30,
+    "judged": 30
+   }
+  },
+  "grade_counts": {
+   "VITAL": 30
+  },
+  "assessors": [
+   {
+    "id": 1,
+    "name": "automatic (known-item)",
+    "kind": "automatic",
+    "meta": {},
+    "judgment_count": 30
+   }
+  ],
+  "pool_depth": 10,
+  "is_known_item": true
+ },
+ {
+  "id": 2,
+  "name": "topical (LLM-judged)",
+  "description": "46 hand-authored topics over the frozen crawl; a 25-topic subset is selected for judging after all runs are frozen. Judged by an LLM assessor on ROMIP's five-point scale.",
+  "frozen_at": "2026-09-03T09:27:32.249828",
+  "created_at": "2026-09-03T09:26:41.361581",
+  "summary": {
+   "queries": 46,
+   "judged_queries": 25,
+   "judgments": 146,
+   "pool_entries": 1489
+  },
+  "topics_by_category": {
+   "navigational": {
+    "total": 12,
+    "judged": 7
+   },
+   "topical": {
+    "total": 24,
+    "judged": 13
+   },
+   "vocabulary-mismatch": {
+    "total": 10,
+    "judged": 5
+   }
+  },
+  "grade_counts": {
+   "RELEVANT_MINUS": 2,
+   "RELEVANT_PLUS": 7,
+   "NOTRELEVANT": 137
+  },
+  "assessors": [
+   {
+    "id": 2,
+    "name": "llm:qwen2.5:3b-instruct:v1",
+    "kind": "llm",
+    "meta": {
+     "model": "qwen2.5:3b-instruct",
+     "endpoint": "http://ollama:11434",
+     "protocol": "openai-chat-completions",
+     "temperature": 0.0,
+     "model_digest": null,
+     "prompt_version": "v1",
+     "max_document_chars": 1500
+    },
+    "judgment_count": 146
+   }
+  ],
+  "pool_depth": 10,
+  "is_known_item": false
+ },
+ {
+  "id": 15,
+  "name": "test-topical-2973b08b",
+  "description": "test",
+  "frozen_at": null,
+  "created_at": "2026-09-03T13:08:38.379571",
+  "summary": {
+   "queries": 3,
+   "judged_queries": 0,
+   "judgments": 0,
+   "pool_entries": 0
+  },
+  "topics_by_category": {
+   "navigational": {
+    "total": 1,
+    "judged": 0
+   },
+   "topical": {
+    "total": 2,
+    "judged": 0
+   }
+  },
+  "grade_counts": {},
+  "assessors": [],
+  "pool_depth": 10,
+  "is_known_item": false
+ },
+ {
+  "id": 16,
+  "name": "test-topical-fbd82fb3",
+  "description": "test",
+  "frozen_at": null,
+  "created_at": "2026-09-03T13:23:40.401442",
+  "summary": {
+   "queries": 3,
+   "judged_queries": 0,
+   "judgments": 0,
+   "pool_entries": 0
+  },
+  "topics_by_category": {
+   "navigational": {
+    "total": 1,
+    "judged": 0
+   },
+   "topical": {
+    "total": 2,
+    "judged": 0
+   }
+  },
+  "grade_counts": {},
+  "assessors": [],
+  "pool_depth": 10,
+  "is_known_item": false
+ }
+]

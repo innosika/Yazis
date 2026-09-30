@@ -1,0 +1,16 @@
+@startuml
+!include _style.iuml
+rectangle "Микрофон\n16 000 отсчётов/с" as M
+rectangle "Детектор речи\n(VAD)\n\nотрезает тишину,\nвыделяет фразу" as VAD
+rectangle "Признаки\n\nокна 25 мс, шаг 10 мс\n→ лог-мел спектр\n(80 полос)" as F
+rectangle "Акустическая\nмодель\n\nкадры → вероятности\nсимволов/токенов" as AM
+rectangle "Декодер\n+ языковая модель\n\nвыбор самой\nвероятной фразы" as D
+rectangle "Текст\n«go to section 3»" as T
+rectangle "Понимание\n(NLU)\n\nнамерение + слоты\ngo_to_section(3)" as NLU
+M -right-> VAD
+VAD -right-> F
+F -right-> AM
+AM -down-> D
+D -left-> T
+T -left-> NLU
+@enduml

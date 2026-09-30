@@ -1,0 +1,217 @@
+# Information Retrieval System — Lab 1, variant 34.
+#
+#   make up     build, start, wait for health, seed the corpus and build the index
+#   make logs   follow all container logs
+#   make down   stop and remove
+#
+# Every service declares a healthcheck and every dependency uses `service_healthy`, so
+# `docker compose up` either reaches a working system or fails loudly — it never leaves
+# the API racing an unmigrated database.
+
+name: irs-lab1
+
+x-backend-env: &backend-env
+  ENVIRONMENT: ${ENVIRONMENT:-dev}
+  LOG_LEVEL: ${LOG_LEVEL:-INFO}
+  LOG_FORMAT: ${LOG_FORMAT:-console}
+  POSTGRES_DSN: postgresql+asyncpg://${POSTGRES_USER:-irs}:${POSTGRES_PASSWORD:-irs}@postgres:5432/${POSTGRES_DB:-irs}
+  REDIS_DSN: redis://redis:6379/0
+  SEMANTIC_ENABLED: ${SEMANTIC_ENABLED:-true}
+  INDEX_LOG_BASE: ${INDEX_LOG_BASE:-e}
+  FASTEMBED_CACHE_PATH: /models/fastembed
+  PYTHONPATH: /app/src
+  EVAL_POOL_DEPTH: ${EVAL_POOL_DEPTH:-10}
+  # The LLM assessor. Defaults to the `ollama` service below (compose profile `llm`);
+  # any OpenAI-compatible chat-completions endpoint can be substituted through .env.
+  ASSESSOR_LLM_BASE_URL: ${ASSESSOR_LLM_BASE_URL:-http://ollama:11434/v1}
+  ASSESSOR_LLM_MODEL: ${ASSESSOR_LLM_MODEL:-qwen2.5:3b-instruct}
+  ASSESSOR_LLM_API_KEY: ${ASSESSOR_LLM_API_KEY:-ollama}
+
+services:
+  postgres:
+    # pgvector's own image: Postgres 17 with the `vector` extension already available.
+    image: pgvector/pgvector:pg17
+    container_name: irs-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-irs}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-irs}
+      POSTGRES_DB: ${POSTGRES_DB:-irs}
+      # The corpus is English; a deterministic collation keeps sort order reproducible
+      # between the developer machine and the container.
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    command:
+      - postgres
+      # The index build and the LSA projection are read-heavy over the postings table.
+      - -c
+      - shared_buffers=256MB
+      - -c
+      - work_mem=32MB
+      - -c
+      - max_connections=100
+      # Log slow statements so the report can cite real query timings.
+      - -c
+      - log_min_duration_statement=500
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    # Host-side ports are deliberately off the well-known defaults so this project
+    # never collides with an existing local Postgres/Redis. Containers reach each
+    # other by service name on the compose network, so this only affects host tools.
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-irs} -d ${POSTGRES_DB:-irs}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: irs-redis
+    command:
+      - redis-server
+      - --appendonly
+      - "no"
+      - --save
+      - ""
+      - --maxmemory
+      - 256mb
+      # The log stream is a pub/sub channel plus a cache; evicting the oldest keys under
+      # pressure is correct here, losing durable data is not (there is none).
+      - --maxmemory-policy
+      - allkeys-lru
+    ports:
+      - "${REDIS_PORT:-6380}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./backend
+      target: runtime
+      args:
+        BAKE_SEMANTIC_MODEL: ${BAKE_SEMANTIC_MODEL:-1}
+    image: irs-backend:latest
+    container_name: irs-api
+    environment: *backend-env
+    # Migrations run here, once, before the server accepts traffic. The worker waits on
+    # this service's health, so it can never observe a half-migrated schema.
+    command:
+      - sh
+      - -c
+      - |
+        set -e
+        echo "applying migrations..."
+        alembic upgrade head
+        echo "starting api..."
+        exec uvicorn irs.main:app --host 0.0.0.0 --port 8000 --proxy-headers
+    volumes:
+      # Source is mounted in development so edits reload without a rebuild.
+      - ./backend/src:/app/src:ro
+      # Writable: `irs.cli snapshot` freezes the crawled corpus back into the repository,
+      # and `report` writes the generated document. The worker's mount stays read-only.
+      - ./backend/seeds:/app/seeds
+      - ./docs:/app/docs
+      - ./backend/alembic:/app/alembic:ro
+      - fastembed-cache:/models/fastembed
+    ports:
+      - "${API_PORT:-8010}:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  worker:
+    image: irs-backend:latest
+    container_name: irs-worker
+    environment: *backend-env
+    command:
+      - taskiq
+      - worker
+      - irs.queue:broker
+      - irs.crawler.tasks
+      - irs.eval.tasks
+      - --workers
+      - "1"
+      - --max-async-tasks
+      - "${CRAWLER_MAX_CONCURRENCY:-8}"
+      - --log-level
+      - ${LOG_LEVEL:-INFO}
+    volumes:
+      - ./backend/src:/app/src:ro
+      - ./backend/seeds:/app/seeds:ro
+      - fastembed-cache:/models/fastembed
+    depends_on:
+      api:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      # TaskIQ exposes no HTTP surface, and the slim image ships neither pgrep nor ps.
+      # Reaching Redis is the meaningful signal: without the broker the worker cannot
+      # consume, and if the worker process itself dies the container exits and is
+      # restarted by the policy above.
+      test:
+        - CMD
+        - python
+        - -c
+        - |
+          import os, sys, redis
+          sys.exit(0 if redis.Redis.from_url(os.environ["REDIS_DSN"]).ping() else 1)
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 20s
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./frontend
+      target: runtime
+    image: irs-frontend:latest
+    container_name: irs-web
+    ports:
+      - "${WEB_PORT:-8080}:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # The LLM assessor that judges the topical test collection. Behind a profile so the
+  # default `docker compose up` does not pull a 2 GB model: `make llm-up && make llm-pull`.
+  # CPU inference; deliberately not a dependency of the worker (a profiled dependency
+  # would make the plain `up` fail), so the judging job fails fast with a hint instead.
+  ollama:
+    image: ollama/ollama:latest
+    container_name: irs-ollama
+    profiles: ["llm"]
+    environment:
+      OLLAMA_KEEP_ALIVE: 30m
+      OLLAMA_NUM_PARALLEL: "1"
+      OLLAMA_MAX_LOADED_MODELS: "1"
+    ports:
+      - "${OLLAMA_PORT:-11435}:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 15s
+      timeout: 5s
+      retries: 6
+      start_period: 20s
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+  # Pulled LLM weights for the assessor; survives `make down`.
+  ollama-models:
+  # The ONNX embedding model is baked into the image; this volume keeps it warm across
+  # rebuilds and is shared by the API and the worker.
+  fastembed-cache:

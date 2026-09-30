@@ -1,0 +1,36 @@
+# Чужие варианты (для другой бригады) — не публикуем
+/lab-4-v7/
+/lab-8-9-v5/
+
+# Инструменты ИИ-ассистента
+.claude/
+.agents/
+skills-lock.json
+HANDOFF.md
+
+# Секреты
+.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node / сборка фронтенда
+node_modules
+dist/
+.vite/
+
+# Прочее
+.DS_Store
+*.local
+.scratch/
+~$*

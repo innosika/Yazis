@@ -1,0 +1,234 @@
+// ------------------------------------------------------------------
+// Фрагмент семантической сети в SC-коде (нотация SCs)
+// Система автоматического реферирования документов, вариант 1
+// Документ: Криптография
+// Сформировано: 2026-09-16 00:28:20
+// ------------------------------------------------------------------
+
+concept_text_document -> document_ru_cs_cryptography;;
+document_ru_cs_cryptography => nrel_main_idtf: [Криптография] (* <- lang_ru;; *);;
+document_ru_cs_cryptography => nrel_text_language: lang_ru;;
+document_ru_cs_cryptography => nrel_subject_domain: subject_domain_computer_science;;
+document_ru_cs_cryptography => nrel_source_link: [https://ru.wikipedia.org/wiki/Криптография];;
+document_ru_cs_cryptography => nrel_character_count: [17539];;
+document_ru_cs_cryptography => nrel_sentence_count: [119];;
+
+// --- реферат классического типа (sentence extraction) ---
+concept_abstract -> abstract_ru_cs_cryptography;;
+document_ru_cs_cryptography => nrel_abstract: abstract_ru_cs_cryptography;;
+abstract_ru_cs_cryptography => nrel_method: method_tfidf;;
+abstract_ru_cs_cryptography => nrel_sentence_count: [10];;
+
+abstract_ru_cs_cryptography -> rrel_1: sentence_ru_cs_cryptography_0;;
+concept_sentence -> sentence_ru_cs_cryptography_0;;
+sentence_ru_cs_cryptography_0 => nrel_text: [Криптогра́фия (от др.-греч. κρυπτός «скрытый» + γράφω «пишу») — наука о математических методах обеспечения конфиденциальности, целостности данных, аутентификации, шифрования.] (* <- lang_ru;; *);;
+sentence_ru_cs_cryptography_0 => nrel_position_in_document: [0];;
+sentence_ru_cs_cryptography_0 => nrel_weight: [15.7810];;
+sentence_ru_cs_cryptography_0 => nrel_posd: [1.0000];;
+sentence_ru_cs_cryptography_0 => nrel_posp: [1.0000];;
+sentence_ru_cs_cryptography_0 => nrel_score: [15.7810];;
+
+abstract_ru_cs_cryptography -> rrel_2: sentence_ru_cs_cryptography_1;;
+concept_sentence -> sentence_ru_cs_cryptography_1;;
+sentence_ru_cs_cryptography_1 => nrel_text: [Изначально криптография изучала методы шифрования информации — обратимого преобразования открытого (исходного) текста на основе секретного алгоритма или ключа в шифрованный текст (шифротекст).] (* <- lang_ru;; *);;
+sentence_ru_cs_cryptography_1 => nrel_position_in_document: [1];;
+sentence_ru_cs_cryptography_1 => nrel_weight: [20.5205];;
+sentence_ru_cs_cryptography_1 => nrel_posd: [0.9900];;
+sentence_ru_cs_cryptography_1 => nrel_posp: [1.0000];;
+sentence_ru_cs_cryptography_1 => nrel_score: [20.7285];;
+
+abstract_ru_cs_cryptography -> rrel_3: sentence_ru_cs_cryptography_4;;
+concept_sentence -> sentence_ru_cs_cryptography_4;;
+sentence_ru_cs_cryptography_4 => nrel_text: [Помимо этого раздела современная криптография включает в себя асимметричные криптосистемы, системы электронной цифровой подписи (ЭЦП), хеш-функции, управление ключами, получение скрытой информации, квантовую криптографию.] (* <- lang_ru;; *);;
+sentence_ru_cs_cryptography_4 => nrel_position_in_document: [4];;
+sentence_ru_cs_cryptography_4 => nrel_weight: [21.4615];;
+sentence_ru_cs_cryptography_4 => nrel_posd: [0.9628];;
+sentence_ru_cs_cryptography_4 => nrel_posp: [1.0000];;
+sentence_ru_cs_cryptography_4 => nrel_score: [22.2915];;
+
+abstract_ru_cs_cryptography -> rrel_4: sentence_ru_cs_cryptography_5;;
+concept_sentence -> sentence_ru_cs_cryptography_5;;
+sentence_ru_cs_cryptography_5 => nrel_text: [Криптография не является защитой от обмана, подкупа или шантажа законных абонентов, кражи ключей и других угроз информации, возникающих в защищённых системах передачи данных.] (* <- lang_ru;; *);;
+sentence_ru_cs_cryptography_5 => nrel_position_in_document: [5];;
+sentence_ru_cs_cryptography_5 => nrel_weight: [17.2519];;
+sentence_ru_cs_cryptography_5 => nrel_posd: [0.9501];;
+sentence_ru_cs_cryptography_5 => nrel_posp: [1.0000];;
+sentence_ru_cs_cryptography_5 => nrel_score: [18.1589];;
+
+abstract_ru_cs_cryptography -> rrel_5: sentence_ru_cs_cryptography_13;;
+concept_sentence -> sentence_ru_cs_cryptography_13;;
+sentence_ru_cs_cryptography_13 => nrel_text: [Шифрование — процесс нормального применения криптографического преобразования исходных данных, известных как открытый текст, в нечитаемую форму – шифротекст.] (* <- lang_ru;; *);;
+sentence_ru_cs_cryptography_13 => nrel_position_in_document: [13];;
+sentence_ru_cs_cryptography_13 => nrel_weight: [13.4393];;
+sentence_ru_cs_cryptography_13 => nrel_posd: [0.9002];;
+sentence_ru_cs_cryptography_13 => nrel_posp: [1.0000];;
+sentence_ru_cs_cryptography_13 => nrel_score: [14.9289];;
+
+abstract_ru_cs_cryptography -> rrel_6: sentence_ru_cs_cryptography_16;;
+concept_sentence -> sentence_ru_cs_cryptography_16;;
+sentence_ru_cs_cryptography_16 => nrel_text: [Асимметричный шифр, двухключевой шифр, шифр с открытым ключом — шифр, в котором используются два ключа, шифрующий и расшифровывающий.] (* <- lang_ru;; *);;
+sentence_ru_cs_cryptography_16 => nrel_position_in_document: [16];;
+sentence_ru_cs_cryptography_16 => nrel_weight: [17.3767];;
+sentence_ru_cs_cryptography_16 => nrel_posd: [0.8812];;
+sentence_ru_cs_cryptography_16 => nrel_posp: [1.0000];;
+sentence_ru_cs_cryptography_16 => nrel_score: [19.7198];;
+
+abstract_ru_cs_cryptography -> rrel_7: sentence_ru_cs_cryptography_23;;
+concept_sentence -> sentence_ru_cs_cryptography_23;;
+sentence_ru_cs_cryptography_23 => nrel_text: [Криптография и криптоанализ составляют криптологию как единую науку о создании и взломе шифров (такое деление привнесено с Запада; до этого в СССР и России не применялось специального деления).] (* <- lang_ru;; *);;
+sentence_ru_cs_cryptography_23 => nrel_position_in_document: [23];;
+sentence_ru_cs_cryptography_23 => nrel_weight: [14.7943];;
+sentence_ru_cs_cryptography_23 => nrel_posd: [0.8437];;
+sentence_ru_cs_cryptography_23 => nrel_posp: [1.0000];;
+sentence_ru_cs_cryptography_23 => nrel_score: [17.5358];;
+
+abstract_ru_cs_cryptography -> rrel_8: sentence_ru_cs_cryptography_42;;
+concept_sentence -> sentence_ru_cs_cryptography_42;;
+sentence_ru_cs_cryptography_42 => nrel_text: [Первый период (приблизительно с 3-го тысячелетия до н. э.) характеризуется господством моноалфавитных шифров (основной принцип — замена алфавита исходного текста другим алфавитом через замену букв другими буквами или символами).] (* <- lang_ru;; *);;
+sentence_ru_cs_cryptography_42 => nrel_position_in_document: [42];;
+sentence_ru_cs_cryptography_42 => nrel_weight: [13.0805];;
+sentence_ru_cs_cryptography_42 => nrel_posd: [0.7182];;
+sentence_ru_cs_cryptography_42 => nrel_posp: [1.0000];;
+sentence_ru_cs_cryptography_42 => nrel_score: [18.2122];;
+
+abstract_ru_cs_cryptography -> rrel_9: sentence_ru_cs_cryptography_103;;
+concept_sentence -> sentence_ru_cs_cryptography_103;;
+sentence_ru_cs_cryptography_103 => nrel_text: [Ещё раньше был издан указ Президента РФ от 3 апреля 1995 № 334 «О мерах по соблюдению законности в области разработки, производства, реализации и эксплуатации шифровальных средств, а также предоставления услуг в области шифрования информации», постановивший «запретить использование государственными организациями и предприятиями в информационно-телекоммуникационных системах шифровальных средств, включая криптографические средства обеспечения подлинности информации (электронная подпись), и защищённых технических средств хранения, обработки и передачи информации, не имеющих сертификата Федерального агентства правительственной связи и информации при Президенте Российской Федерации, а также размещение государственных заказов на предприятиях, в организациях, использующих указанные технические и шифровальные средства, не имеющие сертификата Федерального агентства правительственной связи и информации при Президенте Российской Федерации»] (* <- lang_ru;; *);;
+sentence_ru_cs_cryptography_103 => nrel_position_in_document: [103];;
+sentence_ru_cs_cryptography_103 => nrel_weight: [18.5248];;
+sentence_ru_cs_cryptography_103 => nrel_posd: [0.2487];;
+sentence_ru_cs_cryptography_103 => nrel_posp: [1.0000];;
+sentence_ru_cs_cryptography_103 => nrel_score: [74.4855];;
+
+abstract_ru_cs_cryptography -> rrel_10: sentence_ru_cs_cryptography_105;;
+concept_sentence -> sentence_ru_cs_cryptography_105;;
+sentence_ru_cs_cryptography_105 => nrel_text: [Постановление Правительства РФ от 16 апреля 2012 г. № 313 «Об утверждении Положения о лицензировании деятельности по разработке, производству, распространению шифровальных (криптографических) средств, информационных систем и телекоммуникационных систем, защищённых с использованием шифровальных (криптографических) средств, выполнению работ, оказанию услуг в области шифрования информации, техническому обслуживанию шифровальных (криптографических) средств, информационных систем и телекоммуникационных систем, защищённых с использованием шифровальных (криптографических) средств (за исключением случая, если техническое обслуживание шифровальных (криптографических) средств, информационных систем и телекоммуникационных систем, защищённых с использованием шифровальных (криптографических) средств, осуществляется для обеспечения собственных нужд юридического лица или индивидуального предпринимателя)» отменило действие постановления Правительства Российской Федерации от 29 декабря 2007 г. № 957 «Об утверждении положений о лицензировании отдельных видов деятельности, связанных с шифровальными (криптографическими) средствами» и вводит новые\[какие?\] ограничения.] (* <- lang_ru;; *);;
+sentence_ru_cs_cryptography_105 => nrel_position_in_document: [105];;
+sentence_ru_cs_cryptography_105 => nrel_weight: [17.1583];;
+sentence_ru_cs_cryptography_105 => nrel_posd: [0.1819];;
+sentence_ru_cs_cryptography_105 => nrel_posp: [1.0000];;
+sentence_ru_cs_cryptography_105 => nrel_score: [94.3382];;
+
+// --- реферат в виде списка ключевых слов ---
+concept_key_word_set -> keywords_ru_cs_cryptography;;
+document_ru_cs_cryptography => nrel_key_word_set: keywords_ru_cs_cryptography;;
+
+keywords_ru_cs_cryptography -> rrel_1: keyword_ru_cs_cryptography_klyucha;;
+concept_key_word -> keyword_ru_cs_cryptography_klyucha;;
+keyword_ru_cs_cryptography_klyucha => nrel_main_idtf: [ключа] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_klyucha => nrel_stem: [ключ];;
+keyword_ru_cs_cryptography_klyucha => nrel_tf: [39];;
+keyword_ru_cs_cryptography_klyucha => nrel_df: [1];;
+keyword_ru_cs_cryptography_klyucha => nrel_tf_idf_weight: [2.3026];;
+
+keywords_ru_cs_cryptography -> rrel_2: keyword_ru_cs_cryptography_kriptograficheskih;;
+concept_key_word -> keyword_ru_cs_cryptography_kriptograficheskih;;
+keyword_ru_cs_cryptography_kriptograficheskih => nrel_main_idtf: [криптографических] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_kriptograficheskih => nrel_stem: [криптографическ];;
+keyword_ru_cs_cryptography_kriptograficheskih => nrel_tf: [37];;
+keyword_ru_cs_cryptography_kriptograficheskih => nrel_df: [1];;
+keyword_ru_cs_cryptography_kriptograficheskih => nrel_tf_idf_weight: [2.2435];;
+
+keywords_ru_cs_cryptography -> rrel_3: keyword_ru_cs_cryptography_kriptografii;;
+concept_key_word -> keyword_ru_cs_cryptography_kriptografii;;
+keyword_ru_cs_cryptography_kriptografii => nrel_main_idtf: [криптографии] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_kriptografii => nrel_stem: [криптограф];;
+keyword_ru_cs_cryptography_kriptografii => nrel_tf: [24];;
+keyword_ru_cs_cryptography_kriptografii => nrel_df: [1];;
+keyword_ru_cs_cryptography_kriptografii => nrel_tf_idf_weight: [1.8598];;
+
+keywords_ru_cs_cryptography -> rrel_4: keyword_ru_cs_cryptography_shifr;;
+concept_key_word -> keyword_ru_cs_cryptography_shifr;;
+keyword_ru_cs_cryptography_shifr => nrel_main_idtf: [шифр] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_shifr => nrel_stem: [шифр];;
+keyword_ru_cs_cryptography_shifr => nrel_tf: [20];;
+keyword_ru_cs_cryptography_shifr => nrel_df: [1];;
+keyword_ru_cs_cryptography_shifr => nrel_tf_idf_weight: [1.7417];;
+
+keywords_ru_cs_cryptography -> rrel_5: keyword_ru_cs_cryptography_shifrovalnyh;;
+concept_key_word -> keyword_ru_cs_cryptography_shifrovalnyh;;
+keyword_ru_cs_cryptography_shifrovalnyh => nrel_main_idtf: [шифровальных] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_shifrovalnyh => nrel_stem: [шифровальн];;
+keyword_ru_cs_cryptography_shifrovalnyh => nrel_tf: [19];;
+keyword_ru_cs_cryptography_shifrovalnyh => nrel_df: [1];;
+keyword_ru_cs_cryptography_shifrovalnyh => nrel_tf_idf_weight: [1.7122];;
+
+keywords_ru_cs_cryptography -> rrel_6: keyword_ru_cs_cryptography_shifrovaniya;;
+concept_key_word -> keyword_ru_cs_cryptography_shifrovaniya;;
+keyword_ru_cs_cryptography_shifrovaniya => nrel_main_idtf: [шифрования] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_shifrovaniya => nrel_stem: [шифрован];;
+keyword_ru_cs_cryptography_shifrovaniya => nrel_tf: [19];;
+keyword_ru_cs_cryptography_shifrovaniya => nrel_df: [1];;
+keyword_ru_cs_cryptography_shifrovaniya => nrel_tf_idf_weight: [1.7122];;
+
+keywords_ru_cs_cryptography -> rrel_7: keyword_ru_cs_cryptography_preobrazovaniya;;
+concept_key_word -> keyword_ru_cs_cryptography_preobrazovaniya;;
+keyword_ru_cs_cryptography_preobrazovaniya => nrel_main_idtf: [преобразования] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_preobrazovaniya => nrel_stem: [преобразован];;
+keyword_ru_cs_cryptography_preobrazovaniya => nrel_tf: [13];;
+keyword_ru_cs_cryptography_preobrazovaniya => nrel_df: [1];;
+keyword_ru_cs_cryptography_preobrazovaniya => nrel_tf_idf_weight: [1.5351];;
+
+keywords_ru_cs_cryptography -> rrel_8: keyword_ru_cs_cryptography_sekretnyj;;
+concept_key_word -> keyword_ru_cs_cryptography_sekretnyj;;
+keyword_ru_cs_cryptography_sekretnyj => nrel_main_idtf: [секретный] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_sekretnyj => nrel_stem: [секретн];;
+keyword_ru_cs_cryptography_sekretnyj => nrel_tf: [10];;
+keyword_ru_cs_cryptography_sekretnyj => nrel_df: [1];;
+keyword_ru_cs_cryptography_sekretnyj => nrel_tf_idf_weight: [1.4465];;
+
+keywords_ru_cs_cryptography -> rrel_9: keyword_ru_cs_cryptography_elektronnaya;;
+concept_key_word -> keyword_ru_cs_cryptography_elektronnaya;;
+keyword_ru_cs_cryptography_elektronnaya => nrel_main_idtf: [электронная] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_elektronnaya => nrel_stem: [электрон];;
+keyword_ru_cs_cryptography_elektronnaya => nrel_tf: [10];;
+keyword_ru_cs_cryptography_elektronnaya => nrel_df: [1];;
+keyword_ru_cs_cryptography_elektronnaya => nrel_tf_idf_weight: [1.4465];;
+
+keywords_ru_cs_cryptography -> rrel_10: keyword_ru_cs_cryptography_asimmetrichnye;;
+concept_key_word -> keyword_ru_cs_cryptography_asimmetrichnye;;
+keyword_ru_cs_cryptography_asimmetrichnye => nrel_main_idtf: [асимметричные] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_asimmetrichnye => nrel_stem: [асимметричн];;
+keyword_ru_cs_cryptography_asimmetrichnye => nrel_tf: [9];;
+keyword_ru_cs_cryptography_asimmetrichnye => nrel_df: [1];;
+keyword_ru_cs_cryptography_asimmetrichnye => nrel_tf_idf_weight: [1.4170];;
+
+keywords_ru_cs_cryptography -> rrel_11: keyword_ru_cs_cryptography_kriptosistemy;;
+concept_key_word -> keyword_ru_cs_cryptography_kriptosistemy;;
+keyword_ru_cs_cryptography_kriptosistemy => nrel_main_idtf: [криптосистемы] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_kriptosistemy => nrel_stem: [криптосист];;
+keyword_ru_cs_cryptography_kriptosistemy => nrel_tf: [9];;
+keyword_ru_cs_cryptography_kriptosistemy => nrel_df: [1];;
+keyword_ru_cs_cryptography_kriptosistemy => nrel_tf_idf_weight: [1.4170];;
+
+keywords_ru_cs_cryptography -> rrel_12: keyword_ru_cs_cryptography_dliny;;
+concept_key_word -> keyword_ru_cs_cryptography_dliny;;
+keyword_ru_cs_cryptography_dliny => nrel_main_idtf: [длины] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_dliny => nrel_stem: [длин];;
+keyword_ru_cs_cryptography_dliny => nrel_tf: [8];;
+keyword_ru_cs_cryptography_dliny => nrel_df: [1];;
+keyword_ru_cs_cryptography_dliny => nrel_tf_idf_weight: [1.3875];;
+
+keywords_ru_cs_cryptography -> rrel_13: keyword_ru_cs_cryptography_zashchishchyonnyh;;
+concept_key_word -> keyword_ru_cs_cryptography_zashchishchyonnyh;;
+keyword_ru_cs_cryptography_zashchishchyonnyh => nrel_main_idtf: [защищённых] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_zashchishchyonnyh => nrel_stem: [защищен];;
+keyword_ru_cs_cryptography_zashchishchyonnyh => nrel_tf: [7];;
+keyword_ru_cs_cryptography_zashchishchyonnyh => nrel_df: [1];;
+keyword_ru_cs_cryptography_zashchishchyonnyh => nrel_tf_idf_weight: [1.3579];;
+
+keywords_ru_cs_cryptography -> rrel_14: keyword_ru_cs_cryptography_kriptoanaliz;;
+concept_key_word -> keyword_ru_cs_cryptography_kriptoanaliz;;
+keyword_ru_cs_cryptography_kriptoanaliz => nrel_main_idtf: [криптоанализ] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_kriptoanaliz => nrel_stem: [криптоанализ];;
+keyword_ru_cs_cryptography_kriptoanaliz => nrel_tf: [7];;
+keyword_ru_cs_cryptography_kriptoanaliz => nrel_df: [1];;
+keyword_ru_cs_cryptography_kriptoanaliz => nrel_tf_idf_weight: [1.3579];;
+
+keywords_ru_cs_cryptography -> rrel_15: keyword_ru_cs_cryptography_licenzii;;
+concept_key_word -> keyword_ru_cs_cryptography_licenzii;;
+keyword_ru_cs_cryptography_licenzii => nrel_main_idtf: [лицензии] (* <- lang_ru;; *);;
+keyword_ru_cs_cryptography_licenzii => nrel_stem: [лиценз];;
+keyword_ru_cs_cryptography_licenzii => nrel_tf: [7];;
+keyword_ru_cs_cryptography_licenzii => nrel_df: [1];;
+keyword_ru_cs_cryptography_licenzii => nrel_tf_idf_weight: [1.3579];;

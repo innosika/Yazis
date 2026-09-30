@@ -1,0 +1,244 @@
+@import 'tailwindcss';
+
+/* Dark mode is a class on <html>, set by the theme toggle and seeded from the OS
+   preference on first load. A class rather than a media query so the toggle can win. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------------------
+   Design tokens.
+
+   Two deliberate decisions shape this palette. First, the accent is a deep teal, not the
+   indigo every generated interface reaches for - it reads as instrument rather than
+   marketing. Second, English and Russian each get their own tint, warm and cool, used
+   consistently for source and target throughout the application: in a bilingual tool the
+   single most common question is "which language am I looking at", and colour answers it
+   before the reader has to read anything.
+--------------------------------------------------------------------------------------- */
+
+:root {
+  --c-canvas: #f4f6f7;
+  --c-surface: #ffffff;
+  --c-raised: #fbfcfc;
+  --c-sunken: #eef1f3;
+  --c-border: #dde2e6;
+  --c-border-strong: #c2cad1;
+  --c-ink: #0f171e;
+  --c-ink-muted: #56636f;
+  --c-ink-faint: #7d8894;
+
+  --c-accent: #0d7d74;
+  --c-accent-hover: #0a655e;
+  --c-accent-ink: #ffffff;
+  --c-accent-soft: #dff1ef;
+  --c-accent-soft-ink: #08544e;
+
+  --c-source: #fdf7ee;
+  --c-source-border: #ecd9bd;
+  --c-source-ink: #7a5520;
+  --c-target: #eef4fb;
+  --c-target-border: #ccdff1;
+  --c-target-ink: #1d4c78;
+
+  --c-success: #157347;
+  --c-success-soft: #e3f3ea;
+  --c-warning: #9a6200;
+  --c-warning-soft: #fdf2df;
+  --c-danger: #b42318;
+  --c-danger-soft: #fdeceb;
+  --c-info: #1a5fb4;
+  --c-info-soft: #e8f0fb;
+}
+
+.dark {
+  --c-canvas: #0c1116;
+  --c-surface: #141b22;
+  --c-raised: #1a222b;
+  --c-sunken: #10171d;
+  --c-border: #27313b;
+  --c-border-strong: #3a4653;
+  --c-ink: #e4ebf1;
+  --c-ink-muted: #9aa7b4;
+  --c-ink-faint: #75838f;
+
+  --c-accent: #2aa79a;
+  --c-accent-hover: #35bcad;
+  --c-accent-ink: #04211f;
+  --c-accent-soft: #123833;
+  --c-accent-soft-ink: #7ddcd0;
+
+  --c-source: #241d12;
+  --c-source-border: #43351f;
+  --c-source-ink: #d9b887;
+  --c-target: #111f2e;
+  --c-target-border: #1f3550;
+  --c-target-ink: #93bde6;
+
+  --c-success: #46b877;
+  --c-success-soft: #10291c;
+  --c-warning: #d69a3a;
+  --c-warning-soft: #2c2113;
+  --c-danger: #f1776b;
+  --c-danger-soft: #2d1614;
+  --c-info: #6aa6f0;
+  --c-info-soft: #131f31;
+}
+
+@theme inline {
+  --color-canvas: var(--c-canvas);
+  --color-surface: var(--c-surface);
+  --color-raised: var(--c-raised);
+  --color-sunken: var(--c-sunken);
+  --color-line: var(--c-border);
+  --color-line-strong: var(--c-border-strong);
+  --color-ink: var(--c-ink);
+  --color-ink-muted: var(--c-ink-muted);
+  --color-ink-faint: var(--c-ink-faint);
+
+  --color-accent: var(--c-accent);
+  --color-accent-hover: var(--c-accent-hover);
+  --color-accent-ink: var(--c-accent-ink);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-accent-soft-ink: var(--c-accent-soft-ink);
+
+  --color-source: var(--c-source);
+  --color-source-line: var(--c-source-border);
+  --color-source-ink: var(--c-source-ink);
+  --color-target: var(--c-target);
+  --color-target-line: var(--c-target-border);
+  --color-target-ink: var(--c-target-ink);
+
+  --color-success: var(--c-success);
+  --color-success-soft: var(--c-success-soft);
+  --color-warning: var(--c-warning);
+  --color-warning-soft: var(--c-warning-soft);
+  --color-danger: var(--c-danger);
+  --color-danger-soft: var(--c-danger-soft);
+  --color-info: var(--c-info);
+  --color-info-soft: var(--c-info-soft);
+
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  --font-mono:
+    ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.625rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--c-border);
+  }
+
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--c-canvas);
+    color: var(--c-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv05' 1, 'ss03' 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* One visible focus style for the whole application, so keyboard users never guess. */
+  :focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  ::selection {
+    background-color: var(--c-accent-soft);
+    color: var(--c-accent-soft-ink);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    letter-spacing: -0.011em;
+  }
+
+  /* Tabular figures keep the statistics and frequency columns from dancing as they update. */
+  .nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--c-border-strong) transparent;
+  }
+
+  .scroll-thin::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+
+  .scroll-thin::-webkit-scrollbar-thumb {
+    background-color: var(--c-border-strong);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+/* ---------------------------------------------------------------------------------------
+   Print. Requirement R9 asks for the translation and the frequency list to be printable,
+   so printing is a first-class output: the shell disappears and the results are laid out
+   for paper rather than screenshotted from it.
+--------------------------------------------------------------------------------------- */
+@media print {
+  :root {
+    --c-canvas: #ffffff;
+    --c-surface: #ffffff;
+    --c-raised: #ffffff;
+    --c-sunken: #ffffff;
+    --c-border: #b8bfc6;
+    --c-ink: #000000;
+    --c-ink-muted: #333333;
+    --c-source: #ffffff;
+    --c-target: #ffffff;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: revert !important;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  .print-block {
+    break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  a[href]::after {
+    content: '';
+  }
+}
+
+.print-only {
+  display: none;
+}

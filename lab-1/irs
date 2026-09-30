@@ -1,0 +1,296 @@
+#!/usr/bin/env bash
+# Information Retrieval System — Lab 1, variant 34.
+#
+# Single entry point. Requires only Docker with the Compose plugin; no make, no Python
+# and no Node on the host. Run `./irs` for the command list.
+
+set -Eeuo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+readonly COMPOSE=(docker compose)
+readonly API_EXEC=("${COMPOSE[@]}" exec -T api)
+
+if [[ -t 1 ]]; then
+    B=$'\033[1m'; C=$'\033[36m'; G=$'\033[32m'; Y=$'\033[33m'; RD=$'\033[31m'; N=$'\033[0m'
+else
+    B=""; C=""; G=""; Y=""; RD=""; N=""
+fi
+
+log()  { printf '%s==>%s %s\n' "$C" "$N" "$*"; }
+ok()   { printf '%s  ok%s %s\n' "$G" "$N" "$*"; }
+warn() { printf '%s warn%s %s\n' "$Y" "$N" "$*" >&2; }
+die()  { printf '%serror%s %s\n' "$RD" "$N" "$*" >&2; exit 1; }
+
+port() { # port VAR default  — read from .env if present, else default
+    local var=$1 default=$2 value=""
+    [[ -f .env ]] && value=$(grep -E "^${var}=" .env 2>/dev/null | tail -1 | cut -d= -f2- || true)
+    printf '%s' "${value:-$default}"
+}
+
+require_docker() {
+    command -v docker >/dev/null 2>&1 || die "docker is not installed. See https://docs.docker.com/get-docker/"
+    docker compose version >/dev/null 2>&1 \
+        || die "the Docker Compose plugin is missing. Install docker-compose-plugin."
+    docker info >/dev/null 2>&1 \
+        || die "the Docker daemon is not reachable. Start Docker and try again."
+}
+
+# ------------------------------------------------------------------- commands ----
+
+cmd_help() {
+    cat <<EOF
+
+${B}Information Retrieval System — variant 34${N}
+  vector search model · English corpus · web crawler
+
+${B}Getting started${N}
+  ${C}./irs up${N}              build, start, seed the corpus and build the index
+  ${C}./irs open${N}            print the URLs to open
+
+${B}Lifecycle${N}
+  ${C}./irs start${N}           start without rebuilding or re-seeding
+  ${C}./irs stop${N}            stop and remove containers (data is kept)
+  ${C}./irs restart${N}         restart the API and worker
+  ${C}./irs reset${N}           remove containers AND all data (asks first)
+  ${C}./irs build${N}           rebuild images
+  ${C}./irs build-light${N}     rebuild without the ~130 MB embedding model
+  ${C}./irs status${N}          container status and readiness
+
+${B}Corpus and index${N}
+  ${C}./irs seed${N}            load the frozen document snapshot
+  ${C}./irs index${N}           rebuild the inverted index and term weights
+  ${C}./irs crawl URL [N] [D]${N} crawl live pages (default 50 pages, depth 2)
+  ${C}./irs snapshot${N}        freeze the current corpus to backend/seeds/
+
+${B}Evaluation${N}
+  ${C}./irs evaluate [NAME]${N} run all rankers and compute every metric
+  ${C}./irs report${N}          regenerate docs/ from real evaluation runs
+
+${B}Topical test collection${N}  (order: topics → pool → topics-select → llm-up, llm-pull → judge)
+  ${C}./irs topics${N}          seed the hand-authored topics (backend/seeds/topics.yaml)
+  ${C}./irs pool [D]${N}        build the judgment pool at depth D (default 10); freezes the runs
+  ${C}./irs topics-select [N]${N} select N judged topics after the pool exists (default 25)
+  ${C}./irs llm-up${N}          start the local LLM assessor (Ollama, profile llm)
+  ${C}./irs llm-pull${N}        download the assessor model once (~2 GB)
+  ${C}./irs judge [N]${N}       judge pending pool pairs inline (optionally only N)
+  ${C}./irs lsa${N}             build the latent-semantic projection for the Relevance Lab
+
+${B}Development${N}
+  ${C}./irs test${N}            backend test suite
+  ${C}./irs test-fe${N}         frontend test suite
+  ${C}./irs lint${N}            ruff + mypy
+  ${C}./irs fmt${N}             auto-format
+  ${C}./irs smoke${N}           end-to-end sanity check
+  ${C}./irs migrate${N}         apply database migrations
+  ${C}./irs revision "msg"${N}  autogenerate a migration
+  ${C}./irs psql${N}            open a psql shell
+  ${C}./irs shell${N}           open a shell in the API container
+  ${C}./irs logs [service]${N}  follow logs
+
+EOF
+}
+
+cmd_up() {
+    require_docker
+    log "building and starting services"
+    "${COMPOSE[@]}" up -d --build
+    cmd_wait
+    cmd_seed
+    cmd_index
+    cmd_open
+}
+
+cmd_start() {
+    require_docker
+    "${COMPOSE[@]}" up -d
+    cmd_wait
+    cmd_open
+}
+
+cmd_build()       { require_docker; "${COMPOSE[@]}" build; }
+cmd_build_light() {
+    require_docker
+    log "building without the embedding model (semantic ranker disabled)"
+    BAKE_SEMANTIC_MODEL=0 SEMANTIC_ENABLED=false "${COMPOSE[@]}" build
+}
+cmd_stop()    { require_docker; "${COMPOSE[@]}" down --remove-orphans; ok "stopped"; }
+cmd_restart() { require_docker; "${COMPOSE[@]}" restart api worker; cmd_wait; }
+
+cmd_reset() {
+    require_docker
+    warn "this deletes the database, the crawled corpus and the index"
+    read -r -p "Continue? [y/N] " reply
+    [[ ${reply,,} == y ]] || die "aborted"
+    "${COMPOSE[@]}" down --volumes --remove-orphans
+    ok "containers and volumes removed"
+}
+
+cmd_wait() {
+    log "waiting for services to become healthy"
+    local deadline=$((SECONDS + 180)) pending
+    while ((SECONDS < deadline)); do
+        # Services with a healthcheck must report "healthy"; those without must be running.
+        pending=$("${COMPOSE[@]}" ps --format '{{.Service}} {{.Health}} {{.State}}' 2>/dev/null \
+            | awk '($2 != "healthy" && $2 != "") || ($2 == "" && $3 != "running") {print $1}' || true)
+        if [[ -z $pending ]]; then
+            ok "all services healthy"
+            return 0
+        fi
+        sleep 2
+    done
+    warn "timed out waiting for: $(tr '\n' ' ' <<<"$pending")"
+    "${COMPOSE[@]}" ps
+    die "services did not become healthy; check './irs logs'"
+}
+
+cmd_open() {
+    printf '\n  %sInterface%s     http://localhost:%s\n' "$B" "$N" "$(port WEB_PORT 8080)"
+    printf '  %sAPI docs%s      http://localhost:%s/api/docs\n' "$B" "$N" "$(port API_PORT 8010)"
+    printf '  %sReadiness%s     http://localhost:%s/api/health/ready\n' "$B" "$N" "$(port API_PORT 8010)"
+    printf '  %sMetrics%s       http://localhost:%s/metrics\n\n' "$B" "$N" "$(port API_PORT 8010)"
+}
+
+cmd_status() {
+    require_docker
+    "${COMPOSE[@]}" ps
+    echo
+    curl -fsS "http://localhost:$(port API_PORT 8010)/api/health/ready" 2>/dev/null \
+        | python3 -m json.tool 2>/dev/null \
+        || warn "the API is not answering yet"
+}
+
+cmd_seed()     { log "loading the document snapshot";        "${API_EXEC[@]}" python -m irs.cli seed; }
+cmd_index()    { log "building the index";                   "${API_EXEC[@]}" python -m irs.cli index; }
+cmd_snapshot() { "${API_EXEC[@]}" python -m irs.cli snapshot; }
+cmd_evaluate() { log "evaluating every ranker"
+                 if [[ -n ${1:-} ]]; then "${API_EXEC[@]}" python -m irs.cli evaluate --collection "$1"
+                 else "${API_EXEC[@]}" python -m irs.cli evaluate; fi }
+cmd_topics()   { log "seeding topics";                       "${API_EXEC[@]}" python -m irs.cli topics seed; }
+cmd_pool()     { log "building the judgment pool"
+                 if [[ -n ${1:-} ]]; then "${API_EXEC[@]}" python -m irs.cli pool build --depth "$1"
+                 else "${API_EXEC[@]}" python -m irs.cli pool build; fi
+                 "${API_EXEC[@]}" python -m irs.cli pool stats; }
+cmd_topics_select() { log "selecting the judged subset"
+                 if [[ -n ${1:-} ]]; then "${API_EXEC[@]}" python -m irs.cli topics select --count "$1"
+                 else "${API_EXEC[@]}" python -m irs.cli topics select; fi }
+cmd_judge()    { log "judging with the LLM assessor"
+                 if [[ -n ${1:-} ]]; then "${API_EXEC[@]}" python -m irs.cli judge --limit "$1"
+                 else "${API_EXEC[@]}" python -m irs.cli judge; fi }
+cmd_lsa()      { log "building the LSA projection";           "${API_EXEC[@]}" python -m irs.cli lsa; }
+cmd_llm_up()   { require_docker; "${COMPOSE[@]}" --profile llm up -d ollama
+                 ok "ollama starting — run './irs llm-pull' once to download the model"; }
+cmd_llm_pull() { require_docker
+                 "${COMPOSE[@]}" --profile llm exec ollama ollama pull "${ASSESSOR_LLM_MODEL:-qwen2.5:3b-instruct}"; }
+cmd_llm_down() { require_docker; "${COMPOSE[@]}" --profile llm stop ollama; }
+cmd_report()   { "${API_EXEC[@]}" python -m irs.cli report --out /app/docs; ok "report written to docs/"; }
+
+cmd_crawl() {
+    local url=${1:-} pages=${2:-50} depth=${3:-2}
+    [[ -n $url ]] || die "usage: ./irs crawl URL [pages] [depth]"
+    log "crawling $url (max $pages pages, depth $depth)"
+    "${API_EXEC[@]}" python -m irs.cli crawl --url "$url" --pages "$pages" --depth "$depth"
+}
+
+cmd_migrate()  { "${API_EXEC[@]}" alembic upgrade head; }
+cmd_revision() { [[ -n ${1:-} ]] || die 'usage: ./irs revision "message"'
+                 "${API_EXEC[@]}" alembic revision --autogenerate -m "$1"; }
+cmd_psql()     { "${COMPOSE[@]}" exec postgres psql -U "$(port POSTGRES_USER irs)" -d "$(port POSTGRES_DB irs)"; }
+cmd_shell()    { "${COMPOSE[@]}" exec api bash; }
+cmd_logs()     { if [[ -n ${1:-} ]]; then "${COMPOSE[@]}" logs -f --tail=100 "$1"
+                 else "${COMPOSE[@]}" logs -f --tail=100; fi }
+
+# Test and lint tooling lives in a dedicated `dev` image target, so the production
+# image stays free of test dependencies and nothing is pip-installed per invocation.
+readonly DEV_IMAGE=irs-backend:dev
+
+_ensure_dev_image() {
+    docker image inspect "$DEV_IMAGE" >/dev/null 2>&1 && return 0
+    log "building the dev image (first run only)"
+    docker build --build-arg BAKE_SEMANTIC_MODEL=0 --target dev -t "$DEV_IMAGE" ./backend
+}
+
+_dev() {
+    _ensure_dev_image
+    local writable=${WRITABLE:-ro}
+    docker run --rm \
+        -v "$PWD/backend/src:/app/src:$writable" \
+        -v "$PWD/backend/tests:/app/tests:$writable" \
+        -v "$PWD/backend/seeds:/app/seeds:ro" \
+        -v "$PWD/backend/pyproject.toml:/app/pyproject.toml:ro" \
+        "$DEV_IMAGE" sh -c "$1"
+}
+
+cmd_test() { require_docker; _dev "pytest -q $*"; }
+cmd_lint() { require_docker; _dev "ruff check src tests && ruff format --check src tests && mypy src"; }
+cmd_fmt()  { require_docker; WRITABLE=rw _dev "ruff check --fix src tests && ruff format src tests"; }
+
+cmd_test_fe() {
+    if command -v npm >/dev/null 2>&1; then
+        (cd frontend && npm test)
+    else
+        log "npm not found on the host; running in a container"
+        docker run --rm -v "$PWD/frontend:/app" -w /app node:22-alpine \
+            sh -c "npm install --silent && npm test"
+    fi
+}
+
+cmd_smoke() {
+    require_docker
+    local base="http://localhost:$(port API_PORT 8010)"
+    log "readiness"
+    curl -fsS "$base/api/health/ready" | python3 -m json.tool
+    log "queue round-trip"
+    "${API_EXEC[@]}" python -c 'import asyncio
+from irs.crawler.tasks import ping
+print(asyncio.run(ping()))'
+    log "exported metrics"
+    curl -fsS "$base/metrics" | grep -c '^irs_' | xargs -I{} echo "  {} irs_* series"
+    ok "smoke passed"
+}
+
+# ---------------------------------------------------------------------- router ----
+
+main() {
+    local command=${1:-help}
+    shift || true
+    case $command in
+        help|-h|--help) cmd_help ;;
+        up)             cmd_up ;;
+        start)          cmd_start ;;
+        stop|down)      cmd_stop ;;
+        restart)        cmd_restart ;;
+        reset|clean)    cmd_reset ;;
+        build)          cmd_build ;;
+        build-light)    cmd_build_light ;;
+        wait)           cmd_wait ;;
+        open|info)      cmd_open ;;
+        status|ps)      cmd_status ;;
+        seed)           cmd_seed ;;
+        index)          cmd_index ;;
+        crawl)          cmd_crawl "$@" ;;
+        snapshot)       cmd_snapshot ;;
+        evaluate)       cmd_evaluate "$@" ;;
+        report)         cmd_report ;;
+        topics)         cmd_topics ;;
+        pool)           cmd_pool "$@" ;;
+        topics-select)  cmd_topics_select "$@" ;;
+        judge)          cmd_judge "$@" ;;
+        lsa)            cmd_lsa ;;
+        llm-up)         cmd_llm_up ;;
+        llm-pull)       cmd_llm_pull ;;
+        llm-down)       cmd_llm_down ;;
+        migrate)        cmd_migrate ;;
+        revision)       cmd_revision "$@" ;;
+        psql)           cmd_psql ;;
+        shell)          cmd_shell ;;
+        logs)           cmd_logs "$@" ;;
+        test)           cmd_test "$@" ;;
+        test-fe)        cmd_test_fe ;;
+        lint)           cmd_lint ;;
+        fmt|format)     cmd_fmt ;;
+        smoke)          cmd_smoke ;;
+        *)              die "unknown command '$command'. Run './irs' for the command list." ;;
+    esac
+}
+
+main "$@"

@@ -1,0 +1,346 @@
+/* Система автоматического реферирования документов — оформление интерфейса */
+:root {
+  --bg: #f4f6f9;
+  --panel: #ffffff;
+  --ink: #1d2330;
+  --muted: #6b7686;
+  --line: #dde3ec;
+  --accent: #2f5d8c;
+  --accent-soft: #e8eff7;
+  --accent-2: #b8562f;
+  --ok: #2e7d5b;
+  --warn: #b9770e;
+  --shadow: 0 1px 2px rgba(20, 30, 50, .06), 0 6px 18px rgba(20, 30, 50, .06);
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 14px/1.55 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", system-ui, sans-serif;
+}
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+/* ------------------------------- шапка ------------------------------- */
+header.top {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; align-items: center; gap: 1rem;
+  padding: .7rem 1.2rem;
+  background: linear-gradient(180deg, #2f5d8c, #27506f);
+  color: #fff; box-shadow: var(--shadow);
+}
+header.top h1 { font-size: 1.05rem; margin: 0; font-weight: 600; letter-spacing: .2px; }
+header.top .sub { font-size: 12px; opacity: .8; }
+header.top .spacer { flex: 1; }
+header.top button {
+  background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .28);
+  color: #fff; padding: .35rem .75rem; border-radius: 6px; cursor: pointer;
+}
+header.top button:hover { background: rgba(255, 255, 255, .22); }
+
+/* ------------------------------ раскладка ---------------------------- */
+.layout { display: grid; grid-template-columns: 310px minmax(0, 1fr); gap: 1rem;
+          padding: 1rem 1.2rem 3rem; align-items: start; }
+main { min-width: 0; }   /* не даём содержимому «распирать» колонку сетки */
+@media (max-width: 1000px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+
+aside { position: sticky; top: 64px; display: flex; flex-direction: column; gap: 1rem; }
+.card {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.card > h2 {
+  margin: 0; padding: .65rem .85rem; font-size: 12px; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--muted); border-bottom: 1px solid var(--line);
+  font-weight: 700; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+}
+.card > h2 .hint.inline { text-transform: none; letter-spacing: 0; font-weight: 400; margin-left: auto; }
+.card > .body.tight { padding: .6rem .85rem; }
+.card > .border-top { border-top: 1px solid var(--line); }
+.card > .body { padding: .85rem; }
+
+/* --------------------------- список документов ------------------------ */
+.doclist { max-height: 46vh; overflow: auto; }
+.doc {
+  display: block; width: 100%; text-align: left; background: none; border: 0;
+  border-bottom: 1px solid var(--line); padding: .55rem .85rem; cursor: pointer;
+}
+.doc:hover { background: var(--accent-soft); }
+.doc.active { background: var(--accent-soft); box-shadow: inset 3px 0 0 var(--accent); }
+.doc .t { font-weight: 600; font-size: 13px; }
+.doc .m { font-size: 11px; color: var(--muted); display: flex; gap: .4rem; margin-top: .15rem; }
+.badge {
+  display: inline-block; font-size: 10px; padding: .05rem .35rem; border-radius: 4px;
+  border: 1px solid var(--line); background: #f8fafc; color: var(--muted);
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.badge.ru { border-color: #cfe0f3; background: #eaf2fb; color: #2f5d8c; }
+.badge.en { border-color: #f0dcd0; background: #fbf0ea; color: #a1552c; }
+
+/* ------------------------------ настройки ---------------------------- */
+.field { margin-bottom: .7rem; }
+.field label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: .2rem; }
+.field label b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.field input[type=range] { width: 100%; }
+.field select, .field input[type=number], .field input[type=text], textarea {
+  width: 100%; padding: .35rem .5rem; border: 1px solid var(--line);
+  border-radius: 6px; background: #fff;
+}
+.switch { display: flex; align-items: center; gap: .5rem; font-size: 13px; cursor: pointer; }
+.hint { font-size: 11px; color: var(--muted); margin-top: .25rem; line-height: 1.4; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: .35rem; padding: .4rem .7rem;
+  background: var(--accent); color: #fff; border: 0; border-radius: 6px; cursor: pointer;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn.ghost { background: #fff; color: var(--accent); border: 1px solid var(--line); }
+.btn.ghost:hover { background: var(--accent-soft); }
+.btn.small { padding: .25rem .5rem; font-size: 12px; }
+.btnrow { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+/* -------------------------------- вкладки ---------------------------- */
+nav.tabs { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .8rem; }
+nav.tabs button {
+  border: 1px solid var(--line); background: #fff; padding: .4rem .8rem;
+  border-radius: 999px; cursor: pointer; color: var(--muted);
+}
+nav.tabs button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+section.tab { display: none; }
+section.tab.active { display: block; }
+
+/* ------------------------------- рефераты ---------------------------- */
+.docinfo { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: baseline; }
+.docinfo h3 { margin: 0; font-size: 1.15rem; }
+.docinfo a { color: var(--accent); }
+.stats { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .6rem; }
+.stat {
+  background: #f8fafc; border: 1px solid var(--line); border-radius: 8px;
+  padding: .4rem .65rem; min-width: 104px;
+}
+.stat .v { font-size: 1.05rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stat .k { font-size: 11px; color: var(--muted); }
+
+ol.summary { margin: 0; padding-left: 1.6rem; }
+ol.summary li { margin-bottom: .75rem; font-family: "PT Serif", Georgia, serif; font-size: 15.5px; }
+ol.summary .meta { font-family: system-ui, sans-serif; font-size: 11px; color: var(--muted); margin-top: .2rem; }
+.wbar { display: inline-block; height: 6px; background: var(--accent); border-radius: 3px; vertical-align: middle; }
+.plain { font-family: "PT Serif", Georgia, serif; font-size: 15.5px; text-align: justify; }
+
+.chips { display: flex; flex-wrap: wrap; gap: .4rem; align-items: baseline; }
+.chip {
+  border: 1px solid #c9d8ea; background: var(--accent-soft); color: #23425f;
+  border-radius: 999px; padding: .2rem .7rem; cursor: default;
+}
+.chip b { font-variant-numeric: tabular-nums; color: var(--muted); font-weight: 500; font-size: 11px; }
+
+/* ------------------------------ карта текста -------------------------- */
+.heat { display: grid; grid-template-columns: 26px 1fr 300px; gap: .8rem; }
+@media (max-width: 1100px) { .heat { grid-template-columns: 1fr; } }
+.minimap { position: relative; background: #eef1f6; border-radius: 4px; height: 100%; min-height: 400px; }
+.minimap div { position: absolute; left: 0; right: 0; background: var(--accent); border-radius: 2px; }
+.heattext { font-family: "PT Serif", Georgia, serif; font-size: 15.5px; max-height: 70vh; overflow: auto; padding-right: .5rem; }
+.heattext p { margin: 0 0 .9rem; text-align: justify; }
+.sent { cursor: pointer; border-radius: 3px; padding: 0 1px; transition: background .15s; }
+.sent:hover { outline: 1px dashed var(--accent); }
+.sent.picked { box-shadow: inset 0 -2px 0 var(--accent-2); font-weight: 600; }
+.heattext { line-height: 1.75; }
+.sent.current { outline: 2px solid var(--accent); }
+.detail { position: sticky; top: 72px; align-self: start; }
+.formula {
+  font-family: "Cambria Math", Cambria, Georgia, serif; background: #f8fafc;
+  border: 1px solid var(--line); border-radius: 8px; padding: .6rem .7rem;
+  font-size: 13.5px; line-height: 1.8;
+}
+.formula .num { color: var(--accent-2); font-weight: 700; }
+
+/* --------------------------------- таблицы ---------------------------- */
+table.grid { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+table.grid th, table.grid td { border-bottom: 1px solid var(--line); padding: .35rem .5rem; text-align: right; }
+table.grid th { position: sticky; top: 0; background: #f6f8fb; cursor: pointer; white-space: nowrap; z-index: 2; }
+table.grid td.l, table.grid th.l { text-align: left; }
+table.grid tr:hover td { background: #fafcff; }
+table.grid td.bar { width: 120px; }
+table.grid .b { display: block; height: 8px; background: var(--accent); border-radius: 2px; }
+.scroll { max-height: 66vh; overflow: auto; }
+
+/* ------------------------------ граф OSTIS ---------------------------- */
+.graphwrap { position: relative; background: #fbfcfe; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.graphwrap svg { display: block; width: 100%; height: 620px; cursor: grab; }
+.graphwrap svg:active { cursor: grabbing; }
+.legend { position: absolute; left: 10px; bottom: 10px; background: rgba(255, 255, 255, .92);
+  border: 1px solid var(--line); border-radius: 8px; padding: .5rem .6rem; font-size: 11.5px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: .35rem; }
+.node text { pointer-events: none; font-size: 11px; }
+.edge { stroke: #b9c4d4; }
+.edge-label { font-size: 9px; fill: #8b97a8; }
+pre.code {
+  background: #1d2330; color: #dfe6f0; padding: .9rem; border-radius: var(--radius);
+  overflow: auto; max-height: 420px; font-size: 12px; line-height: 1.5;
+}
+pre.code .c { color: #7f8ea3; }
+pre.code .k { color: #8ec7ff; }
+pre.code .s { color: #ffd59e; }
+
+/* ------------------------------- сравнение ---------------------------- */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: .8rem; }
+.posplot { height: 54px; background: linear-gradient(90deg, #eef2f7, #f8fafc);
+  border: 1px solid var(--line); border-radius: 6px; position: relative; }
+.posplot i { position: absolute; top: 6px; bottom: 6px; width: 3px; background: var(--accent-2); border-radius: 2px; }
+.posplot span { position: absolute; bottom: 2px; font-size: 10px; color: var(--muted); }
+.note { background: #fff8ec; border: 1px solid #f0dfc0; border-left: 3px solid var(--warn);
+  padding: .6rem .8rem; border-radius: 6px; font-size: 13px; }
+.note.ok { background: #f0fbf5; border-color: #cfe9db; border-left-color: var(--ok); }
+
+/* -------------------------------- справка ----------------------------- */
+.help h3 { margin: 1.2rem 0 .4rem; font-size: 1rem; }
+.help p, .help li { font-size: 13.5px; }
+.help code { background: #eef2f7; padding: .1rem .3rem; border-radius: 4px; }
+kbd { background: #eef2f7; border: 1px solid var(--line); border-bottom-width: 2px;
+  border-radius: 4px; padding: 0 .3rem; font-size: 11px; }
+
+.toast {
+  position: fixed; right: 1rem; bottom: 1rem; background: #1d2330; color: #fff;
+  padding: .6rem .9rem; border-radius: 8px; box-shadow: var(--shadow); z-index: 90;
+  opacity: 0; transform: translateY(8px); transition: .2s; pointer-events: none;
+}
+.toast.show { opacity: 1; transform: none; }
+.spinner { display: inline-block; width: 13px; height: 13px; border: 2px solid rgba(255,255,255,.4);
+  border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --------------------------------- печать ----------------------------- */
+@media print {
+  header.top, aside, nav.tabs, .noprint { display: none !important; }
+  .layout { display: block; padding: 0; }
+  .card { border: 0; box-shadow: none; }
+  section.tab { display: none !important; }
+  section.tab.active { display: block !important; }
+  body { background: #fff; }
+}
+
+
+/* ======================= дополнения интерфейса ======================= */
+
+/* индикатор загрузки в шапке */
+header.top { position: sticky; }
+.progress {
+  position: absolute; left: 0; right: 0; bottom: -2px; height: 2px;
+  background: linear-gradient(90deg, transparent, #9ecbff, transparent);
+  background-size: 40% 100%; background-repeat: no-repeat;
+  animation: slide 1s linear infinite;
+}
+@keyframes slide { from { background-position: -40% 0; } to { background-position: 140% 0; } }
+body.busy main { opacity: .55; transition: opacity .15s; }
+
+.pill {
+  font-size: 10.5px; padding: .1rem .4rem; border-radius: 999px; font-weight: 700;
+  background: rgba(255, 255, 255, .18); border: 1px solid var(--line); color: var(--muted);
+  letter-spacing: .02em; text-transform: none;
+}
+.card > h2 .pill { background: #eef2f7; }
+.pill.warn { background: #fdf3e3; border-color: #f0dfc0; color: #8a5a10; }
+
+/* строка текущего документа */
+.docbar { margin-bottom: .8rem; position: sticky; top: 56px; z-index: 20; }
+.docbar .body { padding: .6rem .85rem; }
+.docbar .docinfo { gap: .6rem; }
+.docbar h3 { font-size: 1.05rem; }
+
+/* список документов */
+.doc { position: relative; }
+.doc .del {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  border: 0; background: none; color: var(--muted); cursor: pointer;
+  font-size: 15px; line-height: 1; padding: .2rem .3rem; border-radius: 4px; opacity: 0;
+}
+.doc:hover .del, .doc.active .del { opacity: 1; }
+.doc .del:hover { background: #fdecec; color: #b3261e; }
+.doc.hidden { display: none; }
+.doclist .empty { padding: .8rem .85rem; color: var(--muted); font-size: 12px; }
+
+/* параметры */
+details#adv-params { margin-top: .2rem; border-top: 1px dashed var(--line); padding-top: .5rem; }
+details#adv-params > summary {
+  cursor: pointer; font-size: 12px; color: var(--accent); list-style: none;
+  padding: .15rem 0; user-select: none;
+}
+details#adv-params > summary::before { content: "▸ "; }
+details#adv-params[open] > summary::before { content: "▾ "; }
+.btn.wide { width: 100%; justify-content: center; }
+.btn.danger { background: #b3261e; }
+.switch.small { font-size: 12px; }
+
+/* вкладки */
+nav.tabs button { display: inline-flex; align-items: center; gap: .35rem; }
+nav.tabs button .n {
+  font-size: 10px; background: #eef2f7; color: var(--muted); border-radius: 4px;
+  padding: 0 .25rem; font-weight: 700;
+}
+nav.tabs button.active .n { background: rgba(255, 255, 255, .25); color: #fff; }
+
+/* заметки и легенда */
+.note.tip { background: #eef5fc; border-color: #cddff0; border-left-color: var(--accent); }
+.note.err { background: #fdecec; border-color: #f3c9c6; border-left-color: #b3261e; color: #7c1d17; }
+.note .btn { margin-left: .5rem; vertical-align: baseline; }
+.legend-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+  font-size: 12px; color: var(--muted); margin-bottom: .6rem; }
+.legend-row i.sw { display: inline-block; width: 14px; height: 10px; border-radius: 3px;
+  margin-right: .3rem; vertical-align: middle; }
+
+/* карта текста: подсветка найденного термина */
+.heattext.focused .sent { opacity: .35; }
+.heattext.focused .sent.hit { opacity: 1; outline: 2px solid var(--ok); }
+.sent.hit mark { background: #ffe9a8; padding: 0 1px; border-radius: 2px; }
+
+/* диалоги */
+dialog {
+  border: 1px solid var(--line); border-radius: 12px; padding: 0; max-width: 760px;
+  width: 92%; box-shadow: 0 20px 60px rgba(15, 25, 45, .25); color: var(--ink);
+}
+dialog::backdrop { background: rgba(20, 30, 45, .45); }
+dialog h2 {
+  margin: 0; padding: .7rem .9rem; font-size: 13px; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--muted); border-bottom: 1px solid var(--line);
+}
+dialog .body { padding: .9rem; }
+.btnrow.right { justify-content: flex-end; margin-top: .9rem; }
+table.grid.keys td { border: 0; padding: .2rem .5rem; }
+
+/* графики статистики */
+.chart { width: 100%; height: auto; font: 11px system-ui, sans-serif; }
+.chart .axis { stroke: #c9d3e0; stroke-width: 1; }
+.chart .grid-line { stroke: #eef2f7; stroke-width: 1; }
+.chart text { fill: var(--muted); }
+.chart .dot { fill-opacity: .55; }   /* цвет задаётся атрибутом для каждого языка */
+.chart .fit { stroke: #b8562f; stroke-width: 1.6; stroke-dasharray: 5 3; fill: none; }
+.chart .bar { fill: #2f5d8c; }
+.chart .bar.zero { fill: #b8562f; }
+.stackbar { display: flex; height: 26px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+.stackbar div { display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 11px; white-space: nowrap; }
+.stacklegend { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: .5rem; font-size: 12px; }
+.stacklegend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: .35rem; }
+
+@media (max-width: 1100px) { .docbar { position: static; } }
+@media print {
+  .docbar { position: static; }
+  dialog { display: none !important; }
+}
+
+/* интерактивные элементы, появившиеся во второй итерации интерфейса */
+.chip { cursor: pointer; font: inherit; }
+.chip:hover { background: #dbe7f5; border-color: #9fbcdc; }
+.cloudword:hover { text-decoration: underline; }
+.spinner.dark { border-color: rgba(0, 0, 0, .18); border-top-color: #444; }
+table.grid tr.termrow, table.grid tr.batchrow, table.grid tr.strow { cursor: pointer; }
+ol.summary .showin { margin-left: .5rem; color: var(--accent); text-decoration: none; }
+ol.summary .showin:hover { text-decoration: underline; }
+.docbar[hidden] { display: none; }
+#doc-search { width: 100%; padding: .35rem .5rem; border: 1px solid var(--line);
+  border-radius: 6px; background: #fff; }

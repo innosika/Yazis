@@ -1,0 +1,11 @@
+line-length = 100
+target-version = "py312"
+
+[lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF", "C4", "PTH", "ASYNC"]
+# Line length is the formatter's job; long regexes and phrase tables stay readable.
+ignore = ["RUF001", "RUF002", "RUF003", "E501"]
+
+[lint.per-file-ignores]
+"app/api/*" = ["B008"]
+"tests/*" = ["E501"]

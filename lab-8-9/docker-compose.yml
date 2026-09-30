@@ -1,0 +1,84 @@
+# Lector - a voice reader for computer-science papers (speech synthesis + recognition).
+#
+#   make up     build, download the speech models once, start, wait until ready
+#   make logs   follow the logs
+#   make down   stop
+#
+# `models` is a one-shot job: it fills the `models` volume (Kokoro-82M, Parakeet-TDT
+# 0.6B v3, about 1 GB) and exits. The backend starts only after it succeeded and then
+# runs with the Hugging Face hub offline, so nothing is ever downloaded mid-request.
+
+name: lector
+
+x-backend: &backend
+  build: ./backend
+  image: lector-backend:latest
+  environment:
+    DATA_DIR: /data
+    MODELS_DIR: /models
+    HF_HOME: /models/hf
+    LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    GROQ_API_KEY: ${GROQ_API_KEY:-}
+    GROQ_ASR_MODEL: ${GROQ_ASR_MODEL:-whisper-large-v3-turbo}
+    GROQ_LLM_MODEL: ${GROQ_LLM_MODEL:-openai/gpt-oss-20b}
+    TTS_THREADS: ${TTS_THREADS:-6}
+    OMP_NUM_THREADS: ${TTS_THREADS:-6}
+  volumes:
+    - models:/models
+    - data:/data
+
+services:
+  models:
+    <<: *backend
+    container_name: lector-models
+    command: python -m scripts.fetch_models
+    restart: "no"
+
+  backend:
+    <<: *backend
+    container_name: lector-backend
+    depends_on:
+      models:
+        condition: service_completed_successfully
+    environment:
+      DATA_DIR: /data
+      MODELS_DIR: /models
+      HF_HOME: /models/hf
+      HF_HUB_OFFLINE: "1"
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_ASR_MODEL: ${GROQ_ASR_MODEL:-whisper-large-v3-turbo}
+      GROQ_LLM_MODEL: ${GROQ_LLM_MODEL:-openai/gpt-oss-20b}
+      TTS_THREADS: ${TTS_THREADS:-6}
+      OMP_NUM_THREADS: ${TTS_THREADS:-6}
+    ports:
+      - "${API_PORT:-8030}:8000"
+    # Ready means: voice loaded and warmed up with one synthesis.
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8000/api/health/ready').read()"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    image: lector-frontend:latest
+    container_name: lector-frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${WEB_PORT:-8100}:80"
+    # nginx listens on IPv4 only inside the container, hence 127.0.0.1 not localhost.
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  models:
+  data:

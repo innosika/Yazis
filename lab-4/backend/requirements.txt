@@ -1,0 +1,20 @@
+# Web layer
+fastapi==0.115.14
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+pydantic==2.10.6
+pydantic-settings==2.8.1
+
+# Persistence
+SQLAlchemy[asyncio]==2.0.38
+asyncpg==0.30.0
+alembic==1.14.1
+greenlet==3.1.1
+
+# Linguistics
+spacy==3.8.16
+pymorphy3==2.0.6
+pymorphy3-dicts-ru==2.4.417150.4580142
+
+# Automatic dictionary replenishment consults the MediaWiki API
+httpx==0.28.1
